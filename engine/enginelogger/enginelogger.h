@@ -41,7 +41,6 @@ Creation date: 14th October 2017
 		VERBOSITY_LEVEL = 0
 			- disable all logs
 	*/
-	
 
 #if defined(DEBUG)
 

@@ -14,55 +14,124 @@ Creation date: 14th October 2017
 
 #include "engine-includes.h"
 
-namespace enginecore {
+FILE _iob[] = { *stdin, *stdout, *stderr };
 
+extern "C" FILE * __cdecl __iob_func(void)
+{
+	return _iob;
+}
+
+#pragma comment(lib, "legacy_stdio_definitions.lib")
+
+
+namespace enginecore {
 
 	//static member initialization
 
-	engine* engine::instance_ = nullptr;
+	Engine* Engine::instance_ = nullptr;
 
 
-	engine::engine() : width_(800), height_(800), is_paused_(false), window_name_("") {
+	Engine::Engine() : width_(800), height_(800), is_paused_(false), is_engine_running_(false), window_name_(""), window_(nullptr){
 
 		Init();
 	}
 
 
-	engine* engine::GetInstance() {
+	Engine* Engine::GetInstance() {
 
-		if (!engine::instance_) {
+		if (!Engine::instance_) {
 
-			engine::instance_ = new engine();
+			Engine::instance_ = new Engine();
 		}
-		return engine::instance_;
+		return Engine::instance_;
 	}
 
 
-	void engine::Init() {
+	void Engine::Init() {
 
 		ENGINE_LOG("Engine Instance Created");
+
+		window_ = new gamewindow::Window(width_, height_, "NoobEngine 0.1v");
+
+		if (window_->CreateWindow()) {
+
+			ENGINE_LOG("Initializing Engine Modules");
+			is_engine_running_ = true;
+			Run();
+		}
 	}
 
-	void engine::Update() {
+
+	void Engine::Run() {
+
+		const float dt = 1.0f / 60.0f;
+
+
+		Uint32 start_ticks, end_ticks;
+		while (true == is_engine_running_)
+		{
+			SDL_Event e;
+			while (SDL_PollEvent(&e) != 0)
+			{
+			
+				start_ticks = SDL_GetTicks();
+
+				//User requests quit
+				if (e.type == SDL_QUIT)
+				{
+					is_engine_running_ = false;
+				}
+
+			
+				end_ticks = SDL_GetTicks();
+
+				/*while (end_ticks - start_ticks < end_ticks) {
+
+
+				}*/
+
+				ENGINE_LOG("my dt : %f , expected dt : %f ", end_ticks - start_ticks, dt);
+			}
+		}
+
+
+		ShutDown();
+	}
+
+
+	void Engine::Update() {
 
 
 	}
 
-	void engine::ShutDown() {
+	void Engine::ShutDown() {
 
 		ENGINE_LOG("Shutting Down the engine");
-		SAFE_DELETE(engine::instance_);
-	}
-
-	void engine::Pause() {
-
-
-	}
-
-
-	engine::~engine(){
+		
+		CLEAN_DELETE(window_);	
 
 		ENGINE_LOG("Engine Instance Destroyed");
+		CLEAN_DELETE(Engine::instance_);
+
+		ENGINE_LOG("Exiting Engine");
+	}
+
+	void Engine::Pause() {
+
+
+	}
+
+
+	/*getters*/
+
+	std::string Engine::get_version() {
+
+		return "NoobEngine 0.1v";
+	}
+
+	Engine::~Engine(){
+
+		
 	}
 
 }

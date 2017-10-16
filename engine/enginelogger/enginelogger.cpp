@@ -1,7 +1,6 @@
 #include "enginelogger.h"
 #include "../engine.h"
 #include <Windows.h>
-#include <stdio.h>
 #include <iostream>
 
 /*-------------------------------------------------------

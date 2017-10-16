@@ -83,7 +83,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>\external\SDL2.0 Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\varun\Desktop\Ajay\Cs529\NoobEngine\Git\NoobEngine\external\SDL2.0 Lib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,12 +122,14 @@
     <ClCompile Include="engine\enginelogger\enginelogger.cpp" />
     <ClCompile Include="engine\engine.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
+    <ClCompile Include="engine\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine-includes.h" />
     <ClInclude Include="engine\common\macros.h" />
     <ClInclude Include="engine\enginelogger\enginelogger.h" />
     <ClInclude Include="engine\engine.h" />
+    <ClInclude Include="engine\window\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

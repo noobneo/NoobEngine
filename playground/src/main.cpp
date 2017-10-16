@@ -10,13 +10,7 @@ int main(int argc, char** argv) {
 	int a;
 	std::cout << "Game STart Point " << std::endl;
 
-	enginecore::engine::GetInstance();
-
-	std::cin >> a;
-
-	enginecore::engine::GetInstance()->ShutDown();
-
-	std::cin >> a;
+	enginecore::Engine::GetInstance();
 
 	return 0;
 }

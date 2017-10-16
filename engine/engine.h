@@ -15,29 +15,34 @@ Creation date: 14th October 2017
 ---------------------------------------------------------*/
 
 #include <string>
+#include "window\window.h"
 
  namespace enginecore {
 
-	class engine
+	class Engine
 	{
 	private:
-		engine();
-		~engine();
-
+		Engine();
+		~Engine();
 
 		//disable copy constructor and copy assignment constructor
-		engine(const engine& copy) = delete;
-		engine& operator=(const engine& copy) = delete;
+		Engine(const Engine& copy) = delete;
+		Engine& operator=(const Engine& copy) = delete;
 
 		void Init();
+		void Run();
+
+
+		//getters
+		std::string get_version();
 
 	public:
 		
-		void Update();
 		void ShutDown();
+		void Update();
 		void Pause();
 
-		static engine* GetInstance();
+		static Engine* GetInstance();
 
 
 		inline bool get_is_paused() { return is_paused_; }
@@ -48,10 +53,13 @@ Creation date: 14th October 2017
 		int height_;
 		
 		bool is_paused_;
+		bool is_engine_running_;
 
 		std::string window_name_;
 
-		static engine* instance_;
+		gamewindow::Window* window_;
+
+		static Engine* instance_;
 	};
 }
 
