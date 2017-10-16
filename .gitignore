@@ -1,0 +1,8 @@
+Debug/
+Release/
+
+# VS stuff
+*.db
+*.opendb
+*.sdf
+.vs/
