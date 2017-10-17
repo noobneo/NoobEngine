@@ -31,6 +31,8 @@ namespace enginecore {
 			~Window();
 			
 			bool CreateWindow();
+
+			void SetWindowName(std::string window_name);
 		private:
 
 			Window(const Window &) = delete;

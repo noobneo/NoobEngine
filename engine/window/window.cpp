@@ -52,6 +52,11 @@ namespace enginecore {
 			return true;
 		}
 
+		void Window::SetWindowName(std::string window_name) {
 
+			window_name_ = "NoobEngine 0.1v  dt: "+window_name;
+
+			SDL_SetWindowTitle(game_window_, window_name_.c_str());
+		}
 	}
 }

@@ -1,5 +1,9 @@
-﻿  main.cpp
-  engine.cpp
-  Generating Code...
-  noobEngine.vcxproj -> C:\Users\Visitor\Desktop\Cs529\NoobEngine\noobEngine\Debug\noobEngine.exe
-  noobEngine.vcxproj -> C:\Users\Visitor\Desktop\Cs529\NoobEngine\noobEngine\Debug\noobEngine.pdb (Partial PDB)
+﻿engine.obj : error LNK2019: unresolved external symbol _SDL_PollEvent referenced in function "private: void __thiscall enginecore::Engine::Run(void)" (?Run@Engine@enginecore@@AAEXXZ)
+engine.obj : error LNK2019: unresolved external symbol _SDL_GetPerformanceCounter referenced in function "private: void __thiscall enginecore::Engine::Run(void)" (?Run@Engine@enginecore@@AAEXXZ)
+engine.obj : error LNK2019: unresolved external symbol "public: static class enginecore::fps::Timer * __cdecl enginecore::fps::Timer::GetInstance(void)" (?GetInstance@Timer@fps@enginecore@@SAPAV123@XZ) referenced in function "private: void __thiscall enginecore::Engine::InstantiateModules(void)" (?InstantiateModules@Engine@enginecore@@AAEXXZ)
+window.obj : error LNK2019: unresolved external symbol _SDL_CreateWindow referenced in function "public: bool __thiscall enginecore::gamewindow::Window::CreateWindow(void)" (?CreateWindow@Window@gamewindow@enginecore@@QAE_NXZ)
+window.obj : error LNK2019: unresolved external symbol _SDL_DestroyWindow referenced in function "public: __thiscall enginecore::gamewindow::Window::~Window(void)" (??1Window@gamewindow@enginecore@@QAE@XZ)
+window.obj : error LNK2019: unresolved external symbol _SDL_Init referenced in function "public: bool __thiscall enginecore::gamewindow::Window::CreateWindow(void)" (?CreateWindow@Window@gamewindow@enginecore@@QAE_NXZ)
+window.obj : error LNK2019: unresolved external symbol _SDL_Quit referenced in function "public: __thiscall enginecore::gamewindow::Window::~Window(void)" (??1Window@gamewindow@enginecore@@QAE@XZ)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\SandBox\coursework\cs529\git\NoobEngine\Debug\noobEngine.exe : fatal error LNK1120: 8 unresolved externals

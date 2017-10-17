@@ -13,6 +13,7 @@ Creation date: 14th October 2017
 ---------------------------------------------------------*/
 
 #include "engine-includes.h"
+#include "fpscontroller\fpscontroller.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -56,43 +57,51 @@ namespace enginecore {
 		if (window_->CreateWindow()) {
 
 			ENGINE_LOG("Initializing Engine Modules");
+			InstantiateModules();
+
 			is_engine_running_ = true;
 			Run();
 		}
 	}
 
 
+
+	void Engine::InstantiateModules() {
+
+		//fps controller
+		fps::FpsController::GetInstance();
+
+	}
+
+
 	void Engine::Run() {
 
-		const float dt = 1.0f / 60.0f;
 
-
-		Uint32 start_ticks, end_ticks;
+		std::string str;	
+		char buf[100];
+		fps::FpsController::GetInstance()->GetStartFrameTick();
 		while (true == is_engine_running_)
 		{
 			SDL_Event e;
+			
+			fps::FpsController::GetInstance()->CheckFrameRate();
 			while (SDL_PollEvent(&e) != 0)
 			{
-			
-				start_ticks = SDL_GetTicks();
-
 				//User requests quit
 				if (e.type == SDL_QUIT)
 				{
 					is_engine_running_ = false;
 				}
-
-			
-				end_ticks = SDL_GetTicks();
-
-				/*while (end_ticks - start_ticks < end_ticks) {
-
-
-				}*/
-
-				ENGINE_LOG("my dt : %f , expected dt : %f ", end_ticks - start_ticks, dt);
 			}
-		}
+
+	
+			fps::FpsController::GetInstance()->CapFrameRate();
+
+			sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
+			str = buf;
+			window_->SetWindowName(str);
+
+		}//end of gamelooop
 
 
 		ShutDown();

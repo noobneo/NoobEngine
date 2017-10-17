@@ -31,17 +31,17 @@ Creation date: 14th October 2017
 
 		void Init();
 		void Run();
-
-
-		//getters
-		std::string get_version();
-
-	public:
-		
 		void ShutDown();
 		void Update();
 		void Pause();
 
+		void InstantiateModules();
+
+		//getters
+		std::string get_version();
+
+	public: 
+		
 		static Engine* GetInstance();
 
 
