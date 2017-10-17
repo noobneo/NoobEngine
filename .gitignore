@@ -1,5 +1,7 @@
 Debug/
 Release/
+x64/
+x86/
 
 # VS stuff
 *.db
