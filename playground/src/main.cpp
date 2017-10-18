@@ -7,10 +7,11 @@
 //game start point
 int main(int argc, char** argv) {
 
-	int a;
+
 	std::cout << "Game STart Point " << std::endl;
 
 	enginecore::Engine::GetInstance();
 
 	return 0;
 }
+

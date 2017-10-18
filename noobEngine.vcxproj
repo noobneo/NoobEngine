@@ -139,6 +139,7 @@
     <ClCompile Include="engine\utils\filehandler.cpp" />
     <ClCompile Include="engine\inputhandler\inputhandler.cpp" />
     <ClCompile Include="engine\inputhandler\keyboardeventdispatcher.cpp" />
+    <ClCompile Include="engine\inputhandler\keyboardlistener.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
     <ClCompile Include="engine\utils\textconverter.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="engine\utils\textconverter.h" />
     <ClInclude Include="engine\inputhandler\inputhandler.h" />
     <ClInclude Include="engine\inputhandler\keyboardeventdispatcher.h" />
+    <ClInclude Include="engine\inputhandler\keyboardlistener.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

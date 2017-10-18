@@ -45,6 +45,9 @@
     <ClCompile Include="engine\inputhandler\keyboardeventdispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\inputhandler\keyboardlistener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\inputhandler\keyboardeventdispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\inputhandler\keyboardlistener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
