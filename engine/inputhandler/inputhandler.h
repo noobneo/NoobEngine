@@ -28,6 +28,8 @@ namespace enginecore {
 			InputHandler();
 			~InputHandler();
 
+			void DelegateKeyReleased();
+			void DelegateKeyPressed();
 
 		private:
 

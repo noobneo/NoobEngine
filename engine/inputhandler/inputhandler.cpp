@@ -8,6 +8,8 @@
 
 #include "../engine.h"
 
+#include "keyboardeventdispatcher.h"
+
 namespace enginecore{
 
 	namespace inputhandler {
@@ -16,10 +18,8 @@ namespace enginecore{
 
 		InputHandler::InputHandler() {
 
-			
+
 			memset(previous_key_board_state_, 0, sizeof(Uint8)*MAX_KEYS);
-
-
 			current_key_board_state_ = SDL_GetKeyboardState(NULL);
 			memcpy(previous_key_board_state_, current_key_board_state_, sizeof(Uint8)*MAX_KEYS);
 		}
@@ -36,9 +36,7 @@ namespace enginecore{
 
 		bool InputHandler::IsKeyPressed(KEY_CODE key) {
 
-			if (event_.type != SDL_KEYDOWN) {
-					return false;
-			}
+			
 			
 			if (current_key_board_state_[key]) {
 
@@ -82,6 +80,7 @@ namespace enginecore{
 				ENGINE_LOG("Destroying InputHandler");
 			#endif // TEST_MODE
 
+			KeyboardEventDispatcher::GetInstance()->Destroy();
 			CLEAN_DELETE(InputHandler::instance_);
 		}
 
@@ -98,9 +97,32 @@ namespace enginecore{
 					#endif // TEST_MODE
 					return false;
 				}
+				else {
+
+					if (event_.type == SDL_KEYDOWN) {
+
+						DelegateKeyPressed();
+					}
+					else if (event_.type == SDL_KEYUP) {
+
+						DelegateKeyReleased();
+					}
+				}
 			}
 			return true;
 		}
+
+
+		void InputHandler::DelegateKeyReleased() {
+
+			KeyboardEventDispatcher::GetInstance()->OnKeyReleased(current_key_board_state_);
+		}
+
+		void InputHandler::DelegateKeyPressed() {
+
+			KeyboardEventDispatcher::GetInstance()->OnKeyPressed(current_key_board_state_);
+		}
+
 
 		InputHandler::~InputHandler() {
 
