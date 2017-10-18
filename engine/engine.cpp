@@ -14,6 +14,10 @@ Creation date: 14th October 2017
 
 #include "engine-includes.h"
 #include "fpscontroller\fpscontroller.h"
+#include "utils\filehandler.h"
+
+#include "inputhandler\inputhandler.h"
+
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -71,8 +75,14 @@ namespace enginecore {
 		//fps controller
 		fps::FpsController::GetInstance();
 
-	}
+		//file handler
+		utils::FileHandler::GetInstance();
 
+		//input handler
+		inputhandler::InputHandler::GetInstance();
+
+		
+	}
 
 	void Engine::Run() {
 
@@ -82,24 +92,30 @@ namespace enginecore {
 		fps::FpsController::GetInstance()->GetStartFrameTick();
 		while (true == is_engine_running_)
 		{
-			SDL_Event e;
-			
-			fps::FpsController::GetInstance()->CheckFrameRate();
-			while (SDL_PollEvent(&e) != 0)
-			{
-				//User requests quit
-				if (e.type == SDL_QUIT)
-				{
-					is_engine_running_ = false;
+
+			if (inputhandler::InputHandler::GetInstance()->Update()) {
+
+				if (inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_A)) {
+
+					ENGINE_LOG("Pressing A");
 				}
+
+
+				inputhandler::InputHandler::GetInstance()->IsKeyTriggered(SDL_SCANCODE_A);
+				inputhandler::InputHandler::GetInstance()->IsKeyReleased(SDL_SCANCODE_A);
+
+
+				fps::FpsController::GetInstance()->CheckFrameRate();
+				fps::FpsController::GetInstance()->CapFrameRate();
+
+				sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
+				str = buf;
+				window_->SetWindowName(str);
 			}
+			else {
 
-	
-			fps::FpsController::GetInstance()->CapFrameRate();
-
-			sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
-			str = buf;
-			window_->SetWindowName(str);
+				is_engine_running_ = false;
+			}
 
 		}//end of gamelooop
 
@@ -115,11 +131,23 @@ namespace enginecore {
 
 	void Engine::ShutDown() {
 
+
 		ENGINE_LOG("Shutting Down the engine");
 		
-		CLEAN_DELETE(window_);	
+		//fps module
+		fps::FpsController::GetInstance()->Destroy();
+
+		//utils
+		utils::FileHandler::GetInstance()->Destroy();
+
+
+		//inputmodule
+		inputhandler::InputHandler::GetInstance()->Destroy();
+
 
 		ENGINE_LOG("Engine Instance Destroyed");
+		CLEAN_DELETE(window_);	
+
 		CLEAN_DELETE(Engine::instance_);
 
 		ENGINE_LOG("Exiting Engine");

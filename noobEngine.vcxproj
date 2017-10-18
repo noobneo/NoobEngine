@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -105,7 +105,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -122,7 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -136,8 +136,12 @@
     <ClCompile Include="engine\engine.cpp" />
     <ClCompile Include="engine\fpscontroller\timer.cpp" />
     <ClCompile Include="engine\fpscontroller\fpscontroller.cpp" />
+    <ClCompile Include="engine\utils\filehandler.cpp" />
+    <ClCompile Include="engine\inputhandler\inputhandler.cpp" />
+    <ClCompile Include="engine\inputhandler\keyboardeventdispatcher.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
+    <ClCompile Include="engine\utils\textconverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine-includes.h" />
@@ -147,6 +151,10 @@
     <ClInclude Include="engine\fpscontroller\timer.h" />
     <ClInclude Include="engine\window\window.h" />
     <ClInclude Include="engine\fpscontroller\fpscontroller.h" />
+    <ClInclude Include="engine\utils\filehandler.h" />
+    <ClInclude Include="engine\utils\textconverter.h" />
+    <ClInclude Include="engine\inputhandler\inputhandler.h" />
+    <ClInclude Include="engine\inputhandler\keyboardeventdispatcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

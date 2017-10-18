@@ -12,11 +12,14 @@ Creation date: 16th October 2017
 ---------------------------------------------------------*/
 
 #include "timer.h"
+
 #include <Windows.h>
-#include "../enginelogger/enginelogger.h"
-#include "../assert/assert.h"
-#include "../common/macros.h"
 #include <iostream>
+
+
+#include "../enginelogger/enginelogger.h"
+#include "../common/macros.h"
+
 
 namespace enginecore {
 
@@ -137,6 +140,10 @@ namespace enginecore {
 		}
 
 		void Timer::Destroy() {
+
+			#ifdef TEST_MODE
+				ENGINE_LOG("Destroying Timer");
+			#endif // TEST_MODE
 
 			CLEAN_DELETE(Timer::instance_);
 		}

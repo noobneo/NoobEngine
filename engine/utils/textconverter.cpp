@@ -12,9 +12,12 @@ Creation date: 17th October 2017
 ---------------------------------------------------------*/
 
 #include "textconverter.h"
-#include "../enginelogger/enginelogger.h"
 #include "../common/macros.h"
 	
+#ifdef TEST_MODE
+#include "../enginelogger/enginelogger.h"
+#endif // TEST_MODE
+
 namespace enginecore {
 
 	namespace utils {
@@ -91,13 +94,17 @@ namespace enginecore {
 
 		void TextConverter::Destroy() {
 
+			#ifdef TEST_MODE
+				ENGINE_LOG("Destroying TextConverter");
+			#endif
 			CLEAN_DELETE(TextConverter::instance_);
 		}
 
 
 		/*Tests  TextConverter*/
-
+#ifdef TEST_MODE
 		void TextConverter::TestTextConverter() {
+
 
 			int val_i = 129328;
 			float val_f = 12321.45345f;
@@ -125,6 +132,10 @@ namespace enginecore {
 			ENGINE_LOG("Printing bool from string (0) : %i", GetBoolFromString(str_b2));
 			ENGINE_LOG("Printing bool from string (false) : %i", GetBoolFromString(str_b3));
 			ENGINE_LOG("Printing bool from string (true) : %i", GetBoolFromString(str_b4));
+
+
 		}
+#endif
+
 	}
 }

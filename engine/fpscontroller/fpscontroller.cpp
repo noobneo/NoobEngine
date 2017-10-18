@@ -75,6 +75,8 @@ namespace enginecore {
 		void FpsController::Step() {
 
 			t_ += dt_;
+
+			//ENGINE_LOG("dt:%f",1.0f/(dt_*10));
 		}
 
 		void FpsController::CapFrameRate() {
@@ -85,14 +87,19 @@ namespace enginecore {
 			}*/
 
 			float diff = ideal_frame_rate_ - dt_;
-			Sleep(DWORD((diff>0.0f?diff:0.0f)));
-			
+			Sleep(DWORD(diff));		
 			Step();
 		}
 
 		void FpsController::Destroy() {
 
+			#ifdef TEST_MODE
+				ENGINE_LOG("Destroying Fps Controller");
+			#endif // TEST_MODE
 
+			Timer::GetInstance()->Destroy();
+
+			CLEAN_DELETE(FpsController::instance_);
 		}
 
 

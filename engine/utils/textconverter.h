@@ -34,7 +34,9 @@ namespace enginecore {
 			static TextConverter*	GetInstance();
 
 			void					Destroy();
+#ifdef TEST_MODE
 			void					TestTextConverter();
+#endif
 
 			int						GetIntFromString(std::string);
 			bool					GetBoolFromString(std::string);

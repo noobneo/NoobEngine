@@ -14,10 +14,17 @@ Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 16th October 2017
 ---------------------------------------------------------*/
 
+#include <functional>   // std::bind
+
+using namespace std::placeholders;
+
 #define EPSILON 00000.1f
 
 #define MAX_FPS 60.0f
 #define FPS_SAMPLE_SIZE 60
 
 #define CLEAN_DELETE(ptr)        do{ if(ptr) delete ptr; ptr=nullptr;}while(0);
+
+
+#define CALLBACK(function_name,arg1,arg2) std::bind (function_name,arg1,arg2)   
 #endif // ! __MACROS_H__

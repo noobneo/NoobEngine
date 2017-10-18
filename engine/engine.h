@@ -44,6 +44,7 @@ Creation date: 14th October 2017
 		
 		static Engine* GetInstance();
 
+		inline void set_is_running(bool is_engine_running) { is_engine_running_ = is_engine_running; }
 
 		inline bool get_is_paused() { return is_paused_; }
 

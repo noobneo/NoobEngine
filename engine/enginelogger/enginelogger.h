@@ -14,8 +14,6 @@ Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 14th October 2017
 ---------------------------------------------------------*/
 
-
-
 	//*****************************************************//
     //	A simple logger class which outputs engine logs	  //	
 	//	based on the debug level and verbosity      	  //

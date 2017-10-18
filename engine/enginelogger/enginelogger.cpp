@@ -25,7 +25,7 @@ namespace enginecore {
 
 		sprintf_s(buffer, msg_type);
 		strcat_s(buffer, format);
-		strcat_s(buffer, "\n");
+		strcat_s(buffer, "\n\n");
 
 		const size_t total_size = max_chars + 1024;
 		char log_msg[total_size] = { 0 };
@@ -49,7 +49,7 @@ namespace enginecore {
 
 		sprintf_s(buffer, "Verbose : function name : %s line no : %d",function_name  , line_number);
 		strcat_s(buffer, format);
-		strcat_s(buffer, "\n");
+		strcat_s(buffer, "\n\n");
 
 		const size_t total_size = max_chars + 1024;
 		char log_msg[total_size] = { 0 };

@@ -33,6 +33,18 @@
     <ClCompile Include="engine\fpscontroller\fpscontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\utils\filehandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\utils\textconverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\inputhandler\inputhandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\inputhandler\keyboardeventdispatcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -54,6 +66,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\fpscontroller\fpscontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utils\filehandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utils\textconverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\inputhandler\inputhandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\inputhandler\keyboardeventdispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

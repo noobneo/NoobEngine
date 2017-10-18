@@ -16,6 +16,12 @@ Creation date: 17th October 2017
 #include "../common/macros.h"
 #include "textconverter.h"
 
+
+#ifdef TEST_MODE
+#include "../enginelogger/enginelogger.h"
+#endif // TEST_MODE
+
+
 namespace enginecore {
 
 	namespace utils {
@@ -28,15 +34,23 @@ namespace enginecore {
 			if (!FileHandler::instance_) {
 
 				FileHandler::instance_ = new FileHandler();
+
+				#ifdef TEST_MODE
+					TextConverter::GetInstance()->TestTextConverter();
+				#endif
 			}
 
-			TextConverter::GetInstance()->TestTextConverter();
+			
 
 			return FileHandler::instance_;
 		}
 
 		
 		void FileHandler::Destroy() {
+
+			#ifdef TEST_MODE
+				ENGINE_LOG("Destroying FileHandler");
+			#endif
 
 			TextConverter::GetInstance()->Destroy();
 			CLEAN_DELETE(FileHandler::instance_);
