@@ -37,16 +37,25 @@ Creation date: 14th October 2017
 
 		void InstantiateModules();
 
-		//getters
-		std::string get_version();
+#ifdef TEST_MODE
+
+		void RegisterKeyBoardListener();
+		void OnKeyPressed(const Uint8 * key_state);
+		void OnKeyReleased(const Uint8 * key_state);
+#endif
 
 	public: 
 		
 		static Engine* GetInstance();
 
+
+		/*setters*/
 		inline void set_is_running(bool is_engine_running) { is_engine_running_ = is_engine_running; }
 
+
+		/*getters*/
 		inline bool get_is_paused() { return is_paused_; }
+		inline std::string Engine::get_version() { return "NoobEngine 0.1v";}
 
 	private:
 

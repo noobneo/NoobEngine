@@ -17,7 +17,7 @@ Creation date: 14th October 2017
 #include "utils\filehandler.h"
 
 #include "inputhandler\inputhandler.h"
-
+#include "inputhandler\keyboardlistener.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -82,6 +82,12 @@ namespace enginecore {
 		inputhandler::InputHandler::GetInstance();
 
 		
+#ifdef TEST_MODE
+
+		RegisterKeyBoardListener();
+#endif
+
+
 	}
 
 	void Engine::Run() {
@@ -94,16 +100,6 @@ namespace enginecore {
 		{
 
 			if (inputhandler::InputHandler::GetInstance()->Update()) {
-
-				if (inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_A)) {
-
-					ENGINE_LOG("Pressing A");
-				}
-
-
-				inputhandler::InputHandler::GetInstance()->IsKeyTriggered(SDL_SCANCODE_A);
-				inputhandler::InputHandler::GetInstance()->IsKeyReleased(SDL_SCANCODE_A);
-
 
 				fps::FpsController::GetInstance()->CheckFrameRate();
 				fps::FpsController::GetInstance()->CapFrameRate();
@@ -159,12 +155,35 @@ namespace enginecore {
 	}
 
 
-	/*getters*/
+#ifdef TEST_MODE
 
-	std::string Engine::get_version() {
+	void Engine::RegisterKeyBoardListener() {
 
-		return "NoobEngine 0.1v";
+		auto keyboard_listener= inputhandler::KeyboardListener::CreateListener();
+
+		keyboard_listener->on_key_pressed_ = FUNCTION_CALLBACK(Engine::OnKeyPressed,this);
+		keyboard_listener->on_key_released_ = FUNCTION_CALLBACK(Engine::OnKeyReleased, this);
 	}
+
+
+	void Engine::OnKeyPressed(const Uint8 * key_state) {
+
+		if (key_state[SDL_SCANCODE_RIGHT]) {
+
+			ENGINE_LOG("Right Pressed");
+		}
+	}
+
+	void Engine::OnKeyReleased(const Uint8 * key_state) {
+
+
+		if (key_state[SDL_SCANCODE_RIGHT]) {
+
+			ENGINE_LOG("Right Released");
+		}
+	}
+#endif
+
 
 	Engine::~Engine(){
 
