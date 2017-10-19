@@ -1,11 +1,13 @@
 #ifndef _RESOURCE_MANAGER_H_
 #define _RESOURCE_MANAGER_H_
-#include <unordered_map>
 
 
 namespace enginecore {
 
 	namespace resourcemanager {
+
+		class Sprite;
+		class TextureLoader;
 
 		class ResourceManager
 		{
@@ -14,19 +16,19 @@ namespace enginecore {
 			static ResourceManager* GetInstance();
 
 			//create a class to wrap textures
-			SDL_Surface* CreateSprite(std::string path);
+			Sprite* CreateSprite(std::string path);
 			void Destroy();
 
 		private:
-			ResourceManager() = default;
-			~ResourceManager() = default;
+			ResourceManager();
+			~ResourceManager();
 
 
 		private:
 
 			static ResourceManager* instance_;
-			std::unordered_map<std::string, SDL_Surface*> textures_;
-
+			
+			TextureLoader* texture_loader_;
 		};
 	}
 
