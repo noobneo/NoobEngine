@@ -17,7 +17,10 @@ Creation date: 14th October 2017
 #include <string>
 #include "window\window.h"
 
+#include "resourcemanager\sprite.h"
+
  namespace enginecore {
+
 
 	class Engine
 	{
@@ -39,9 +42,12 @@ Creation date: 14th October 2017
 
 #ifdef TEST_MODE
 
+		void CreateImage();
 		void RegisterKeyBoardListener();
+	public:
 		void OnKeyPressed(const Uint8 * key_state);
 		void OnKeyReleased(const Uint8 * key_state);
+	private:
 #endif
 
 	public: 
@@ -70,6 +76,12 @@ Creation date: 14th October 2017
 		gamewindow::Window* window_;
 
 		static Engine* instance_;
+
+
+#ifdef TEST_MODE
+
+		resourcemanager::Sprite* image_;
+#endif
 	};
 }
 

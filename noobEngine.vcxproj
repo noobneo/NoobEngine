@@ -146,6 +146,7 @@
     <ClCompile Include="engine\resourcemanager\resourcemanager.cpp" />
     <ClCompile Include="engine\resourcemanager\textureloader.cpp" />
     <ClCompile Include="engine\resourcemanager\sprite.cpp" />
+    <ClCompile Include="engine\renderer\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine-includes.h" />
@@ -163,6 +164,11 @@
     <ClInclude Include="engine\resourcemanager\resourcemanager.h" />
     <ClInclude Include="engine\resourcemanager\textureloader.h" />
     <ClInclude Include="engine\resourcemanager\sprite.h" />
+    <ClInclude Include="engine\renderer\renderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="img.bmp" />
+    <Image Include="playground\resources\img.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -49,6 +49,7 @@ namespace enginecore {
 				return false;
 			}
 
+			window_surface_ = SDL_GetWindowSurface(game_window_);
 			return true;
 		}
 

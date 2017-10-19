@@ -26,13 +26,18 @@ namespace enginecore {
 		class Window
 		{
 		public:
-			Window() :width_(800), height_(800), window_name_("") , game_window_(nullptr){}
-			Window(int width , int height , std::string window_name, SDL_Window* game_window = nullptr) :width_(width), height_(height), window_name_(window_name), game_window_(nullptr) {}
+			Window() :width_(800), height_(800), window_name_("") , game_window_(nullptr), window_surface_(nullptr){}
+			Window(int width , int height , std::string window_name, SDL_Window* game_window = nullptr , SDL_Surface* window_surface = nullptr) :width_(width), height_(height), window_name_(window_name), 
+																																					game_window_(nullptr), window_surface_(nullptr){}
 			~Window();
 			
 			bool CreateWindow();
 
 			void SetWindowName(std::string window_name);
+
+			inline SDL_Surface* get_window_surface() { return window_surface_; };
+			inline SDL_Window*	get_game_window() { return game_window_; };
+
 		private:
 
 			Window(const Window &) = delete;
@@ -46,6 +51,7 @@ namespace enginecore {
 			std::string window_name_;
 
 			SDL_Window * game_window_;
+			SDL_Surface* window_surface_;
 
 		};
 	}//namespace gamewindow

@@ -57,6 +57,9 @@
     <ClCompile Include="engine\resourcemanager\textureloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\renderer\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -104,5 +107,16 @@
     <ClInclude Include="engine\resourcemanager\textureloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\renderer\renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="playground\resources\img.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

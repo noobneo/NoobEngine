@@ -18,6 +18,13 @@ Creation date: 14th October 2017
 
 #include "inputhandler\inputhandler.h"
 #include "inputhandler\keyboardlistener.h"
+#include "renderer\renderer.h"
+#include "resourcemanager\resourcemanager.h"
+#include "resourcemanager\sprite.h"
+
+
+
+
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -48,6 +55,7 @@ namespace enginecore {
 
 			Engine::instance_ = new Engine();
 		}
+
 		return Engine::instance_;
 	}
 
@@ -81,12 +89,21 @@ namespace enginecore {
 		//input handler
 		inputhandler::InputHandler::GetInstance();
 
+
+		//resourcemanager
+		resourcemanager::ResourceManager::GetInstance();
+
+		//renderer
+		renderer::Renderer::GetInstance();
+		renderer::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface());
+		
+
 		
 #ifdef TEST_MODE
 
 		RegisterKeyBoardListener();
+		CreateImage();
 #endif
-
 
 	}
 
@@ -101,7 +118,13 @@ namespace enginecore {
 
 			if (inputhandler::InputHandler::GetInstance()->Update()) {
 
+				//start of loop
 				fps::FpsController::GetInstance()->CheckFrameRate();
+				
+				//update
+				renderer::Renderer::GetInstance()->Draw();
+
+				//end of loop
 				fps::FpsController::GetInstance()->CapFrameRate();
 
 				sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
@@ -141,6 +164,13 @@ namespace enginecore {
 		inputhandler::InputHandler::GetInstance()->Destroy();
 
 
+		//resourcemanager
+		resourcemanager::ResourceManager::GetInstance()->Destroy();
+
+		//renderer
+		renderer::Renderer::GetInstance()->Destroy();
+
+
 		ENGINE_LOG("Engine Instance Destroyed");
 		CLEAN_DELETE(window_);	
 
@@ -168,20 +198,26 @@ namespace enginecore {
 
 	void Engine::OnKeyPressed(const Uint8 * key_state) {
 
+
+		int speed = 5;
 		if (key_state[SDL_SCANCODE_RIGHT]) {
 
 			ENGINE_LOG("Right Pressed");
+			image_->SetPositionX(image_->get_position_x() + speed);
 
 		}else if (key_state[SDL_SCANCODE_LEFT]) {
 
+			image_->SetPositionX(image_->get_position_x() - speed);
 			ENGINE_LOG("Left Pressed");
 
 		} else if (key_state[SDL_SCANCODE_UP]) {
 
+			image_->SetPositionY(image_->get_position_y() - speed);
 			ENGINE_LOG("Up Pressed");
 
 		}else if (key_state[SDL_SCANCODE_DOWN]) {
 
+			image_->SetPositionY(image_->get_position_y() + speed);
 			ENGINE_LOG("Down Pressed");
 		}
 	}
@@ -204,6 +240,11 @@ namespace enginecore {
 
 			ENGINE_LOG("Down Released");
 		}
+	}
+
+	void Engine::CreateImage() {
+
+		image_ = resourcemanager::ResourceManager::GetInstance()->CreateSprite("img.bmp");
 	}
 #endif
 
