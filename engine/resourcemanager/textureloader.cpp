@@ -47,6 +47,9 @@ namespace enginecore {
 			for (auto &itr : textures_) {
 
 				SDL_FreeSurface(itr.second);
+				#ifdef TEST_MODE
+					ENGINE_LOG("DEstroying the SDL_Surface");
+				#endif // TEST_MODE
 			}
 
 			textures_.clear();

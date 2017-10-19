@@ -2,6 +2,7 @@
 
 #include "../common/macros.h"
 #include "textureloader.h"
+#include "../renderer/renderer.h"
 
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
@@ -30,7 +31,10 @@ namespace enginecore {
 
 		Sprite* ResourceManager::CreateSprite(std::string path) {
 
-			return texture_loader_->CreateTexture(path);
+			auto sprite =  texture_loader_->CreateTexture(path);
+			renderer::Renderer::GetInstance()->PushToRenderQueue(sprite);
+
+			return sprite;
 		}
 
 		void ResourceManager::Destroy() {
