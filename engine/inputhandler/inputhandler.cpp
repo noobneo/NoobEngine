@@ -34,7 +34,8 @@ namespace enginecore{
 
 
 			memset(previous_key_board_state_, 0, sizeof(Uint8)*MAX_KEYS);
-			current_key_board_state_ = SDL_GetKeyboardState(NULL);
+			pump_state_ = SDL_GetKeyboardState(NULL);
+			memcpy(current_key_board_state_, pump_state_, sizeof(Uint8)*MAX_KEYS);
 			memcpy(previous_key_board_state_, current_key_board_state_, sizeof(Uint8)*MAX_KEYS);
 		}
 
@@ -101,7 +102,9 @@ namespace enginecore{
 		bool InputHandler::Update() {
 
 			memcpy(previous_key_board_state_, current_key_board_state_, sizeof(Uint8)*MAX_KEYS);
-			SDL_PumpEvents();
+			memcpy(current_key_board_state_,pump_state_, sizeof(Uint8)*MAX_KEYS);
+			//SDL_PumpEvents();
+			
 
 			if (SDL_PollEvent(&event_) != 0) {
 
@@ -116,20 +119,21 @@ namespace enginecore{
 					if (event_.type == SDL_KEYDOWN) {
 
 						DelegateKeyPressed();
-					}
-					else if (event_.type == SDL_KEYUP) {
+
+					}else if (event_.type == SDL_KEYUP) {
 
 						DelegateKeyReleased();
 					}
 				}
 			}
+
 			return true;
 		}
 
 
 		void InputHandler::DelegateKeyReleased() {
 
-			KeyboardEventDispatcher::GetInstance()->OnKeyReleased(current_key_board_state_);
+			KeyboardEventDispatcher::GetInstance()->OnKeyReleased(previous_key_board_state_);
 		}
 
 		void InputHandler::DelegateKeyPressed() {

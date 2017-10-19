@@ -171,15 +171,38 @@ namespace enginecore {
 		if (key_state[SDL_SCANCODE_RIGHT]) {
 
 			ENGINE_LOG("Right Pressed");
+
+		}else if (key_state[SDL_SCANCODE_LEFT]) {
+
+			ENGINE_LOG("Left Pressed");
+
+		} else if (key_state[SDL_SCANCODE_UP]) {
+
+			ENGINE_LOG("Up Pressed");
+
+		}else if (key_state[SDL_SCANCODE_DOWN]) {
+
+			ENGINE_LOG("Down Pressed");
 		}
 	}
 
 	void Engine::OnKeyReleased(const Uint8 * key_state) {
 
-
 		if (key_state[SDL_SCANCODE_RIGHT]) {
 
 			ENGINE_LOG("Right Released");
+
+		} else if (key_state[SDL_SCANCODE_LEFT]) {
+
+			ENGINE_LOG("Left Released");
+
+		} else if (key_state[SDL_SCANCODE_UP]) {
+
+			ENGINE_LOG("Up Released");
+
+		} else if (key_state[SDL_SCANCODE_DOWN]) {
+
+			ENGINE_LOG("Down Released");
 		}
 	}
 #endif

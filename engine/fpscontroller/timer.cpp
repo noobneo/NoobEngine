@@ -65,7 +65,7 @@ namespace enginecore {
 
 			LARGE_INTEGER li;
 			if (!QueryPerformanceFrequency(&li)) {
-
+			
 				ENGINE_ERR_LOG("QueryPerformanceFrequency failed!");
 			}
 

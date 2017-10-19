@@ -143,6 +143,9 @@
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
     <ClCompile Include="engine\utils\textconverter.cpp" />
+    <ClCompile Include="engine\resourcemanager\resourcemanager.cpp" />
+    <ClCompile Include="engine\resourcemanager\textureloader.cpp" />
+    <ClCompile Include="engine\resourcemanager\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine-includes.h" />
@@ -157,6 +160,9 @@
     <ClInclude Include="engine\inputhandler\inputhandler.h" />
     <ClInclude Include="engine\inputhandler\keyboardeventdispatcher.h" />
     <ClInclude Include="engine\inputhandler\keyboardlistener.h" />
+    <ClInclude Include="engine\resourcemanager\resourcemanager.h" />
+    <ClInclude Include="engine\resourcemanager\textureloader.h" />
+    <ClInclude Include="engine\resourcemanager\sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
