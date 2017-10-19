@@ -48,7 +48,7 @@ namespace enginecore {
 		private:
 
 			const Uint8* pump_state_;
-			Uint8 current_key_board_state_[MAX_KEYS];
+			const Uint8* current_key_board_state_;
 			Uint8 previous_key_board_state_[MAX_KEYS];
 
 			static InputHandler *instance_;

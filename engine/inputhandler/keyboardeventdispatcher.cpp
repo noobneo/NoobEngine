@@ -35,13 +35,6 @@ namespace enginecore {
 			return KeyboardEventDispatcher::instance_;
 		}
 
-
-		KeyboardEventDispatcher::KeyboardEventDispatcher(){
-
-			total_listeners_ = 0;
-		}
-
-
 		void KeyboardEventDispatcher::OnKeyPressed(const Uint8* key_states) {
 
 			for (auto &it : listeners_) {

@@ -43,7 +43,7 @@ namespace enginecore {
 			inline int get_total_listeners() { return total_listeners_; };
 
 		private:
-			KeyboardEventDispatcher();
+			KeyboardEventDispatcher():total_listeners_(0) {}
 			~KeyboardEventDispatcher()=default;
 
 			void UnRegisterListeners();
