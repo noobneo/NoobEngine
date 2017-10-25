@@ -14,6 +14,7 @@ Creation date: 16th October 2017
 
 #include "window.h"
 #include "../enginelogger/enginelogger.h"
+#include "../../external/SDL2.0 Lib/include/SDL.h"
 
 namespace enginecore {
 

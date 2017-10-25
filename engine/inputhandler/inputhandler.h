@@ -14,7 +14,8 @@ Creation date: 17th October 2017
 
 #ifndef _INPUT_HANDLER_H
 #define _INPUT_HANDLER_H
-#include "../../external/SDL2.0 Lib/include/SDL.h"
+#include "../../external/SDL2.0 Lib/include/SDL_scancode.h"
+#include "../../external/SDL2.0 Lib/include/SDL_events.h" 
 
 #define KEY_CODE SDL_Scancode 
 #define MAX_KEYS 512

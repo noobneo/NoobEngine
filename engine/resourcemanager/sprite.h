@@ -1,7 +1,7 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-#include "../../external/SDL2.0 Lib/include/SDL.h"
+#include "../../SDL2.0 Lib/include/SDL_surface.h"
 
 namespace enginecore {
 

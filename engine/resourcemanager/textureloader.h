@@ -3,7 +3,8 @@
 
 #include <unordered_map>
 #include <string>
-#include "../../SDL2.0 Lib/include/SDL.h"
+#include "../../SDL2.0 Lib/include/SDL_surface.h"
+#include "../../SDL2.0 Lib/include/SDL_video.h"
 
 namespace enginecore{
 

@@ -18,7 +18,7 @@ Creation date: 18th October 2017
 
 
 #include "../common/macros.h"
-#include "../../external/SDL2.0 Lib/include/SDL.h"
+#include "../../external/SDL2.0 Lib/include/SDL_stdinc.h"//think of alternative
 	
 namespace enginecore {
 

@@ -17,7 +17,7 @@ Creation date: 16th October 2017
 
 
 #include<string>
-#include "../../external/SDL2.0 Lib/include/SDL.h"
+#include "../../external/SDL2.0 Lib/include/SDL_video.h"
 
 namespace enginecore {
 

@@ -23,9 +23,6 @@ Creation date: 14th October 2017
 #include "resourcemanager\sprite.h"
 
 
-
-
-
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
 extern "C" FILE * __cdecl __iob_func(void)
