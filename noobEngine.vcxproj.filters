@@ -128,6 +128,9 @@
     <ClInclude Include="engine\components\maincomponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\components\component-types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="playground\resources\img.bmp">

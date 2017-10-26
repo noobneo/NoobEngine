@@ -155,6 +155,7 @@
     <ClCompile Include="engine\renderer\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\components\component-types.h" />
     <ClInclude Include="engine\components\maincomponent.h" />
     <ClInclude Include="engine\engine-includes.h" />
     <ClInclude Include="engine\common\macros.h" />

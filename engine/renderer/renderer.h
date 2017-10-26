@@ -26,6 +26,9 @@ namespace enginecore {
 			Renderer() :window_surface_(nullptr), game_window_(nullptr) {}
 			~Renderer()=default;
 
+			Renderer& operator=(const Renderer&) = delete;
+			Renderer(const Renderer&) = delete;
+
 		private:
 
 			static Renderer* instance_;
