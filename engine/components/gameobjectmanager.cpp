@@ -14,7 +14,7 @@ Creation date: 25th October 2017
 #include "gameobjectmanager.h"
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
-#include "gameobject.h"
+#include "gameobject.h"s
 
 namespace enginecore {
 
@@ -62,12 +62,21 @@ namespace enginecore {
 
 		GameObject* GameobjectManager::CreateGameObject() {
 
-			return nullptr;
+			if (!first_available_) {
+
+				ENGINE_ERR_LOG("No free gamobjects yet!!!");
+			}
+
+			GameObject *go = first_available_;
+
+			first_available_ = go->get_next();
+			go->set_is_active(true);
+			return go;
 		}
 
 		void GameobjectManager::Update() {
 
-			for (auto &itr : gameobjects_) {
+			for (auto &itr : active_objects_) {
 
 				 itr.second->Update();
 			}
@@ -90,19 +99,30 @@ namespace enginecore {
 
 		void GameobjectManager::DeleteGameobject(int id) {
 
+			for (auto &itr : active_objects_) {
+				
+				if (itr.second->get_id() == id) {
 
+					itr.second->set_next(first_available_->get_next());
+					first_available_ = itr.second;
+					itr.second->set_is_active(false);
+					active_objects_.erase(id);
+					return;
+				}
+			}
 		}
 
 
 		void GameobjectManager::ClearPool() {
 
-			for (auto &itr : gameobjects_) {
+			for (auto itr : gameobjects_) {
 
-				delete itr.second;
+				delete itr;
 			}
 			count_ = 0;
 			gameobject_id_ = 0;
-			gameobjects_.clear();
+			active_objects_.clear();
+			//gameobjects_.clear();
 		}
 
 		void GameobjectManager::Destroy() {

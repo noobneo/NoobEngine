@@ -13,7 +13,9 @@ Project: CS529_ajaytanwar
 Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 25th October 2017
 ---------------------------------------------------------*/
+#include <array>
 #include <unordered_map>
+#include "component-types.h"
 
 namespace enginecore {
 
@@ -30,8 +32,8 @@ namespace enginecore {
 		void Destroy();
 
 		void DeleteGameobject(int id);
+		GameObject* CreateGameObject();
 
-		static GameObject* CreateGameObject();
 		static GameobjectManager* GetInstance();
 
 	private:
@@ -59,7 +61,8 @@ namespace enginecore {
 		int gameobject_id_;
 		int count_;
 
-		std::unordered_map<int, GameObject*> gameobjects_;
+		std::array<GameObject*,MAX_SIZE> gameobjects_;
+		std::unordered_map<int,GameObject*> active_objects_;
 
 		GameObject* first_available_;
 	};

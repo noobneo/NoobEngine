@@ -33,7 +33,7 @@ namespace enginecore {
 		void set_id(int id) {  id_  = id; };
 		
 	private:
-		GameObject();
+		GameObject() :components_(MAX_SIZE){}
 		~GameObject();
 		GameObject& operator=(const GameObject&) = delete;
 		GameObject(const GameObject&) = delete;
@@ -41,6 +41,9 @@ namespace enginecore {
 		//void Init(int id);
 
 		void set_next(GameObject* next) { next_ = next; };
+		void set_is_active(bool is_active) { is_active_ = is_active; };
+
+		bool get_is_active() { return is_active_; };
 		GameObject* get_next() { return next_; };
 
 	private:
