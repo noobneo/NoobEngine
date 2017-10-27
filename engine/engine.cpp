@@ -21,6 +21,7 @@ Creation date: 14th October 2017
 #include "renderer\renderer.h"
 #include "resourcemanager\resourcemanager.h"
 #include "resourcemanager\sprite.h"
+#include "components\gameobjectmanager.h"
 
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
@@ -93,6 +94,10 @@ namespace enginecore {
 		//renderer
 		renderer::Renderer::GetInstance();
 		renderer::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface());
+
+
+		//gameobjectmanager
+		component::GameobjectManager::GetInstance();
 		
 
 		
@@ -118,8 +123,14 @@ namespace enginecore {
 				//start of loop
 				fps::FpsController::GetInstance()->CheckFrameRate();
 				
+				//GameobjectManager
+
+				component::GameobjectManager::GetInstance()->Update();
+
 				//update
 				renderer::Renderer::GetInstance()->Draw();
+
+
 
 				//end of loop
 				fps::FpsController::GetInstance()->CapFrameRate();
@@ -166,6 +177,9 @@ namespace enginecore {
 
 		//renderer
 		renderer::Renderer::GetInstance()->Destroy();
+
+		//gameobjectmanager
+		component::GameobjectManager::GetInstance()->Destroy();
 
 
 		ENGINE_LOG("Engine Instance Destroyed");
