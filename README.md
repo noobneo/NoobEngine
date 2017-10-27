@@ -3,21 +3,22 @@ Copyright (C) 2017 DigiPen Institute of Technology.
 Reproduction or disclosure of this file or its contents without the prior
 written consent of DigiPen Institute of Technology is prohibited.
 File Name: Readme.md
-Purpose: Features of Noob Engine
+Purpose: Description of Noob Engine
 Language: C/C++
-Platform: Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24210 , x64 ,Windows 7
 Project: CS529_ajaytanwar
-Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
+Author: Ajay Singh Tanwar
 Creation date: 18th October 2017
 ---------------------------------------------------------*/
 
-NoobEngine is ongoing projects which includes developing a game engine and game using that a part of CS529 course .
+NoobEngine is ongoing project in which i am developing a component based data driven game engine which as 
+a part my course Fundamentals of Game Development at Digipen Institute of Technology . This project also 
+includes developing game using the engine
 
-					*************************************************************************
-					| 							Noob Engine v1.0v							|
-					*************************************************************************
-					
-					
+	*************************************************************************
+	| 	                         Noob Engine v1.0v			|
+	*************************************************************************
+
+
 	
 	Features 
 	
