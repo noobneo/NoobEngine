@@ -20,7 +20,7 @@ Creation date: 25th October 2017
 
 namespace enginecore {
 
-	namespace components {
+	namespace component {
 
 		MainComponent::MainComponent() {
 

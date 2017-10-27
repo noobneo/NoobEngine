@@ -18,8 +18,7 @@ Creation date: 25th October 2017
 
 namespace enginecore {
 
-	namespace components {
-
+	namespace component {
 
 		GameobjectManager* GameobjectManager::instance_ = nullptr;
 
@@ -27,9 +26,29 @@ namespace enginecore {
 
 			gameobject_id_		= 0;
 			count_				= 0;
-			is_clearing_		= false;
-			is_deleting_object_ = false;		
+			first_available_	= nullptr;
+
+			PoolGameObjects();
+
+#ifdef TEST_MODE
+			IteratePool();
+#endif // TEST_MODE
 		}
+
+		void GameobjectManager::PoolGameObjects() {
+
+			for (int i = 0; i < MAX_SIZE; ++i) {
+
+				++count_;
+				++gameobject_id_;
+				auto gameobject = new GameObject();
+				gameobject->set_id(gameobject_id_);
+				gameobject->set_next(first_available_);
+				first_available_ = gameobject;
+				gameobjects_[gameobject_id_] = gameobject;
+			}
+		}
+
 
 		GameobjectManager* GameobjectManager::GetInstance() {
 
@@ -41,6 +60,10 @@ namespace enginecore {
 			return GameobjectManager::instance_;
 		}
 
+		GameObject* GameobjectManager::CreateGameObject() {
+
+			return nullptr;
+		}
 
 		void GameobjectManager::Update() {
 
@@ -51,74 +74,34 @@ namespace enginecore {
 		}
 
 
-		void GameobjectManager::AddGameObject(GameObject* gameobject) {
+#ifdef TEST_MODE
 
-			int id = gameobject->get_id();
-			auto itr = gameobjects_.find(id);
+		void GameobjectManager::IteratePool() {
 
-			if (itr == gameobjects_.end()) {
+			GameObject *temp = first_available_;
 
-				gameobject->set_id(gameobject_id_);
-				gameobjects_[id] = gameobject;
-				++count_;
-				++gameobject_id_;
-				return;
+			while (temp) {
+				ENGINE_LOG("Gameobject with id : %d",temp->get_id());
+				temp = temp->get_next();
 			}
-
-			ENGINE_ERR_LOG("Gameobject with id_ : %d was note found in the queue", itr->second->get_id());
 		}
-
-
-		void GameobjectManager::RemoveObject(int id) {
-			
-			if (is_clearing_) {
-
-				return;
-			} else if (is_deleting_object_) {
-
-				is_deleting_object_ = false;
-				return;
-			}
-
-			auto itr = gameobjects_.find(id);
-
-			if (itr == gameobjects_.end()) {
-
-				ENGINE_ERR_LOG("Gameobject with id_ : %d was note found in the queue", itr->second->get_id());
-				return;
-			}
-		
-			--count_;
-			gameobjects_.erase(id);
-		}
+#endif // TEST_MODE
 
 
 		void GameobjectManager::DeleteGameobject(int id) {
 
-			auto itr = gameobjects_.find(id);
 
-			if (itr == gameobjects_.end()) {
-
-				ENGINE_ERR_LOG("Gameobject with id_ : %d was note found in the queue", itr->second->get_id());
-				return;
-			}
-
-			--count_;
-			is_deleting_object_ = true;
-			delete itr->second;
-			gameobjects_.erase(id);
 		}
 
 
-		void GameobjectManager::DeleteAllGameObjects() {
+		void GameobjectManager::ClearPool() {
 
-			is_clearing_ = true;
 			for (auto &itr : gameobjects_) {
 
 				delete itr.second;
 			}
-
 			count_ = 0;
+			gameobject_id_ = 0;
 			gameobjects_.clear();
 		}
 
@@ -128,7 +111,7 @@ namespace enginecore {
 			ENGINE_LOG("Destroying GameobjectManager");
 	#endif // TEST_MODE
 
-			DeleteAllGameObjects();
+			ClearPool();
 			CLEAN_DELETE(GameobjectManager::instance_);
 		}
 

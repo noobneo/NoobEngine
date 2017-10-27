@@ -17,25 +17,21 @@ Creation date: 25th October 2017
 
 namespace enginecore {
 
-	 
-	namespace components {
+	namespace component {
 
 	class GameObject;
 
 	class GameobjectManager
 	{
 
-
 	public:
 
 		void Update();
 		void Destroy();
 
-		//if called this make sure you delete objectsss
-		//or call DeleteGameobject Instead
-		void RemoveObject(int id);//think alternative
 		void DeleteGameobject(int id);
-		void AddGameObject(GameObject* gameobject);
+
+		static GameObject* CreateGameObject();
 		static GameobjectManager* GetInstance();
 
 	private:
@@ -46,7 +42,15 @@ namespace enginecore {
 		GameobjectManager& operator=(const GameobjectManager&) = delete;
 		GameobjectManager(const GameobjectManager&) = delete;
 
-		void DeleteAllGameObjects();
+		void PoolGameObjects();
+		void ClearPool();
+
+
+#ifdef TEST_MODE
+
+		void IteratePool();
+#endif // TEST_MODE
+
 
 	private:
 
@@ -54,12 +58,10 @@ namespace enginecore {
 		
 		int gameobject_id_;
 		int count_;
-		
-		bool is_clearing_;
-		bool is_deleting_object_;
 
 		std::unordered_map<int, GameObject*> gameobjects_;
 
+		GameObject* first_available_;
 	};
 
 	}

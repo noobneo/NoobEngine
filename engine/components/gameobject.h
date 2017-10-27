@@ -19,7 +19,7 @@ Creation date: 25th October 2017
 
 namespace enginecore {
 
-	namespace components {
+	namespace component {
 
 	class MainComponent;
 
@@ -27,21 +27,31 @@ namespace enginecore {
 	{
 
 	public:
-		GameObject();
-		~GameObject();
-
-
-		static GameObject* Create();
-
 		virtual void Update();
 
 		int get_id() { return id_; };
 		void set_id(int id) {  id_  = id; };
+		
+	private:
+		GameObject();
+		~GameObject();
+		GameObject& operator=(const GameObject&) = delete;
+		GameObject(const GameObject&) = delete;
+
+		//void Init(int id);
+
+		void set_next(GameObject* next) { next_ = next; };
+		GameObject* get_next() { return next_; };
 
 	private:
-		int id_;
+		friend class GameobjectManager;
 
+		int id_;
+		bool is_active_;
+		
 		std::unordered_map<ComponentType, MainComponent*> components_;
+		
+		GameObject* next_;
 	};
 
 	}

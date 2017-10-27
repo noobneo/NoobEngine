@@ -13,27 +13,17 @@ Creation date: 25th October 2017
 
 #include "gameobject.h"
 #include "gameobjectmanager.h"
-
 #include "../enginelogger/enginelogger.h"
+
 namespace enginecore {
 
-	namespace components {
+	namespace component {
 
 		GameObject::GameObject() {
 
-			GameobjectManager::GetInstance()->AddGameObject(this);
-		}
-
-		GameObject* GameObject::Create() {
-
-			GameObject* obj = nullptr;
-			obj = new GameObject();
-			if (obj) {
-
-				ENGINE_ERR_LOG("Could not create game object");
-				return nullptr;
-			}
-			return obj;
+			id_			= -1;
+			next_		= nullptr;
+			is_active_	= false;
 		}
 
 		void GameObject::Update(){
@@ -42,10 +32,14 @@ namespace enginecore {
 
 		GameObject::~GameObject() {
 
-			GameobjectManager::GetInstance()->RemoveObject(id_);
+
+#ifdef TEST_MODE
+			ENGINE_LOG("Destroying Gameobject :%d",id_);
+#endif // TEST_MODE
+			components_.clear();
 			id_ = -1;
+			next_ = nullptr;
+			is_active_ = false;
 		}
-
-
 	}
 }
