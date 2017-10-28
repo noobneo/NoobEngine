@@ -22,6 +22,7 @@ namespace enginecore {
 	namespace component {
 
 	class GameObject;
+	class ComponentManager;
 
 	class GameobjectManager
 	{
@@ -30,6 +31,10 @@ namespace enginecore {
 
 		void Update();
 		void Destroy();
+
+		void AddRenderComponent(GameObject* game_object);
+		void AddPhysicsComponent(GameObject* game_object);
+		void AddTransformComponent(GameObject* game_object);
 
 		void DeleteGameobject(int id);
 		GameObject* CreateGameObject();
@@ -44,12 +49,11 @@ namespace enginecore {
 		GameobjectManager& operator=(const GameobjectManager&) = delete;
 		GameobjectManager(const GameobjectManager&) = delete;
 
-		void PoolGameObjects();
 		void ClearPool();
-
+		void PoolGameObjects();
+		void InitComponentManager();
 
 #ifdef TEST_MODE
-
 		void IteratePool();
 #endif // TEST_MODE
 
@@ -65,6 +69,7 @@ namespace enginecore {
 		std::unordered_map<int,GameObject*> active_objects_;
 
 		GameObject* first_available_;
+		ComponentManager* component_manager_;
 	};
 
 	}

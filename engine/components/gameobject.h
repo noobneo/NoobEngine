@@ -28,12 +28,12 @@ namespace enginecore {
 
 	public:
 		virtual void Update();
-
+		
 		int get_id() { return id_; };
 		void set_id(int id) {  id_  = id; };
 		
 	private:
-		GameObject() :components_(MAX_SIZE){}
+		GameObject();
 		~GameObject();
 		GameObject& operator=(const GameObject&) = delete;
 		GameObject(const GameObject&) = delete;

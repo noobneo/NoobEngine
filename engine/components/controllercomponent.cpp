@@ -1,10 +1,22 @@
 #include "controllercomponent.h"
 
-ControllerComponent::ControllerComponent()
-{
-}
+
+namespace enginecore {
+
+	namespace component {
+
+		ControllerComponent::ControllerComponent() {
+
+		}
 
 
-ControllerComponent::~ControllerComponent()
-{
+		void ControllerComponent::Update() {
+
+
+		}
+
+		ControllerComponent::~ControllerComponent() {
+
+		}
+	}
 }

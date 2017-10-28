@@ -24,8 +24,10 @@ namespace enginecore {
 
 		MainComponent::MainComponent() {
 
+			id_				= -1;
+			next_			= nullptr;
+			owner_			= nullptr;	
 			component_type_ = E_COMPONENT_TYPE_NONE;
-			owner_ = nullptr;
 		}
 
 

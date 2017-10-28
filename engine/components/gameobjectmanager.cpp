@@ -12,9 +12,12 @@ Creation date: 25th October 2017
 ---------------------------------------------------------*/
 
 #include "gameobjectmanager.h"
+#include "componentmanager.h"
+#include "gameobject.h"
+
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
-#include "gameobject.h"s
+
 
 namespace enginecore {
 
@@ -27,28 +30,15 @@ namespace enginecore {
 			gameobject_id_		= 0;
 			count_				= 0;
 			first_available_	= nullptr;
+			component_manager_ = nullptr;
 
+			InitComponentManager();
 			PoolGameObjects();
 
 #ifdef TEST_MODE
 			IteratePool();
 #endif // TEST_MODE
 		}
-
-		void GameobjectManager::PoolGameObjects() {
-
-			for (int i = 0; i < MAX_SIZE; ++i) {
-
-				++count_;
-				++gameobject_id_;
-				auto gameobject = new GameObject();
-				gameobject->set_id(gameobject_id_);
-				gameobject->set_next(first_available_);
-				first_available_ = gameobject;
-				gameobjects_[gameobject_id_] = gameobject;
-			}
-		}
-
 
 		GameobjectManager* GameobjectManager::GetInstance() {
 
@@ -73,6 +63,44 @@ namespace enginecore {
 			go->set_is_active(true);
 			return go;
 		}
+
+		void GameobjectManager::PoolGameObjects() {
+
+			for (int i = 0; i < MAX_SIZE; ++i) {
+
+				auto gameobject = new GameObject();
+				gameobject->set_id(gameobject_id_);
+				gameobject->set_next(first_available_);
+				first_available_ = gameobject;
+				gameobjects_[gameobject_id_] = gameobject;
+
+				++count_;
+				++gameobject_id_;
+			}
+		}
+
+
+		void GameobjectManager::InitComponentManager() {
+
+			component_manager_ = new ComponentManager();
+			component_manager_->LoadComponents();
+		}
+		void GameobjectManager::AddRenderComponent(GameObject* game_object) {
+
+			
+		}
+
+		void GameobjectManager::AddPhysicsComponent(GameObject* game_object) {
+
+
+		}
+
+		void GameobjectManager::AddTransformComponent(GameObject* game_object) {
+
+
+		}
+
+
 
 		void GameobjectManager::Update() {
 

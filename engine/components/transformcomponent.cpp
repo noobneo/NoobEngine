@@ -1,12 +1,24 @@
 #include "transformcomponent.h"
 
+namespace enginecore {
+
+	namespace component {
+
+		TransformComponent::TransformComponent() {
+
+		}
 
 
-transformcomponent::transformcomponent()
-{
+		void TransformComponent::Update() {
+
+
+		}
+
+		TransformComponent::~TransformComponent() {
+
+		}
+
+	}
+
 }
 
-
-transformcomponent::~transformcomponent()
-{
-}

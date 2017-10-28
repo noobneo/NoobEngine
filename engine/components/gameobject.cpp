@@ -34,7 +34,7 @@ namespace enginecore {
 
 
 #ifdef TEST_MODE
-			ENGINE_LOG("Destroying Gameobject :%d",id_);
+		//	ENGINE_LOG("Destroying Gameobject :%d",id_);
 #endif // TEST_MODE
 			components_.clear();
 			id_ = -1;

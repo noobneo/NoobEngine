@@ -1,12 +1,20 @@
 #include "rendercomponent.h"
 
+namespace enginecore {
+
+	namespace component {
+
+		RenderComponent::RenderComponent() {
+
+		}
+
+		RenderComponent::~RenderComponent()	{
+		}
+
+		void RenderComponent::Update() {
 
 
-rendercomponent::rendercomponent()
-{
+		}
+	}
 }
 
-
-rendercomponent::~rendercomponent()
-{
-}

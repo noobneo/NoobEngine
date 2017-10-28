@@ -21,6 +21,7 @@ namespace enginecore {
 	namespace component {
 
 		class GameObject;
+		class ComponentManager;
 
 		class MainComponent
 		{
@@ -32,12 +33,26 @@ namespace enginecore {
 			GameObject* get_owner() { return owner_; };
 			void set_owner(GameObject* owner) { owner_ = owner; };
 
-		private:
+			void set_next(MainComponent* next) { next_; next; };
+			MainComponent* get_next() { return next_; };
+
+			void set_id(int id) { id_ = id; };
+			int get_id() { return id_; };
+
+			virtual void Update() = 0;
+
+		protected:
 			MainComponent();
 			virtual ~MainComponent();
 
+		private:
+
+			int id_;
+
 			ComponentType component_type_;
+			MainComponent* next_;
 			GameObject* owner_;
+			
 		};
 	}
 }
