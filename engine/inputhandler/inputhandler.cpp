@@ -141,7 +141,9 @@ namespace enginecore{
 
 
 		InputHandler::~InputHandler() {
-
+#ifdef TEST_MODE
+			//ENGINE_LOG("InputHandler Destructor");
+#endif // TEST_MODE
 		}
 	}
 
