@@ -22,12 +22,13 @@ namespace enginecore {
 	namespace component {
 
 	class MainComponent;
+	class ComponentManager;
 
 	class GameObject 
 	{
 
 	public:
-		virtual void Update();
+		void Update();
 		
 		int get_id() { return id_; };
 		void set_id(int id) {  id_  = id; };
@@ -39,6 +40,8 @@ namespace enginecore {
 		GameObject(const GameObject&) = delete;
 
 		//void Init(int id);
+
+		void AttachComponent(MainComponent * component, ComponentType type);
 
 		void set_next(GameObject* next) { next_ = next; };
 		void set_is_active(bool is_active) { is_active_ = is_active; };

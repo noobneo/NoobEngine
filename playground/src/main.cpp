@@ -15,7 +15,6 @@ int main(int argc, char** argv) {
 		enginecore::Engine::GetInstance();
 		run = false;
 	}
-	
 
 	return 0;
 }

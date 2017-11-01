@@ -30,8 +30,8 @@ namespace enginecore {
 			gameobject_id_		= 0;
 			count_				= 0;
 			first_available_	= nullptr;
-			component_manager_ = nullptr;
-
+			component_manager_	= nullptr;
+	
 			InitComponentManager();
 			PoolGameObjects();
 
@@ -49,6 +49,13 @@ namespace enginecore {
 
 			return GameobjectManager::instance_;
 		}
+
+		void GameobjectManager::InitComponentManager() {
+
+			component_manager_ = new ComponentManager();
+			component_manager_->LoadComponents();
+		}
+
 
 		GameObject* GameobjectManager::CreateGameObject() {
 
@@ -78,28 +85,6 @@ namespace enginecore {
 				++gameobject_id_;
 			}
 		}
-
-
-		void GameobjectManager::InitComponentManager() {
-
-			component_manager_ = new ComponentManager();
-			component_manager_->LoadComponents();
-		}
-		void GameobjectManager::AddRenderComponent(GameObject* game_object) {
-
-			
-		}
-
-		void GameobjectManager::AddPhysicsComponent(GameObject* game_object) {
-
-
-		}
-
-		void GameobjectManager::AddTransformComponent(GameObject* game_object) {
-
-
-		}
-
 
 
 		void GameobjectManager::Update() {
@@ -150,7 +135,7 @@ namespace enginecore {
 			count_ = 0;
 			gameobject_id_ = 0;
 			active_objects_.clear();
-			//gameobjects_.clear();
+//			gameobjects_.clear();
 		}
 
 		void GameobjectManager::Destroy() {
@@ -160,6 +145,8 @@ namespace enginecore {
 	#endif // TEST_MODE
 
 			ClearPool();
+
+			CLEAN_DELETE(component_manager_);
 			CLEAN_DELETE(GameobjectManager::instance_);
 		}
 

@@ -28,7 +28,7 @@ namespace enginecore {
 
 		public:
 			ComponentType get_component_type() { return component_type_; };
-			ComponentType set_component_type(ComponentType component_type) { component_type_ = component_type; };
+			void set_component_type(ComponentType component_type) { component_type_ = component_type; };
 
 			GameObject* get_owner() { return owner_; };
 			void set_owner(GameObject* owner) { owner_ = owner; };
@@ -46,6 +46,7 @@ namespace enginecore {
 			virtual ~MainComponent();
 
 		private:
+			friend class ComponentManager;
 
 			int id_;
 

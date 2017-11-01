@@ -32,10 +32,6 @@ namespace enginecore {
 		void Update();
 		void Destroy();
 
-		void AddRenderComponent(GameObject* game_object);
-		void AddPhysicsComponent(GameObject* game_object);
-		void AddTransformComponent(GameObject* game_object);
-
 		void DeleteGameobject(int id);
 		GameObject* CreateGameObject();
 

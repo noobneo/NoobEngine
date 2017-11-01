@@ -30,12 +30,26 @@ namespace enginecore {
 
 		}
 
+		void GameObject::AttachComponent(MainComponent * component, ComponentType type) {
+
+			auto itr = components_.find(type);
+
+			if (itr != components_.end()) {
+
+				ENGINE_ERR_LOG("Component already attached ! Make sure you remove it first to add different");
+				return;
+			}
+			components_[type] = component;
+		}
+
+
 		GameObject::~GameObject() {
 
 
 #ifdef TEST_MODE
 		//	ENGINE_LOG("Destroying Gameobject :%d",id_);
 #endif // TEST_MODE
+			
 			components_.clear();
 			id_ = -1;
 			next_ = nullptr;

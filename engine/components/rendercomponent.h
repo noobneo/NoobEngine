@@ -8,6 +8,7 @@ namespace enginecore {
 	namespace component {
 
 		class ComponentManager;
+		class Sprite;
 
 		class RenderComponent : public MainComponent
 		{
@@ -19,6 +20,7 @@ namespace enginecore {
 
 		private:
 			friend class ComponentManager;
+			Sprite* image_;
 		};
 	}
 }

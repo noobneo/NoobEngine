@@ -116,13 +116,15 @@ namespace enginecore{
 				}
 			}
 
-			if (event_.type == SDL_KEYDOWN) {
+			/*if (event_.type == SDL_KEYDOWN) {
 
-				DelegateKeyPressed();
 
-			}else if (event_.type == SDL_KEYUP) {
+			}*/
+			DelegateKeyPressed();
+			
+			if (event_.type == SDL_KEYUP) {
 
-				DelegateKeyReleased();
+				DelegateKeyReleased();	
 			}
 
 			return true;

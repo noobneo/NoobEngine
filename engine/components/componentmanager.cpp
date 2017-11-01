@@ -3,12 +3,13 @@
 #include "physicscomponent.h"
 #include "transformcomponent.h"
 
+#include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
+#include "gameobject.h"
 
 namespace enginecore {
 
 	namespace component {
-
 
 		ComponentManager::ComponentManager() {
 
@@ -62,21 +63,22 @@ namespace enginecore {
 			}
 		}
 
-		MainComponent* ComponentManager::GetPhysicsComponent(ComponentType type) {
+		MainComponent* ComponentManager::GetPhysicsComponent(ComponentType type , int id) {
 
 			if (!available_physics_component_) {
 
 				ENGINE_ERR_LOG("No Transform Component Available yet");
-			}
-							
+			} 
+
+
 			MainComponent* temp = available_physics_component_;
 			available_physics_component_ = available_physics_component_->get_next();
-			active_physics_component_.push_back(temp);
+			active_physics_component_[id] = temp;
 			return temp;
 
 		}
 
-		MainComponent* ComponentManager::GetRenderComponent(ComponentType type) {
+		MainComponent* ComponentManager::GetRenderComponent(ComponentType type, int id) {
 
 			if (!available_render_component_) {
 
@@ -85,12 +87,12 @@ namespace enginecore {
 
 			MainComponent* temp = available_render_component_;
 			available_render_component_ = available_render_component_->get_next();
-			active_render_component_.push_back(temp);
+			active_render_component_[id] = temp;
 			return temp;
 		}
 
 
-		MainComponent* ComponentManager::GetTransformComponent(ComponentType type) {
+		MainComponent* ComponentManager::GetTransformComponent(ComponentType type, int id) {
 
 			if (!available_transform_component_) {
 
@@ -99,9 +101,10 @@ namespace enginecore {
 
 			MainComponent* temp = available_transform_component_;
 			available_transform_component_ = available_transform_component_->get_next();
-			active_transform_component_.push_back(temp);
+			active_transform_component_[id] = temp;
 			return temp;
 		}
+
 
 		void ComponentManager::Update() {
 
@@ -138,6 +141,60 @@ namespace enginecore {
 
 		}
 
+
+
+		void ComponentManager::RemoveAllActiveComponents() {
+
+			active_render_component_.clear();
+			active_physics_component_.clear();
+			active_transform_component_.clear();
+			active_controller_component_.clear();
+
+		}
+		void ComponentManager::Destroy() {
+
+#ifdef TEST_MODE
+			ENGINE_LOG("Destroying Component Manager");
+#endif // TEST_MODE
+			
+
+			/*delete all all the componenets*/
+
+
+			MainComponent* render_[MAX_SIZE];
+			MainComponent* physics_[MAX_SIZE];
+			MainComponent* transform_[MAX_SIZE];
+			MainComponent* controller_[MAX_SIZE];
+
+			/*render components*/
+			for (int i = 0; i < MAX_SIZE; i++) {
+
+				delete render_[i];
+			}
+
+			/*physics components*/
+			for (int i = 0; i < MAX_SIZE; i++) {
+
+				delete physics_[i];
+			}
+
+			/*transform_ components*/
+			for (int i = 0; i < MAX_SIZE; i++) {
+
+				delete transform_[i];
+			}
+
+			/*transform_ components*/
+			for (int i = 0; i < MAX_SIZE; i++) {
+
+				delete controller_[i];
+			}
+
+			active_render_component_.clear();
+			active_physics_component_.clear();
+			active_transform_component_.clear();
+			active_controller_component_.clear();
+		}
 	}
 }
 

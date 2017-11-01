@@ -142,6 +142,10 @@
     <ClCompile Include="engine\engine.cpp" />
     <ClCompile Include="engine\fpscontroller\timer.cpp" />
     <ClCompile Include="engine\fpscontroller\fpscontroller.cpp" />
+    <ClCompile Include="engine\maths\lineSegment2D.cpp" />
+    <ClCompile Include="engine\maths\math2D.cpp" />
+    <ClCompile Include="engine\maths\matrix2D.cpp" />
+    <ClCompile Include="engine\maths\vector2D.cpp" />
     <ClCompile Include="engine\utils\filehandler.cpp" />
     <ClCompile Include="engine\inputhandler\inputhandler.cpp" />
     <ClCompile Include="engine\inputhandler\keyboardeventdispatcher.cpp" />
@@ -169,6 +173,10 @@
     <ClInclude Include="engine\enginelogger\enginelogger.h" />
     <ClInclude Include="engine\engine.h" />
     <ClInclude Include="engine\fpscontroller\timer.h" />
+    <ClInclude Include="engine\maths\lineSegment2D.h" />
+    <ClInclude Include="engine\maths\math2D.h" />
+    <ClInclude Include="engine\maths\matrix2D.h" />
+    <ClInclude Include="engine\maths\vector2D.h" />
     <ClInclude Include="engine\window\window.h" />
     <ClInclude Include="engine\fpscontroller\fpscontroller.h" />
     <ClInclude Include="engine\utils\filehandler.h" />
