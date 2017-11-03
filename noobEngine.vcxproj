@@ -162,6 +162,7 @@
     <ClCompile Include="engine\renderer\renderer.cpp" />
     <ClCompile Include="engine\components\rendercomponent.cpp" />
     <ClCompile Include="engine\components\transformcomponent.cpp" />
+    <ClCompile Include="engine\serializer\serializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\components\controllercomponent.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="engine\components\physicscomponent.h" />
     <ClInclude Include="engine\components\rendercomponent.h" />
     <ClInclude Include="engine\components\transformcomponent.h" />
+    <ClInclude Include="engine\serializer\serializer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="img.bmp" />

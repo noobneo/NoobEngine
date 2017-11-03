@@ -15,4 +15,15 @@ typedef enum {
 	E_COMPONENT_TYPE_INPUT_HANDLER,
 }ComponentType;
 
+
+typedef struct GameObjectData{
+	bool has_transform;
+	float pos_x;
+	float pos_y;
+	bool has_sprite;
+	bool is_visible;
+	std::string file_name_;
+	std::vector<std::string> scripts_;
+};
+
 #endif // !_COMPONENT_TYPES_H_

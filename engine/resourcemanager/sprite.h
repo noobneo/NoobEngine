@@ -14,11 +14,11 @@ namespace enginecore {
 			//virtual void Update();
 			
 
-			void SetPositionX(int position_x);
-			void SetPositionY(int position_y);
+			void SetPositionX(float position_x);
+			void SetPositionY(float position_y);
 			
-			inline int get_position_x() { return position_x_ ; };
-			inline int get_position_y() { return position_y_ ; };
+			inline float get_position_x() { return position_x_ ; };
+			inline float get_position_y() { return position_y_ ; };
 			
 			inline SDL_Surface* get_surface() { return surface_; };
 			inline SDL_Rect get_bounding_box() { return bounding_box_; };
@@ -41,8 +41,8 @@ namespace enginecore {
 			bool is_visible_;
 			bool is_dirty_;
 
-			int position_x_;
-			int position_y_;
+			float position_x_;
+			float position_y_;
 
 			int width_;
 			int height_;

@@ -38,17 +38,17 @@ namespace enginecore {
 		void Sprite::UpdatePosition() {
 
 			is_dirty_ = true;
-			bounding_box_.x = position_x_;
-			bounding_box_.y = position_y_;
+			bounding_box_.x = (int)position_x_;
+			bounding_box_.y = (int)position_y_;
 		}
 
-		void Sprite::SetPositionX(int position_x) {
+		void Sprite::SetPositionX(float position_x) {
 
 			position_x_ = position_x;
 			UpdatePosition();
 		}
 
-		void Sprite::SetPositionY(int position_y) {
+		void Sprite::SetPositionY(float position_y) {
 
 			position_y_ = position_y;
 			UpdatePosition();

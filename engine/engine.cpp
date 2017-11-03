@@ -13,16 +13,6 @@ Creation date: 14th October 2017
 ---------------------------------------------------------*/
 
 #include "engine-includes.h"
-#include "fpscontroller\fpscontroller.h"
-#include "utils\filehandler.h"
-
-#include "inputhandler\inputhandler.h"
-#include "inputhandler\keyboardlistener.h"
-#include "renderer\renderer.h"
-#include "resourcemanager\resourcemanager.h"
-#include "resourcemanager\sprite.h"
-#include "components\gameobjectmanager.h"
-
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -98,12 +88,13 @@ namespace enginecore {
 
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance();
+
+		//serializer
+		serialize::Serializer::GetInstance();
 		
 
 		
 #ifdef TEST_MODE
-
-		RegisterKeyBoardListener();
 		CreateImage();
 #endif
 
@@ -181,6 +172,10 @@ namespace enginecore {
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance()->Destroy();
 
+		//serializer
+		//serializer
+		serialize::Serializer::GetInstance()->Destroy();
+
 
 		ENGINE_LOG("Engine Instance Destroyed");
 		CLEAN_DELETE(window_);	
@@ -198,64 +193,9 @@ namespace enginecore {
 
 #ifdef TEST_MODE
 
-	void Engine::RegisterKeyBoardListener() {
-
-		auto keyboard_listener= inputhandler::KeyboardListener::CreateListener();
-
-		keyboard_listener->on_key_pressed_ = FUNCTION_CALLBACK(Engine::OnKeyPressed,this);
-		keyboard_listener->on_key_released_ = FUNCTION_CALLBACK(Engine::OnKeyReleased, this);
-	}
-
-
-	void Engine::OnKeyPressed(const Uint8 * key_state) {
-
-
-		int speed = 5;
-		if (key_state[SDL_SCANCODE_RIGHT]) {
-
-			ENGINE_LOG("Right Pressed");
-			image_->SetPositionX(image_->get_position_x() + speed);
-
-		}else if (key_state[SDL_SCANCODE_LEFT]) {
-
-			image_->SetPositionX(image_->get_position_x() - speed);
-			ENGINE_LOG("Left Pressed");
-
-		} else if (key_state[SDL_SCANCODE_UP]) {
-
-			image_->SetPositionY(image_->get_position_y() - speed);
-			ENGINE_LOG("Up Pressed");
-
-		}else if (key_state[SDL_SCANCODE_DOWN]) {
-
-			image_->SetPositionY(image_->get_position_y() + speed);
-			ENGINE_LOG("Down Pressed");
-		}
-	}
-
-	void Engine::OnKeyReleased(const Uint8 * key_state) {
-
-		if (key_state[SDL_SCANCODE_RIGHT]) {
-
-			ENGINE_LOG("Right Released");
-
-		} else if (key_state[SDL_SCANCODE_LEFT]) {
-
-			ENGINE_LOG("Left Released");
-
-		} else if (key_state[SDL_SCANCODE_UP]) {
-
-			ENGINE_LOG("Up Released");
-
-		} else if (key_state[SDL_SCANCODE_DOWN]) {
-
-			ENGINE_LOG("Down Released");
-		}
-	}
-
 	void Engine::CreateImage() {
 
-		image_ = resourcemanager::ResourceManager::GetInstance()->CreateSprite("img.bmp");
+
 	}
 #endif
 

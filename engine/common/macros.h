@@ -16,9 +16,6 @@ Creation date: 16th October 2017
 
 #include <functional>   // std::bind
 
-
-#define EPSILON 00000.1f
-
 #define MAX_FPS 60.0f
 #define FPS_SAMPLE_SIZE 60
 

@@ -50,6 +50,7 @@ namespace enginecore {
 			return GameobjectManager::instance_;
 		}
 
+	
 		void GameobjectManager::InitComponentManager() {
 
 			component_manager_ = new ComponentManager();
@@ -69,6 +70,19 @@ namespace enginecore {
 			first_available_ = go->get_next();
 			go->set_is_active(true);
 			return go;
+		}
+
+		void GameobjectManager::InitializeGameObject() {
+			
+			if (!first_available_) {
+
+				ENGINE_ERR_LOG("No free gamobjects yet!!!");
+			}
+
+			GameObject *go = first_available_;
+
+			first_available_ = go->get_next();
+			go->set_is_active(true);
 		}
 
 		void GameobjectManager::PoolGameObjects() {

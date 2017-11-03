@@ -96,6 +96,9 @@
     <ClCompile Include="engine\maths\lineSegment2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\serializer\serializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -183,6 +186,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\maths\lineSegment2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\serializer\serializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

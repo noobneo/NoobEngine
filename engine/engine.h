@@ -17,7 +17,7 @@ Creation date: 14th October 2017
 #include <string>
 #include "window\window.h"
 
-#include "resourcemanager\sprite.h"
+#include "components\gameobject.h"
 
  namespace enginecore {
 
@@ -40,15 +40,11 @@ Creation date: 14th October 2017
 
 		void InstantiateModules();
 
-#ifdef TEST_MODE
 
+#ifdef TEST_MODE
 		void CreateImage();
-		void RegisterKeyBoardListener();
-	public:
-		void OnKeyPressed(const Uint8 * key_state);
-		void OnKeyReleased(const Uint8 * key_state);
-	private:
 #endif
+
 
 	public: 
 		
@@ -80,7 +76,7 @@ Creation date: 14th October 2017
 
 #ifdef TEST_MODE
 
-		resourcemanager::Sprite* image_;
+		component::GameObject* obj_;
 #endif
 	};
 }

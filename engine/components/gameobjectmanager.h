@@ -34,6 +34,7 @@ namespace enginecore {
 
 		void DeleteGameobject(int id);
 		GameObject* CreateGameObject();
+		void InitializeGameObject();
 
 		static GameobjectManager* GetInstance();
 
