@@ -14,6 +14,11 @@ namespace enginecore {
 		}
 
 
+		void PhysicsComponent::Init() {
+
+
+		}
+
 		void PhysicsComponent::Update() {
 
 #ifdef  TEST_MODE

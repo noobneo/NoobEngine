@@ -16,9 +16,7 @@ namespace enginecore {
 
 
 			void Update();
-			void Destroy();
-			void RemoveAllActiveComponents();
-
+		
 		private:
 			ComponentManager();
 			~ComponentManager()=default;
@@ -26,11 +24,15 @@ namespace enginecore {
 			ComponentManager(const ComponentManager& copy) = delete;
 			void operator=(const ComponentManager& copy) = delete;
 
+			void Destroy();
+			void UnloadComponents();
+			void RemoveAllActiveComponents();
+
+
 			void LoadComponents();
 			void LoadRender();
 			void LoadPhyics();
 			void LoadTransform();
-
 
 
 			void UpdateRenderComponents();
@@ -68,6 +70,11 @@ namespace enginecore {
 			std::unordered_map<int , MainComponent*>	active_physics_component_;
 			std::unordered_map<int , MainComponent*>	active_transform_component_;
 			std::unordered_map<int , MainComponent*>	active_controller_component_;
+
+			bool is_render_components_loaded_;
+			bool is_physics_components_loaded_;
+			bool is_transform_components_loaded_;
+			bool is_controller_components_loaded_;
 			
 		};
 

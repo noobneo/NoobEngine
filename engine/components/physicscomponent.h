@@ -15,11 +15,12 @@ namespace enginecore {
 
 		public :
 
-			virtual void Update();
 		private:
 			PhysicsComponent();
 			~PhysicsComponent();
 
+			virtual void Update();
+			virtual void Init();
 		private:
 			friend class ComponentManager;
 		};

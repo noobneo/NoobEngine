@@ -14,6 +14,8 @@ Creation date: 25th October 2017
 #include "gameobject.h"
 #include "gameobjectmanager.h"
 #include "../enginelogger/enginelogger.h"
+#include "maincomponent.h"
+#include "transformcomponent.h"
 
 namespace enginecore {
 
@@ -40,6 +42,38 @@ namespace enginecore {
 				return;
 			}
 			components_[type] = component;
+		}
+
+		void GameObject::SetPositionX(float position_x) {
+
+			TransformComponent* transform = static_cast<TransformComponent*>(GetComponent(E_COMPONENT_TYPE_TRANSFORM));
+
+			position_x_ = position_x;
+			//TransformComponent* trans = static_cast<TransformComponent*> ();
+			transform->SetPositionX(position_x_);
+		}
+
+		void GameObject::SetPositionY(float position_y) {
+
+			TransformComponent* transform = static_cast<TransformComponent*>(GetComponent(E_COMPONENT_TYPE_TRANSFORM));
+
+			position_y_ = position_y;
+			//TransformComponent* trans = static_cast<TransformComponent*> ();
+			transform->SetPositionY(position_y_);
+		}
+
+		MainComponent* GameObject::GetComponent(ComponentType type) {
+
+			auto itr = components_.find(type);
+
+			if (itr != components_.end()) {
+
+				return itr->second;
+			}
+
+			ENGINE_ERR_LOG("Could not find the component with type : %d", type);
+
+			return NULL;
 		}
 
 

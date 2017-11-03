@@ -2,25 +2,31 @@
 #define _RENDER_COMPONENT_H_
 
 #include "maincomponent.h"
-
+#include "../maths/vector2D.h"
+#include "../resourcemanager/sprite.h"
 namespace enginecore {
 
 	namespace component {
 
 		class ComponentManager;
-		class Sprite;
 
 		class RenderComponent : public MainComponent
 		{
 		public:
-			virtual void Update();
+			
+			void UpdateRenderPosition(math::Vector2D position); 
 		private:
 			RenderComponent();
 			~RenderComponent();
 
+			virtual void Update();
+			virtual void Init();
+
+			void set_sprite(resourcemanager::Sprite* image) { image_ = image; };
+
 		private:
 			friend class ComponentManager;
-			Sprite* image_;
+			resourcemanager::Sprite* image_;
 		};
 	}
 }

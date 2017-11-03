@@ -1,5 +1,4 @@
 #include "rendercomponent.h"
-#include "../resourcemanager/sprite.h"
 
 namespace enginecore {
 
@@ -15,8 +14,18 @@ namespace enginecore {
 			image_ = nullptr;
 		}
 
-		void RenderComponent::Update() {
+		void RenderComponent::Init() {
 
+			//init with default image
+		}
+
+		void RenderComponent::UpdateRenderPosition(math::Vector2D position) {
+
+			image_->SetPositionX(position.x_);
+			image_->SetPositionY(position.y_);
+		}
+
+		void RenderComponent::Update() {
 
 		}
 	}

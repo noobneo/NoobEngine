@@ -145,7 +145,7 @@ namespace enginecore {
 	#endif // TEST_MODE
 
 			ClearPool();
-
+			component_manager_->UnloadComponents();
 			CLEAN_DELETE(component_manager_);
 			CLEAN_DELETE(GameobjectManager::instance_);
 		}

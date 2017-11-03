@@ -33,6 +33,17 @@ namespace enginecore {
 		int get_id() { return id_; };
 		void set_id(int id) {  id_  = id; };
 		
+		void SetPositionX(float position_x);
+		void SetPositionY(float position_y);
+
+		MainComponent* GetComponent(ComponentType type);
+		//template <typename T>
+		//T GetComponent(ComponentType type);
+		
+		inline float get_position_x() { return position_x_; };
+		inline float get_position_y() { return position_y_; };
+
+
 	private:
 		GameObject();
 		~GameObject();
@@ -49,6 +60,7 @@ namespace enginecore {
 		bool get_is_active() { return is_active_; };
 		GameObject* get_next() { return next_; };
 
+
 	private:
 		friend class GameobjectManager;
 
@@ -58,6 +70,14 @@ namespace enginecore {
 		std::unordered_map<ComponentType, MainComponent*> components_;
 		
 		GameObject* next_;
+
+		float position_x_;
+		float position_y_;
+
+		int width_;
+		int height_;
+
+
 	};
 
 	}

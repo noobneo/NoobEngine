@@ -1,4 +1,6 @@
 #include "transformcomponent.h"
+#include "rendercomponent.h"
+#include "gameobject.h"
 
 namespace enginecore {
 
@@ -12,6 +14,39 @@ namespace enginecore {
 		void TransformComponent::Update() {
 
 
+		}
+
+		void TransformComponent::Init() {
+
+			scale_x_ = 1.0;
+			scale_x_ = 1.0;
+
+			math::Vector2DSet(&position_, 0.0f, 0.0f);
+		}
+
+		void TransformComponent::SetPositionX(float _x) {
+
+			position_.x_ = _x;
+			UpdateRenderPosition();
+		}
+
+		void TransformComponent::SetPositionY(float _y) {
+
+			position_.y_ = _y;
+			UpdateRenderPosition();
+		}
+
+		void TransformComponent::SetPosition(math::Vector2D position) {
+
+			math::Vector2DSet(&position_, position.x_, position.y_);
+			UpdateRenderPosition();
+		}
+
+
+		void TransformComponent::UpdateRenderPosition(){
+
+			RenderComponent* render_comp = static_cast<RenderComponent*>(owner_->GetComponent(E_COMPONENT_TYPE_RENDER));
+			render_comp->UpdateRenderPosition(position_);
 		}
 
 		TransformComponent::~TransformComponent() {

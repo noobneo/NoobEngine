@@ -17,6 +17,11 @@ namespace enginecore {
 			available_physics_component_	= nullptr;
 			available_transform_component_	= nullptr;
 			available_controller_component_ = nullptr;
+
+			is_render_components_loaded_ = false;
+			is_physics_components_loaded_ = false;
+			is_transform_components_loaded_  =false;
+			is_controller_components_loaded_ =false;
 		}
 
 		void ComponentManager::LoadComponents() {
@@ -37,6 +42,7 @@ namespace enginecore {
 				render_[i]->set_component_type(E_COMPONENT_TYPE_RENDER);
 				available_render_component_ = render_[i];
 			}
+			is_render_components_loaded_ = true;
 		}
 
 		void ComponentManager::LoadPhyics() {
@@ -49,6 +55,7 @@ namespace enginecore {
 				physics_[i]->set_component_type(E_COMPONENT_TYPE_PHYSICS);
 				available_physics_component_ = physics_[i];
 			}
+			is_physics_components_loaded_ = true;
 		}
 
 		void ComponentManager::LoadTransform() {
@@ -61,6 +68,8 @@ namespace enginecore {
 				transform_[i]->set_component_type(E_COMPONENT_TYPE_TRANSFORM);
 				available_transform_component_ = transform_[i];
 			}
+
+			is_transform_components_loaded_ = true;
 		}
 
 		MainComponent* ComponentManager::GetPhysicsComponent(ComponentType type , int id) {
@@ -143,6 +152,12 @@ namespace enginecore {
 
 
 
+		void ComponentManager::UnloadComponents() {
+
+			RemoveAllActiveComponents();//do something with ths
+			Destroy();
+		}
+
 		void ComponentManager::RemoveAllActiveComponents() {
 
 			active_render_component_.clear();
@@ -156,38 +171,47 @@ namespace enginecore {
 #ifdef TEST_MODE
 			ENGINE_LOG("Destroying Component Manager");
 #endif // TEST_MODE
-			
+		
 
-			/*delete all all the componenets*/
+			if (is_render_components_loaded_) {
 
+				/*render components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
 
-			MainComponent* render_[MAX_SIZE];
-			MainComponent* physics_[MAX_SIZE];
-			MainComponent* transform_[MAX_SIZE];
-			MainComponent* controller_[MAX_SIZE];
-
-			/*render components*/
-			for (int i = 0; i < MAX_SIZE; i++) {
-
-				delete render_[i];
+					delete render_[i];
+				}
+				is_render_components_loaded_ = false;
 			}
 
-			/*physics components*/
-			for (int i = 0; i < MAX_SIZE; i++) {
+			if (is_physics_components_loaded_) {
 
-				delete physics_[i];
+				/*physics components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
+
+					delete physics_[i];
+				}
+				is_physics_components_loaded_ = false;
 			}
 
-			/*transform_ components*/
-			for (int i = 0; i < MAX_SIZE; i++) {
+			if (is_transform_components_loaded_) {
 
-				delete transform_[i];
+				/*transform_ components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
+
+					delete transform_[i];
+				}
+				is_transform_components_loaded_ = false;
 			}
 
-			/*transform_ components*/
-			for (int i = 0; i < MAX_SIZE; i++) {
 
-				delete controller_[i];
+			if (is_controller_components_loaded_) {
+
+				/*transform_ components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
+
+					delete controller_[i];
+				}
+				is_controller_components_loaded_ = false;
 			}
 
 			active_render_component_.clear();
