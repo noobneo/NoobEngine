@@ -2,6 +2,7 @@
 #include "rendercomponent.h"
 #include "physicscomponent.h"
 #include "transformcomponent.h"
+#include "controllercomponent.h"
 
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
@@ -11,6 +12,9 @@ namespace enginecore {
 
 	namespace component {
 
+
+		ComponentManager* ComponentManager::instance_ = nullptr;
+
 		ComponentManager::ComponentManager() {
 
 			available_render_component_		= nullptr;
@@ -18,10 +22,22 @@ namespace enginecore {
 			available_transform_component_	= nullptr;
 			available_controller_component_ = nullptr;
 
-			is_render_components_loaded_ = false;
-			is_physics_components_loaded_ = false;
-			is_transform_components_loaded_  =false;
-			is_controller_components_loaded_ =false;
+			is_render_components_loaded_	= false;
+			is_physics_components_loaded_	= false;
+			is_transform_components_loaded_ = false;
+			is_controller_components_loaded_= false;
+
+			LoadComponents();
+		}
+
+		ComponentManager* ComponentManager::GetInstance() {
+
+			if (!ComponentManager::instance_) {
+
+				ComponentManager::instance_ = new ComponentManager();
+			}
+
+			return ComponentManager::instance_;
 		}
 
 		void ComponentManager::LoadComponents() {
@@ -29,6 +45,7 @@ namespace enginecore {
 			LoadRender();
 			LoadPhyics();
 			LoadTransform();
+			LoadController();
 		}
 
 
@@ -72,7 +89,37 @@ namespace enginecore {
 			is_transform_components_loaded_ = true;
 		}
 
-		MainComponent* ComponentManager::GetPhysicsComponent(ComponentType type , int id) {
+		void ComponentManager::LoadController() {
+
+			for (int i = 0; i < MAX_SIZE; ++i) {
+
+				controller_[i] = new ControllerComponent();
+				controller_[i]->set_id(i);
+				controller_[i]->set_next(available_controller_component_);
+				controller_[i]->set_component_type(E_COMPONENT_TYPE_TRANSFORM);
+				available_controller_component_ = controller_[i];
+			}
+
+			is_controller_components_loaded_ = true;
+		}
+
+
+
+		MainComponent* ComponentManager::GetControllerComponent(int id) {
+
+			if (!available_controller_component_) {
+
+				ENGINE_ERR_LOG("No Transform Component Available yet");
+			}
+
+			MainComponent* temp = available_controller_component_;
+			available_controller_component_ = available_controller_component_->get_next();
+			active_controller_component_[id] = temp;
+			return temp;
+		}
+
+
+		MainComponent* ComponentManager::GetPhysicsComponent(int id) {
 
 			if (!available_physics_component_) {
 
@@ -87,7 +134,7 @@ namespace enginecore {
 
 		}
 
-		MainComponent* ComponentManager::GetRenderComponent(ComponentType type, int id) {
+		MainComponent* ComponentManager::GetRenderComponent(int id) {
 
 			if (!available_render_component_) {
 
@@ -101,7 +148,7 @@ namespace enginecore {
 		}
 
 
-		MainComponent* ComponentManager::GetTransformComponent(ComponentType type, int id) {
+		MainComponent* ComponentManager::GetTransformComponent(int id) {
 
 			if (!available_transform_component_) {
 
@@ -154,7 +201,6 @@ namespace enginecore {
 
 		void ComponentManager::UnloadComponents() {
 
-			RemoveAllActiveComponents();//do something with ths
 			Destroy();
 		}
 
@@ -167,6 +213,9 @@ namespace enginecore {
 
 		}
 		void ComponentManager::Destroy() {
+
+
+			RemoveAllActiveComponents();//do something with ths
 
 #ifdef TEST_MODE
 			ENGINE_LOG("Destroying Component Manager");
@@ -214,10 +263,7 @@ namespace enginecore {
 				is_controller_components_loaded_ = false;
 			}
 
-			active_render_component_.clear();
-			active_physics_component_.clear();
-			active_transform_component_.clear();
-			active_controller_component_.clear();
+			CLEAN_DELETE(ComponentManager::instance_);
 		}
 	}
 }

@@ -1,5 +1,9 @@
 #include "rendercomponent.h"
 
+#ifdef TEST_MODE
+#include "../enginelogger/enginelogger.h"
+#endif // TEST_MODE
+
 namespace enginecore {
 
 	namespace component {
@@ -12,10 +16,14 @@ namespace enginecore {
 		RenderComponent::~RenderComponent()	{
 
 			image_ = nullptr;
+#ifdef TEST_MODE
+			ENGINE_LOG("Destroying RenderCOmpoenent");
+#endif // TEST_MODE
 		}
 
-		void RenderComponent::Init() {
+		void RenderComponent::Init(GameObject* owner) {
 
+			owner_ = owner;
 			//init with default image
 		}
 

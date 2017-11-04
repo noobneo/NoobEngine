@@ -9,13 +9,16 @@ namespace enginecore {
 	namespace component {
 
 		class MainComponent;
-		class GameobjectManager;
+		class ObjectFactory;
 
 		class ComponentManager
 		{
 
+		public:
 
+			static ComponentManager* GetInstance();
 			void Update();
+			void Destroy();
 		
 		private:
 			ComponentManager();
@@ -24,7 +27,6 @@ namespace enginecore {
 			ComponentManager(const ComponentManager& copy) = delete;
 			void operator=(const ComponentManager& copy) = delete;
 
-			void Destroy();
 			void UnloadComponents();
 			void RemoveAllActiveComponents();
 
@@ -33,6 +35,7 @@ namespace enginecore {
 			void LoadRender();
 			void LoadPhyics();
 			void LoadTransform();
+			void LoadController();
 
 
 			void UpdateRenderComponents();
@@ -43,18 +46,23 @@ namespace enginecore {
 		
 
 
-			MainComponent* GetPhysicsComponent(ComponentType type , int id);
-			MainComponent* GetRenderComponent(ComponentType type, int id);
-			MainComponent* GetTransformComponent(ComponentType type, int id);
+			MainComponent* GetPhysicsComponent( int id);
+			MainComponent* GetRenderComponent( int id);
+			MainComponent* GetTransformComponent(int id);
 
+			//temp
+			MainComponent* GetControllerComponent(int id);
 
 		private:
 
-			friend class GameobjectManager;//check again
+			friend class ObjectFactory;
+
+			static ComponentManager* instance_;
 
 			int total_active_render_components_;
 			int total_active_physics_components_;
 			int total_active_transform_components_;
+			int total_active_controller_components_;
 
 			MainComponent* render_		[MAX_SIZE];
 			MainComponent* physics_		[MAX_SIZE];

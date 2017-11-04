@@ -14,9 +14,9 @@ namespace enginecore {
 		}
 
 
-		void PhysicsComponent::Init() {
+		void PhysicsComponent::Init(GameObject* owner) {
 
-
+			owner_ = owner;
 		}
 
 		void PhysicsComponent::Update() {
@@ -28,6 +28,10 @@ namespace enginecore {
 		}
 
 		PhysicsComponent::~PhysicsComponent() {
+
+#ifdef TEST_MODE
+			ENGINE_LOG("Destroying Physics Component");
+#endif // TEST_MODE
 
 		}
 

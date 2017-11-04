@@ -9,6 +9,7 @@ namespace enginecore {
 	namespace component {
 		
 		class ComponentManager;
+		class ObjectFactory;
 
 		class ControllerComponent : public MainComponent
 		{
@@ -19,7 +20,7 @@ namespace enginecore {
 
 
 			virtual void Update();
-			virtual void Init();
+			virtual void Init(GameObject* owner);
 
 #ifdef TEST_MODE
 
@@ -32,6 +33,7 @@ namespace enginecore {
 
 		private:
 			friend class ComponentManager;
+			friend class ObjectFactory;
 		};
 	}
 }

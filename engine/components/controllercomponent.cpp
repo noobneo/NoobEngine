@@ -22,14 +22,18 @@ namespace enginecore {
 		}
 
 
-		void ControllerComponent::Init() {
+		void ControllerComponent::Init(GameObject* owner) {
 
+			owner_ = owner;
 			RegisterKeyBoardListener();
 		}
 
 
 		ControllerComponent::~ControllerComponent() {
 
+#ifdef TEST_MODE
+			ENGINE_LOG("DEstroying the ControllerComponent ");
+#endif // TEST_MODE
 		}
 
 

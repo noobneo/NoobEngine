@@ -22,7 +22,7 @@ namespace enginecore {
 	namespace component {
 
 	class GameObject;
-	class ComponentManager;
+	class ObjectFactory;
 
 	class GameobjectManager
 	{
@@ -48,7 +48,6 @@ namespace enginecore {
 
 		void ClearPool();
 		void PoolGameObjects();
-		void InitComponentManager();
 
 #ifdef TEST_MODE
 		void IteratePool();
@@ -57,6 +56,7 @@ namespace enginecore {
 
 	private:
 
+		friend class ObjectFactory;
 		static GameobjectManager* instance_;
 		
 		int gameobject_id_;
@@ -66,7 +66,6 @@ namespace enginecore {
 		std::unordered_map<int,GameObject*> active_objects_;
 
 		GameObject* first_available_;
-		ComponentManager* component_manager_;
 	};
 
 	}

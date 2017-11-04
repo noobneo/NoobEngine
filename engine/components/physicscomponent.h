@@ -9,6 +9,7 @@ namespace enginecore {
 
 
 		class ComponentManager;
+		class ObjectFactory;
 
 		class PhysicsComponent : public MainComponent
 		{
@@ -20,7 +21,7 @@ namespace enginecore {
 			~PhysicsComponent();
 
 			virtual void Update();
-			virtual void Init();
+			virtual void Init(GameObject* obj);
 		private:
 			friend class ComponentManager;
 		};

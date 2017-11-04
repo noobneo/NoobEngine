@@ -9,6 +9,7 @@ namespace enginecore {
 	namespace component {
 
 		class ComponentManager;
+		class ObjectFactory;
 
 		class RenderComponent : public MainComponent
 		{
@@ -20,12 +21,14 @@ namespace enginecore {
 			~RenderComponent();
 
 			virtual void Update();
-			virtual void Init();
+			virtual void Init(GameObject* owner);
 
 			void set_sprite(resourcemanager::Sprite* image) { image_ = image; };
 
 		private:
 			friend class ComponentManager;
+			friend class ObjectFactory;
+
 			resourcemanager::Sprite* image_;
 		};
 	}

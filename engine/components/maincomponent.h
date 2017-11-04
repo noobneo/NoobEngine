@@ -40,7 +40,7 @@ namespace enginecore {
 			int get_id() { return id_; };
 
 			virtual void Update() = 0;
-			virtual void Init() = 0;
+			virtual void Init(GameObject* owner) = 0;
 
 		protected:
 			MainComponent();
@@ -49,6 +49,7 @@ namespace enginecore {
 			GameObject* owner_;
 		private:
 			friend class ComponentManager;
+			
 
 			int id_;
 

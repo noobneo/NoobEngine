@@ -37,6 +37,8 @@ namespace enginecore {
 
 		FileHandler(const FileHandler&) = delete;
 		FileHandler& operator=(const FileHandler&) = delete;
+
+
 		
 		
 	private:

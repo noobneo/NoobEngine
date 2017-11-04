@@ -12,7 +12,7 @@ Creation date: 25th October 2017
 ---------------------------------------------------------*/
 
 #include "gameobjectmanager.h"
-#include "componentmanager.h"
+//#include "componentmanager.h"
 #include "gameobject.h"
 
 #include "../common/macros.h"
@@ -30,9 +30,7 @@ namespace enginecore {
 			gameobject_id_		= 0;
 			count_				= 0;
 			first_available_	= nullptr;
-			component_manager_	= nullptr;
-	
-			InitComponentManager();
+
 			PoolGameObjects();
 
 #ifdef TEST_MODE
@@ -51,13 +49,6 @@ namespace enginecore {
 		}
 
 	
-		void GameobjectManager::InitComponentManager() {
-
-			component_manager_ = new ComponentManager();
-			component_manager_->LoadComponents();
-		}
-
-
 		GameObject* GameobjectManager::CreateGameObject() {
 
 			if (!first_available_) {
@@ -69,6 +60,7 @@ namespace enginecore {
 
 			first_available_ = go->get_next();
 			go->set_is_active(true);
+			active_objects_[go->get_id()] = go;
 			return go;
 		}
 
@@ -83,6 +75,7 @@ namespace enginecore {
 
 			first_available_ = go->get_next();
 			go->set_is_active(true);
+			active_objects_[go->get_id()] = go;
 		}
 
 		void GameobjectManager::PoolGameObjects() {
@@ -159,8 +152,6 @@ namespace enginecore {
 	#endif // TEST_MODE
 
 			ClearPool();
-			component_manager_->UnloadComponents();
-			CLEAN_DELETE(component_manager_);
 			CLEAN_DELETE(GameobjectManager::instance_);
 		}
 

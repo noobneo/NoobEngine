@@ -2,6 +2,10 @@
 #include "rendercomponent.h"
 #include "gameobject.h"
 
+#ifdef TEST_MODE
+	#include "../enginelogger/enginelogger.h"
+#endif // TEST_MODE
+
 namespace enginecore {
 
 	namespace component {
@@ -16,7 +20,10 @@ namespace enginecore {
 
 		}
 
-		void TransformComponent::Init() {
+		void TransformComponent::Init(GameObject* owner) {
+
+
+			owner_ = owner;
 
 			scale_x_ = 1.0;
 			scale_x_ = 1.0;
@@ -51,6 +58,9 @@ namespace enginecore {
 
 		TransformComponent::~TransformComponent() {
 
+#ifdef TEST_MODE
+			ENGINE_LOG("Destroying Transform Component ");
+#endif // TEST_MODE
 		}
 
 	}

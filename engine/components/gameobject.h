@@ -23,6 +23,7 @@ namespace enginecore {
 
 	class MainComponent;
 	class ComponentManager;
+	class ObjectFactory;
 
 	class GameObject 
 	{
@@ -63,6 +64,7 @@ namespace enginecore {
 
 	private:
 		friend class GameobjectManager;
+		friend class ObjectFactory;
 
 		int id_;
 		bool is_active_;

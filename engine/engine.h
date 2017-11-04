@@ -33,23 +33,17 @@ Creation date: 14th October 2017
 		Engine& operator=(const Engine& copy) = delete;
 
 		void Init();
-		void Run();
 		void ShutDown();
 		void Update();
 		void Pause();
 
 		void InstantiateModules();
 
-
-#ifdef TEST_MODE
-		void CreateImage();
-#endif
-
-
 	public: 
 		
-		static Engine* GetInstance();
 
+		static Engine* GetInstance();
+		void Run();
 
 		/*setters*/
 		inline void set_is_running(bool is_engine_running) { is_engine_running_ = is_engine_running; }

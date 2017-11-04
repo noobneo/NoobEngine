@@ -17,6 +17,7 @@
 #include "resourcemanager\resourcemanager.h"
 #include "components\gameobjectmanager.h"
 #include "serializer\serializer.h"
-
+#include "components\objectfactory.h"
+#include "components\componentmanager.h"
 
 #endif // !_ENGINE_INCLUDES_

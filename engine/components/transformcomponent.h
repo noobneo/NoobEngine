@@ -9,6 +9,8 @@ namespace enginecore {
 	namespace component {
 
 		class ComponentManager;
+		class ObjectFactory;
+
 		class TransformComponent : public MainComponent
 		{
 
@@ -26,7 +28,7 @@ namespace enginecore {
 
 		private:
 			virtual void Update();
-			virtual void Init();
+			virtual void Init(GameObject* owner);
 
 			void UpdateRenderPosition();
 
@@ -35,6 +37,7 @@ namespace enginecore {
 
 		private:
 			friend class ComponentManager;
+			friend class ObjectFactory;
 
 			math::Vector2D position_;
 

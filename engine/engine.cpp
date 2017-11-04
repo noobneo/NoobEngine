@@ -58,9 +58,7 @@ namespace enginecore {
 
 			ENGINE_LOG("Initializing Engine Modules");
 			InstantiateModules();
-
-			is_engine_running_ = true;
-			Run();
+		//	Run();
 		}
 	}
 
@@ -89,20 +87,22 @@ namespace enginecore {
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance();
 
+		//objectfactory 
+		component::ComponentManager::GetInstance();
+
+
+		//objectfactory 
+		component::ObjectFactory::GetInstance();
+
 		//serializer
 		serialize::Serializer::GetInstance();
-		
-
-		
-#ifdef TEST_MODE
-		CreateImage();
-#endif
 
 	}
 
 	void Engine::Run() {
 
 
+		is_engine_running_ = true;
 		std::string str;	
 		char buf[100];
 		fps::FpsController::GetInstance()->GetStartFrameTick();
@@ -116,7 +116,11 @@ namespace enginecore {
 				
 				//GameobjectManager
 
+				component::ComponentManager::GetInstance()->Update();
+				
 				component::GameobjectManager::GetInstance()->Update();
+
+
 
 				//update
 				renderer::Renderer::GetInstance()->Draw();
@@ -172,7 +176,12 @@ namespace enginecore {
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance()->Destroy();
 
-		//serializer
+		//objectfactory 
+		component::ComponentManager::GetInstance()->Destroy();
+
+		//objectfactory 
+		component::ObjectFactory::GetInstance()->Destroy();
+
 		//serializer
 		serialize::Serializer::GetInstance()->Destroy();
 
@@ -189,16 +198,6 @@ namespace enginecore {
 
 
 	}
-
-
-#ifdef TEST_MODE
-
-	void Engine::CreateImage() {
-
-
-	}
-#endif
-
 
 	Engine::~Engine(){
 
