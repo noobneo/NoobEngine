@@ -99,6 +99,9 @@
     <ClCompile Include="engine\serializer\serializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\components\objectfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -191,13 +194,20 @@
     <ClInclude Include="engine\serializer\serializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\components\objectfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\serializer\serialized-data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="playground\resources\img.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="img.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="playground\resources\gamedata\player.json" />
+    <None Include="playground\resources\gamedata\level1.json" />
   </ItemGroup>
 </Project>
