@@ -39,31 +39,39 @@ namespace enginecore {
 				data.Reset();
 				data = leveldata_[i];
 				GameObject* obj = GameobjectManager::GetInstance()->CreateGameObject();
+				if (obj) {
 
-				if (data.has_transform_) {
-					//transform
-					TransformComponent* trans = static_cast<TransformComponent*>(ComponentManager::GetInstance()->GetTransformComponent(obj->get_id()));
-					trans->Init(obj);
-					obj->AttachComponent(trans, E_COMPONENT_TYPE_TRANSFORM);
+					if (data.has_transform_) {
+						//transform
+						TransformComponent* trans = static_cast<TransformComponent*>(ComponentManager::GetInstance()->GetTransformComponent(obj->get_id()));
+						trans->Init(obj);
+						obj->AttachComponent(trans, E_COMPONENT_TYPE_TRANSFORM);
 
-				} 
+					} 
 				
-				if (data.has_sprite_) {
-					//Render
-					RenderComponent* render = static_cast<RenderComponent*>(ComponentManager::GetInstance()->GetRenderComponent(obj->get_id()));
-					render->Init(obj);
-					obj->AttachComponent(render, E_COMPONENT_TYPE_RENDER);
-					resourcemanager::Sprite* spr = resourcemanager::ResourceManager::GetInstance()->CreateSprite(data.file_name_);
-					render->set_sprite(spr);
+					if (data.has_sprite_) {
+						//Render
+						RenderComponent* render = static_cast<RenderComponent*>(ComponentManager::GetInstance()->GetRenderComponent(obj->get_id()));
+						render->Init(obj);
+						obj->AttachComponent(render, E_COMPONENT_TYPE_RENDER);
+						resourcemanager::Sprite* spr = resourcemanager::ResourceManager::GetInstance()->CreateSprite(data.file_name_);
+						render->set_sprite(spr);
 
-				} 
+					} 
 				
-				if (data.has_controller_) {
+					if (data.has_controller_) {
 
-					//Controller
-					ControllerComponent* controller = static_cast<ControllerComponent*>(ComponentManager::GetInstance()->GetControllerComponent(obj->get_id()));
-					controller->Init(obj);
-					obj->AttachComponent(controller, E_COMPONENT_TYPE_INPUT_HANDLER);
+						//Controller
+						ControllerComponent* controller = static_cast<ControllerComponent*>(ComponentManager::GetInstance()->GetControllerComponent(obj->get_id()));
+						controller->Init(obj);
+						obj->AttachComponent(controller, E_COMPONENT_TYPE_INPUT_HANDLER);
+					}
+
+				}
+				else {
+
+
+					ENGINE_ERR_LOG("Object could not created : %s", data.object_name_.c_str());
 				}
 			}
 		}

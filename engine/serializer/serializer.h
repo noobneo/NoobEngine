@@ -33,7 +33,7 @@ namespace enginecore {
 			Serializer() = default;
 			~Serializer() = default;
 
-			void SerializeFromJson(std::string filename, std::vector<GameObjectData> &gamedata);
+			void SerializeFromJson(std::string filename, std::vector<GameObjectData> &gamedata,bool is_achetype = false);
 
 		private:
 			static Serializer* instance_;

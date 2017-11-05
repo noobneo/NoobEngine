@@ -45,10 +45,11 @@ namespace enginecore {
 
 		}
 
-		void Serializer::SerializeFromJson(std::string filename, std::vector<GameObjectData>& gamedata) {
+		void Serializer::SerializeFromJson(std::string filename, std::vector<GameObjectData>& gamedata, bool is_achetype ) {
 
 			rapidjson::Document doc;
 
+			bool is_architype = false;
 			FILE* fp;
 			errno_t err;
 			err = fopen_s(&fp, filename.c_str(), "rb");
@@ -64,13 +65,14 @@ namespace enginecore {
 			fclose(fp);
 
 			GameObjectData data;
-			data.Reset();
+	
 			for (auto itr = doc.MemberBegin(); itr != doc.MemberEnd(); ++itr) {
 #ifdef TEST_MODE
 				
 				OutputContent(itr);
 #endif // TEST_MODE
 			
+
 				switch (itr->value.GetType()) {
 
 				case rapidjson::Type::kArrayType:
@@ -79,11 +81,10 @@ namespace enginecore {
 				case rapidjson::Type::kObjectType:
 				{
 
+					std::string name(itr->name.GetString());
+					ENGINE_LOG("");
 
-
-
-					if (strcmp(itr->name.GetString(), "archetype") == 0) {
-
+					if (name.find("object")!=std::string::npos) {
 
 
 						auto obj = itr->value.GetObject();
@@ -93,14 +94,15 @@ namespace enginecore {
 #endif // TEST_MODE
 						}
 
-						data.object_name_ = obj["archetype"].GetString();
-						data.pos_x_ = obj["x"].GetFloat();
-						data.pos_y_ = obj["y"].GetFloat();
-
-
+						 
+						std::string file_name(obj["archetype"].GetString());
+						SerializeFromJson(file_name, gamedata,true);
+						
+						gamedata.back().object_name_ = file_name;
+						gamedata.back().pos_x_ = obj["x"].GetFloat();
+						gamedata.back().pos_y_ = obj["y"].GetFloat();
 					}
 					else {
-
 
 							auto obj = itr->value.GetObject();
 							for (auto itr1 = obj.MemberBegin(); itr1 != obj.MemberEnd(); ++itr1) {
@@ -112,12 +114,7 @@ namespace enginecore {
 							data.has_transform_ = true;
 							data.pos_x_ = obj["x"].GetFloat();
 							data.pos_y_ = obj["y"].GetFloat();
-
-
 					}
-
-
-
 				}
 
 				break;
@@ -180,9 +177,12 @@ namespace enginecore {
 					break;
 
 				}
-
 			}
-			gamedata.push_back(data);
+
+			if (is_achetype) {
+
+				gamedata.push_back(data);
+			}
 
 		}
 

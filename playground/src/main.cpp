@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
 
 		enginecore::Engine::GetInstance();
 		run = false;
-		enginecore::serialize::Serializer::GetInstance()->SerializeGameData("playground/resources/gamedata/player.json");
+		enginecore::serialize::Serializer::GetInstance()->SerializeGameData("playground/resources/gamedata/level1.json");
 		enginecore::Engine::GetInstance()->Run();
 	}
 

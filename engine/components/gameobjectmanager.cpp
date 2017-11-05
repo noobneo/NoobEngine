@@ -54,6 +54,7 @@ namespace enginecore {
 			if (!first_available_) {
 
 				ENGINE_ERR_LOG("No free gamobjects yet!!!");
+				return nullptr;
 			}
 
 			GameObject *go = first_available_;

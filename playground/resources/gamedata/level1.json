@@ -1,6 +1,4 @@
 {
-  "Level1":{
-      
       "object2":{
        "archetype" : "playground/resources/gamedata/player.json",
        "x" : 100.0,
@@ -20,6 +18,4 @@
        "scaleY"    : 1,
         "visible"  : true
       }
-	  
-  }
 }
