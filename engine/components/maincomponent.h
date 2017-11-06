@@ -33,7 +33,7 @@ namespace enginecore {
 			GameObject* get_owner() { return owner_; };
 			void set_owner(GameObject* owner) { owner_ = owner; };
 
-			void set_next(MainComponent* next) { next_; next; };
+			void set_next(MainComponent* next) { next_= next; };
 			MainComponent* get_next() { return next_; };
 
 			void set_id(int id) { id_ = id; };

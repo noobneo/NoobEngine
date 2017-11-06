@@ -24,7 +24,7 @@ namespace enginecore {
 			float get_position_x() { return position_.x_;};
 			float get_position_y() { return position_.y_; };
 
-			math::Vector2D get_position() { return position_; };
+			inline math::Vector2D get_position() { return position_; };
 
 		private:
 			virtual void Update();

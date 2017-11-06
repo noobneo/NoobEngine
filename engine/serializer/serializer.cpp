@@ -65,6 +65,7 @@ namespace enginecore {
 			fclose(fp);
 
 			GameObjectData data;
+			data.Reset();
 	
 			for (auto itr = doc.MemberBegin(); itr != doc.MemberEnd(); ++itr) {
 #ifdef TEST_MODE
@@ -82,17 +83,11 @@ namespace enginecore {
 				{
 
 					std::string name(itr->name.GetString());
-					ENGINE_LOG("");
 
 					if (name.find("object")!=std::string::npos) {
 
 
 						auto obj = itr->value.GetObject();
-						for (auto itr1 = obj.MemberBegin(); itr1 != obj.MemberEnd(); ++itr1) {
-#ifdef TEST_MODE
-							OutputContent(itr1);
-#endif // TEST_MODE
-						}
 
 						 
 						std::string file_name(obj["archetype"].GetString());
@@ -101,8 +96,23 @@ namespace enginecore {
 						gamedata.back().object_name_ = file_name;
 						gamedata.back().pos_x_ = obj["x"].GetFloat();
 						gamedata.back().pos_y_ = obj["y"].GetFloat();
-					}
-					else {
+
+						if (obj.HasMember("direction")) {
+							std::string str_temp(obj["direction"].GetString());
+							gamedata.back().direction_ = str_temp;
+						}
+
+					}else if (name.find("animation") != std::string::npos) {
+
+						auto obj = itr->value.GetObject();
+
+						data.has_animation_ = true;
+						data.step_ = obj["step"].GetFloat();
+						data.limit_ = obj["limit"].GetFloat();
+						std::string str_temp(obj["direction"].GetString());
+						data.direction_ = str_temp;
+
+					} else {
 
 							auto obj = itr->value.GetObject();
 							for (auto itr1 = obj.MemberBegin(); itr1 != obj.MemberEnd(); ++itr1) {
@@ -125,10 +135,10 @@ namespace enginecore {
 					if (strcmp(itr->name.GetString(), "controller") == 0) {
 
 						data.has_controller_ = itr->value.GetBool();
-					}
-					else if (strcmp(itr->name.GetString(), "undo") == 0) {
 
-						data.has_undo_ = itr->value.GetBool();
+					}else if (strcmp(itr->name.GetString(), "animation") == 0) {
+
+					//	data.has_animation_ = itr->value.GetBool();
 					}
 				}
 					break;
@@ -139,10 +149,10 @@ namespace enginecore {
 					if (strcmp(itr->name.GetString(), "controller") == 0) {
 
 						data.has_controller_ = itr->value.GetBool();
-					}
-					else if (strcmp(itr->name.GetString(), "undo") == 0) {
 
-						data.has_undo_ = itr->value.GetBool();
+					}else if (strcmp(itr->name.GetString(), "animation") == 0) {
+
+						//data.has_animation_ = itr->value.GetBool();
 					}
 				}
 					break;
@@ -161,11 +171,11 @@ namespace enginecore {
 
 						}else if(strcmp(itr->name.GetString(), "controller") == 0){
 
-							data.has_controller_ = true;
+						//	data.has_controller_ = true;
 
-						}else if (strcmp(itr->name.GetString(), "undo") == 0) {
+						}else if (strcmp(itr->name.GetString(), "animation") == 0) {
 
-							data.has_undo_ = true;
+						//	data.has_animation_ = true;
 						}
 						
 					}

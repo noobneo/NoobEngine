@@ -10,6 +10,7 @@
 #include "transformcomponent.h"
 #include "rendercomponent.h"
 #include "controllercomponent.h"
+#include "animationcomponent.h"
 
 namespace enginecore {
 
@@ -33,7 +34,7 @@ namespace enginecore {
 				
 			leveldata_ = leveldata;
 
-			for (int i = 0; i < leveldata_.size();++i) {
+			for (size_t i = 0; i < leveldata_.size();++i) {
 
 				GameObjectData data;
 				data.Reset();
@@ -46,6 +47,8 @@ namespace enginecore {
 						TransformComponent* trans = static_cast<TransformComponent*>(ComponentManager::GetInstance()->GetTransformComponent(obj->get_id()));
 						trans->Init(obj);
 						obj->AttachComponent(trans, E_COMPONENT_TYPE_TRANSFORM);
+						obj->SetPositionX(data.pos_x_);
+						obj->SetPositionY(data.pos_y_);
 
 					} 
 				
@@ -65,6 +68,16 @@ namespace enginecore {
 						ControllerComponent* controller = static_cast<ControllerComponent*>(ComponentManager::GetInstance()->GetControllerComponent(obj->get_id()));
 						controller->Init(obj);
 						obj->AttachComponent(controller, E_COMPONENT_TYPE_INPUT_HANDLER);
+					}
+
+					if (data.has_animation_) {
+						//animation
+						AnimationComponent* animation = static_cast<AnimationComponent*>(ComponentManager::GetInstance()->GetAnimationComponent(obj->get_id()));
+						animation->Init(obj);
+						animation->set_limit(data.limit_);
+						animation->set_step(data.step_);
+						animation->set_direction(data.direction_);
+						obj->AttachComponent(animation, E_COMPONENT_TYPE_ANIMATION);
 					}
 
 				}

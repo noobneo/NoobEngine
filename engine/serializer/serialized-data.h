@@ -12,7 +12,10 @@ typedef struct GameObjectData {
 	std::string file_name_;
 	bool is_visible_;
 	bool has_controller_;
-	bool has_undo_;
+	bool has_animation_;
+	float limit_;
+	float step_;
+	std::string direction_;
 
 	void Reset() {
 
@@ -24,7 +27,10 @@ typedef struct GameObjectData {
 		file_name_ = "";
 		is_visible_ = true;
 		has_controller_ = false;
-		has_undo_ = false;;
+		has_animation_ = false;
+		limit_ = 0.0f;
+		step_ = 0.0f;
+		direction_ = "y";
 	}
 
 }GameObjectData;

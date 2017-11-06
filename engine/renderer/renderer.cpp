@@ -61,7 +61,7 @@ namespace enginecore {
 			#endif // TEST_MODE
 
 
-			for (int i = 0; i < sprites_.size(); ) {
+			for (size_t i = 0; i < sprites_.size(); ) {
 
 				CLEAN_DELETE(sprites_[i]);
 				++i;

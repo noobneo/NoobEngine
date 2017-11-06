@@ -12,8 +12,8 @@ namespace enginecore {
 
 		Sprite::Sprite() {
 
-			position_x_ = 0;
-			position_y_ = 0;
+			position_x_ = 0.0f;
+			position_y_ = 0.0f;
 
 			is_dirty_ = true;
 			is_visible_ = true;
@@ -40,6 +40,14 @@ namespace enginecore {
 			is_dirty_ = true;
 			bounding_box_.x = (int)position_x_;
 			bounding_box_.y = (int)position_y_;
+		}
+
+
+		void Sprite::SetPosition(float position_x,float position_y) {
+
+			position_x_ = position_x;
+			position_y_ = position_y;
+			UpdatePosition();
 		}
 
 		void Sprite::SetPositionX(float position_x) {

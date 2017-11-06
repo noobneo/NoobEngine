@@ -1,21 +1,32 @@
 {
-      "object2":{
-       "archetype" : "playground/resources/gamedata/player.json",
-       "x" : 100.0,
-       "y" : 100.0,
-       "color"     : "#ffffggff",
-       "scaleX"    : 1,
-       "scaleY"    : 1,
-        "visible"  : true
-      },
+    "object1":{
+      "archetype" : "playground/resources/gamedata/player.json",
+      "x" : 500.0,
+      "y" : 100.0,
+      "color"     : "#ffffggff",
+      "scaleX"    : 1,
+      "scaleY"    : 1,
+      "visible"  : true
+    },
 
-      "object3":{
-       "archetype" : "playground/resources/gamedata/player.json",
-       "x" : 300.0,
-       "y" : 100.0,
-       "color"     : "#ffffggff",
-       "scaleX"    : 1,
-       "scaleY"    : 1,
-        "visible"  : true
-      }
+  "object2": {
+    "archetype": "playground/resources/gamedata/enemy.json",
+    "x": 100.0,
+    "y": 100.0,
+    "color": "#ffffggff",
+    "scaleX": 1,
+    "scaleY": 1,
+    "visible": true
+  },
+
+  "object3":{
+    "archetype" : "playground/resources/gamedata/enemy.json",
+    "x" : 200.0,
+    "y" : 400.0,
+    "color"     : "#ffffggff",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true,
+    "direction": "y"
+  }
 }

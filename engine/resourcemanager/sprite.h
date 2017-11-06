@@ -16,6 +16,7 @@ namespace enginecore {
 
 			void SetPositionX(float position_x);
 			void SetPositionY(float position_y);
+			void SetPosition(float position_x, float position_y);
 			
 			inline float get_position_x() { return position_x_ ; };
 			inline float get_position_y() { return position_y_ ; };

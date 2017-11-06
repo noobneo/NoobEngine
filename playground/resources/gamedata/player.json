@@ -1,8 +1,8 @@
 {
-        "sprite" : "playground/resources/img.bmp",
+        "sprite" : "playground/resources/player.bmp",
         "transform" : {
           
-          "x" : 100.0,
+          "x" : 300.0,
           "y" : 100.0
         },
         "controller" : true

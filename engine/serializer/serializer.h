@@ -13,8 +13,7 @@ namespace enginecore {
 
 	namespace serialize {
 
-		
-
+	
 		class Serializer
 		{
 

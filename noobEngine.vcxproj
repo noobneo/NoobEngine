@@ -75,11 +75,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Link>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -90,11 +90,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;SBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;$(MSBuildProjectDirectory)\external\SDL_mixer\include;C:\Users\varun\Desktop\Ajay\NoobEngine\external\SDL_mixer\lib\x64;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -105,15 +105,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,18 +123,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\components\animationcomponent.cpp" />
     <ClCompile Include="engine\components\controllercomponent.cpp" />
     <ClCompile Include="engine\components\componentmanager.cpp" />
     <ClCompile Include="engine\components\maincomponent.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="engine\serializer\serializer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\components\animationcomponent.h" />
     <ClInclude Include="engine\components\controllercomponent.h" />
     <ClInclude Include="engine\components\componentmanager.h" />
     <ClInclude Include="engine\components\component-types.h" />
@@ -200,9 +202,12 @@
     <ClInclude Include="engine\components\objectfactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="playground\resources\enemy.bmp" />
     <Image Include="playground\resources\img.bmp" />
+    <Image Include="playground\resources\player.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="playground\resources\gamedata\enemy.json" />
     <None Include="playground\resources\gamedata\level1.json" />
     <None Include="playground\resources\gamedata\player.json" />
   </ItemGroup>

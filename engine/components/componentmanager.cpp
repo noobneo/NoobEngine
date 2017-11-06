@@ -3,6 +3,7 @@
 #include "physicscomponent.h"
 #include "transformcomponent.h"
 #include "controllercomponent.h"
+#include "animationcomponent.h"
 
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
@@ -21,11 +22,13 @@ namespace enginecore {
 			available_physics_component_	= nullptr;
 			available_transform_component_	= nullptr;
 			available_controller_component_ = nullptr;
+			available_animation_component_ = nullptr;
 
 			is_render_components_loaded_	= false;
 			is_physics_components_loaded_	= false;
 			is_transform_components_loaded_ = false;
 			is_controller_components_loaded_= false;
+			is_animation_components_loaded_ = false;
 
 			LoadComponents();
 		}
@@ -46,6 +49,7 @@ namespace enginecore {
 			LoadPhyics();
 			LoadTransform();
 			LoadController();
+			LoadAnimation();
 		}
 
 
@@ -102,6 +106,22 @@ namespace enginecore {
 
 			is_controller_components_loaded_ = true;
 		}
+
+		void ComponentManager::LoadAnimation() {
+
+			for (int i = 0; i < MAX_SIZE; ++i) {
+
+				animation_[i] = new AnimationComponent();
+				animation_[i]->set_id(i);
+				animation_[i]->set_next(available_animation_component_);
+				animation_[i]->set_component_type(E_COMPONENT_TYPE_ANIMATION);
+				available_animation_component_ = animation_[i];
+			}
+
+			is_animation_components_loaded_ = true;
+		}
+
+
 
 
 
@@ -161,17 +181,33 @@ namespace enginecore {
 			return temp;
 		}
 
+		MainComponent* ComponentManager::GetAnimationComponent(int id) {
+
+			if (!available_animation_component_) {
+
+				ENGINE_ERR_LOG("No Animation Component Available yet");
+			}
+
+			MainComponent* temp = available_animation_component_;
+			available_animation_component_ = available_animation_component_->get_next();
+			active_animation_component_[id] = temp;
+			return temp;
+		}
 
 		void ComponentManager::Update() {
 
+			UpdateRenderComponents();
 			UpdatePhysicsComponents();
 			UpdateDebugDrawComponent();
-			UpdateRenderComponents();
+			UpdateAnimationComponent();
 		}
 
 		void ComponentManager::UpdateRenderComponents() {
 
+			for (auto &itr : active_render_component_) {
 
+				itr.second->Update();
+			}
 		}
 
 		void ComponentManager::UpdateTransformComponents() {
@@ -181,10 +217,6 @@ namespace enginecore {
 
 		void ComponentManager::UpdatePhysicsComponents() {
 
-			for (auto &itr : active_physics_component_) {
-
-				itr.second->Update();
-			}
 		}
 
 		void ComponentManager::UpdateControllerComponent() {
@@ -197,6 +229,13 @@ namespace enginecore {
 
 		}
 
+		void ComponentManager::UpdateAnimationComponent() {
+
+			for (auto &itr : active_animation_component_) {
+
+				itr.second->Update();
+			}
+		}
 
 
 		void ComponentManager::UnloadComponents() {
@@ -210,6 +249,7 @@ namespace enginecore {
 			active_physics_component_.clear();
 			active_transform_component_.clear();
 			active_controller_component_.clear();
+			active_animation_component_.clear();
 
 		}
 		void ComponentManager::Destroy() {
@@ -261,6 +301,16 @@ namespace enginecore {
 					delete controller_[i];
 				}
 				is_controller_components_loaded_ = false;
+			}
+
+
+			if (is_animation_components_loaded_) {
+				/*transform_ components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
+
+					delete animation_[i];
+				}
+				is_animation_components_loaded_ = false;
 			}
 
 			CLEAN_DELETE(ComponentManager::instance_);
