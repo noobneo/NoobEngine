@@ -105,6 +105,15 @@
     <ClCompile Include="engine\components\animationcomponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\components\bodycomponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\shapecomponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\physics\physicsmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\engine.h">
@@ -204,6 +213,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\components\animationcomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\bodycomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\shapecomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\physics\physicsmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

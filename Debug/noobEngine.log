@@ -1,2 +1,27 @@
-﻿  noobEngine.vcxproj -> C:\SandBox\Git\NoobEngine\Debug\noobEngine.exe
-  noobEngine.vcxproj -> C:\SandBox\Git\NoobEngine\Debug\noobEngine.pdb (Partial PDB)
+﻿  animationcomponent.cpp
+  componentmanager.cpp
+  controllercomponent.cpp
+  gameobject.cpp
+  gameobjectmanager.cpp
+  maincomponent.cpp
+  objectfactory.cpp
+  physicscomponent.cpp
+  rendercomponent.cpp
+  transformcomponent.cpp
+  engine.cpp
+  enginelogger.cpp
+  fpscontroller.cpp
+  timer.cpp
+  inputhandler.cpp
+  keyboardeventdispatcher.cpp
+  keyboardlistener.cpp
+  physicsmanager.cpp
+  renderer.cpp
+  resourcemanager.cpp
+  sprite.cpp
+  textureloader.cpp
+  serializer.cpp
+  filehandler.cpp
+  textconverter.cpp
+  window.cpp
+  noobEngine.vcxproj -> D:\MsCS\CS529\Git\NoobEngine\Debug\noobEngine.exe

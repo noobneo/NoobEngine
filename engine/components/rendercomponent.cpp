@@ -12,6 +12,7 @@ namespace enginecore {
 		RenderComponent::RenderComponent() {
 
 			image_ = nullptr;
+			transform_component_ref_ = nullptr;
 		}
 
 		RenderComponent::~RenderComponent()	{
@@ -25,6 +26,7 @@ namespace enginecore {
 		void RenderComponent::Init(GameObject* owner) {
 
 			owner_ = owner;
+			transform_component_ref_ = static_cast<TransformComponent*>(owner_->GetComponent(E_COMPONENT_TYPE_TRANSFORM));
 			//init with default image
 		}
 
@@ -38,8 +40,7 @@ namespace enginecore {
 
 		void RenderComponent::Update() {
 
-			TransformComponent* transform_comp = static_cast<TransformComponent*>(owner_->GetComponent(E_COMPONENT_TYPE_TRANSFORM));
-			UpdateRenderPosition(transform_comp->get_position());
+			UpdateRenderPosition(transform_component_ref_->get_position());
 		}
 	}
 }

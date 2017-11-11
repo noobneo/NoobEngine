@@ -33,7 +33,6 @@ namespace enginecore {
 
 			position_.x_ = _x;
 			math::Vector2DSet(&position_, position_.x_, position_.y_);
-			//UpdateRenderPosition();
 		}
 
 		void TransformComponent::SetPositionY(float _y) {
@@ -45,15 +44,8 @@ namespace enginecore {
 		void TransformComponent::SetPosition(math::Vector2D position) {
 
 			math::Vector2DSet(&position_, position.x_, position.y_);
-			//UpdateRenderPosition();
 		}
 
-
-		void TransformComponent::UpdateRenderPosition(){
-
-			/*RenderComponent* render_comp = static_cast<RenderComponent*>(owner_->GetComponent(E_COMPONENT_TYPE_RENDER));
-			render_comp->UpdateRenderPosition(position_);*/
-		}
 
 		TransformComponent::~TransformComponent() {
 

@@ -78,7 +78,6 @@ Creation date: 14th October 2017
 namespace enginecore {
 	void EngineDebugLogPrint(const char* msg_type, const char* format, ...);
 #if defined(VERBOSITY_LEVEL)
-
 	void EngineDebugLogPrint(const char* function_name, const int line_number, const char* format, ...);
 #endif
 }

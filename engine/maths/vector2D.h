@@ -14,6 +14,12 @@ namespace enginecore {
 
 			float x_;
 			float y_;
+
+			Vector2D& operator=(const Vector2D& copy) {
+
+				x_ = copy.x_;
+				y_ = copy.y_;
+			}
 		}Vector2D;
 
 		

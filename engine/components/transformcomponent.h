@@ -30,8 +30,6 @@ namespace enginecore {
 			virtual void Update();
 			virtual void Init(GameObject* owner);
 
-			void UpdateRenderPosition();
-
 			TransformComponent();
 			~TransformComponent();
 

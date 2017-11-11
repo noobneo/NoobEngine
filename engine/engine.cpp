@@ -97,6 +97,9 @@ namespace enginecore {
 		//serializer
 		serialize::Serializer::GetInstance();
 
+		//physicsmanager
+		physics::PhysicsManager::GetInstance();
+
 	}
 
 	void Engine::Run() {
@@ -114,18 +117,17 @@ namespace enginecore {
 				//start of loop
 				fps::FpsController::GetInstance()->CheckFrameRate();
 				
-				//GameobjectManager
+				//PhysicsManager
+				physics::PhysicsManager::GetInstance()->Update();
 
+				//ComponentManager
 				component::ComponentManager::GetInstance()->Update();
 				
+				//GameObjectManager
 				component::GameobjectManager::GetInstance()->Update();
-
-
 
 				//update
 				renderer::Renderer::GetInstance()->Draw();
-
-
 
 				//end of loop
 				fps::FpsController::GetInstance()->CapFrameRate();
@@ -140,7 +142,6 @@ namespace enginecore {
 			}
 
 		}//end of gamelooop
-
 
 		ShutDown();
 	}
@@ -184,6 +185,9 @@ namespace enginecore {
 
 		//serializer
 		serialize::Serializer::GetInstance()->Destroy();
+
+		//physicsmanager
+		physics::PhysicsManager::GetInstance()->Destroy();
 
 
 		ENGINE_LOG("Engine Instance Destroyed");

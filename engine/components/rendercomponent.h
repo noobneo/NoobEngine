@@ -10,6 +10,7 @@ namespace enginecore {
 
 		class ComponentManager;
 		class ObjectFactory;
+		class TransformComponent;
 
 		class RenderComponent : public MainComponent
 		{
@@ -30,6 +31,7 @@ namespace enginecore {
 			friend class ObjectFactory;
 
 			resourcemanager::Sprite* image_;
+			TransformComponent* transform_component_ref_;
 		};
 	}
 }

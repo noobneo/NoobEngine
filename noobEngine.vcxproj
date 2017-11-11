@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{74509427-C4FD-4E54-A85C-544D652712C5}</ProjectGuid>
     <RootNamespace>noobEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -76,6 +76,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link />
     <Link>
@@ -135,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\components\bodycomponent.cpp" />
     <ClCompile Include="engine\components\animationcomponent.cpp" />
     <ClCompile Include="engine\components\controllercomponent.cpp" />
     <ClCompile Include="engine\components\componentmanager.cpp" />
@@ -155,6 +158,7 @@
     <ClCompile Include="engine\components\gameobjectmanager.cpp" />
     <ClCompile Include="engine\components\physicscomponent.cpp" />
     <ClCompile Include="engine\components\objectfactory.cpp" />
+    <ClCompile Include="engine\physics\physicsmanager.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
     <ClCompile Include="engine\utils\textconverter.cpp" />
@@ -165,8 +169,10 @@
     <ClCompile Include="engine\components\rendercomponent.cpp" />
     <ClCompile Include="engine\components\transformcomponent.cpp" />
     <ClCompile Include="engine\serializer\serializer.cpp" />
+    <ClCompile Include="engine\components\shapecomponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\components\bodycomponent.h" />
     <ClInclude Include="engine\components\animationcomponent.h" />
     <ClInclude Include="engine\components\controllercomponent.h" />
     <ClInclude Include="engine\components\componentmanager.h" />
@@ -200,6 +206,8 @@
     <ClInclude Include="engine\components\transformcomponent.h" />
     <ClInclude Include="engine\serializer\serializer.h" />
     <ClInclude Include="engine\components\objectfactory.h" />
+    <ClInclude Include="engine\components\shapecomponent.h" />
+    <ClInclude Include="engine\physics\physicsmanager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="playground\resources\enemy.bmp" />

@@ -1,7 +1,7 @@
 
 #ifndef _COMPONENT_TYPES_H_
 #define _COMPONENT_TYPES_H_
-#define MAX_SIZE 10 //total number of gameobjects or other entities that could be created eg.components,particles,animation
+#define MAX_SIZE 3 //total number of gameobjects or other entities that could be created eg.components,particles,animation
 
 typedef enum {
 

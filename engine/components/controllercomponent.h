@@ -29,8 +29,6 @@ namespace enginecore {
 			void OnKeyReleased(const Uint8 * key_state);
 #endif
 
-
-
 		private:
 			friend class ComponentManager;
 			friend class ObjectFactory;

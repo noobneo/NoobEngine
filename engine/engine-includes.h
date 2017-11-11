@@ -19,5 +19,6 @@
 #include "serializer\serializer.h"
 #include "components\objectfactory.h"
 #include "components\componentmanager.h"
+#include "physics\physicsmanager.h"
 
 #endif // !_ENGINE_INCLUDES_
