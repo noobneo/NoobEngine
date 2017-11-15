@@ -17,6 +17,7 @@ Creation date: 17th October 2017
 #include "../../external/SDL2.0 Lib/include/SDL_scancode.h"
 #include "../../external/SDL2.0 Lib/include/SDL_events.h" 
 
+#include "../common/scenemanager.h"
 #define KEY_CODE SDL_Scancode 
 #define MAX_KEYS 512
 
@@ -45,11 +46,14 @@ namespace enginecore {
 
 			void DelegateKeyReleased();
 			void DelegateKeyPressed();
+			void Reset();
 
 		private:
+			friend class common::SceneManager;
 
 			const Uint8* pump_state_;
-			const Uint8* current_key_board_state_;
+			Uint8 current_key_board_state_[MAX_KEYS];
+			//const Uint8* current_key_board_state_;
 			Uint8 previous_key_board_state_[MAX_KEYS];
 
 			static InputHandler *instance_;

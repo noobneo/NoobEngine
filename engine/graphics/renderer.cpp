@@ -2,7 +2,7 @@
 #include "../common/macros.h"
 
 #include "../../SDL2.0 Lib/include/SDL.h"
-#include "../resourcemanager/sprite.h"
+#include "../graphics/sprite.h"
 
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
@@ -10,7 +10,7 @@
 
 namespace enginecore {
 
-	namespace renderer {
+	namespace graphics {
 
 		Renderer* Renderer::instance_ = nullptr;
 
@@ -24,7 +24,7 @@ namespace enginecore {
 			return Renderer::instance_;
 		}
 
-		void Renderer::PushToRenderQueue(resourcemanager::Sprite* sprite) {
+		void Renderer::PushToRenderQueue(graphics::Sprite* sprite) {
 
 			sprites_.push_back(sprite);
 		}
@@ -35,7 +35,7 @@ namespace enginecore {
 
 			for (auto sprite : sprites_) {
 
-				enginecore::resourcemanager::Sprite* spr = sprite;
+				enginecore::graphics::Sprite* spr = sprite;
 				//if (spr->get_is_dirty()) {
 
 				SDL_BlitSurface(spr->get_surface(),NULL,window_surface_,&spr->get_bounding_box());
@@ -53,6 +53,16 @@ namespace enginecore {
 
 		}
 
+		void Renderer:: Reset() {
+
+			for (size_t i = 0; i < sprites_.size(); ) {
+
+				CLEAN_DELETE(sprites_[i]);
+				++i;
+			}
+
+			sprites_.clear();
+		}
 
 		void Renderer::Destroy() {
 

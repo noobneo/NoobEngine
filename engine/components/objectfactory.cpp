@@ -6,11 +6,16 @@
 #include "gameobjectmanager.h"
 #include "componentmanager.h"
 #include "../resourcemanager/resourcemanager.h"
-#include "../resourcemanager/sprite.h"
+#include "../graphics/sprite.h"
 #include "transformcomponent.h"
 #include "rendercomponent.h"
 #include "controllercomponent.h"
 #include "animationcomponent.h"
+#include "bodycomponent.h"
+#include "shapecomponent.h"
+#include "../physics/physicsmanager.h"
+#include "../utils/textconverter.h"
+#include "../physics/shape.h"
 
 namespace enginecore {
 
@@ -29,6 +34,10 @@ namespace enginecore {
 			return ObjectFactory::instance_;
 		}
 
+		void ObjectFactory::ReloadLevel() {
+
+			CreateObjects(leveldata_);
+		}
 
 		void ObjectFactory::CreateObjects(std::vector<GameObjectData> &leveldata) {
 				
@@ -40,6 +49,11 @@ namespace enginecore {
 				data.Reset();
 				data = leveldata_[i];
 				GameObject* obj = GameobjectManager::GetInstance()->CreateGameObject();
+				obj->set_tag(data.tag_);
+				obj->set_jump_force(data.jump_force_);
+				obj->set_max_speed(data.max_speed_);
+				obj->set_move_force(data.move_force_);
+
 				if (obj) {
 
 					if (data.has_transform_) {
@@ -51,13 +65,50 @@ namespace enginecore {
 						obj->SetPositionY(data.pos_y_);
 
 					} 
+
+					if (data.has_body_) {
+
+						math::Vector2D position;
+						position.x_ = data.pos_x_;
+						position.y_ = data.pos_y_;
+						BodyComponent* body = static_cast<BodyComponent*>(ComponentManager::GetInstance()->GetBodyComponent(obj->get_id()));
+						body->set_mass(data.mass_);
+						body->set_position(position);
+						body->get_shape_component()->Init(obj);
+
+						//register with physics manager
+
+						if (data.has_body_) {
+
+							physics::ShapeType type = physics::get_shape_type(data.shape_type_);
+							body->get_shape_component()->AddShape(type);
+
+							physics::BodyType body_type = physics::get_body_type(data.body_type_);
+							body->set_type(body_type);
+
+							if (type== physics::E_SHAPE_CIRCLE) {
+
+								body->get_shape_component()->SetShapeAttribs(data.radius_);
+							}
+							else {
+
+								body->get_shape_component()->SetShapeAttribs(data.width_ , data.height_);
+							}
+
+						}
+
+						body->Init(obj);
+						obj->AttachComponent(body, E_COMPONENT_TYPE_BODY);
+						physics::PhysicsManager::GetInstance()->AddBodyToUpdateQueue(body);
+
+					}
 				
 					if (data.has_sprite_) {
 						//Render
 						RenderComponent* render = static_cast<RenderComponent*>(ComponentManager::GetInstance()->GetRenderComponent(obj->get_id()));
 						render->Init(obj);
 						obj->AttachComponent(render, E_COMPONENT_TYPE_RENDER);
-						resourcemanager::Sprite* spr = resourcemanager::ResourceManager::GetInstance()->CreateSprite(data.file_name_);
+						graphics::Sprite* spr = resourcemanager::ResourceManager::GetInstance()->CreateSprite(data.file_name_);
 						render->set_sprite(spr);
 
 					} 

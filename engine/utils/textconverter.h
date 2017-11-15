@@ -47,6 +47,8 @@ namespace enginecore {
 			std::string				GetStringFromFloat(float val);
 			std::string				GetStringFromDouble(double val);
 
+			std::string				GetLowerCaseFromString(std::string text);
+			std::string				GetUpperCaseFromString(std::string text);
 		private:
 
 			static TextConverter* instance_;

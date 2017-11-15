@@ -52,5 +52,15 @@ namespace enginecore {
 			owner_ = owner;
 		}
 
+		void AnimationComponent::Reset() {
+
+			owner_ = nullptr;
+			direction_ = "y";
+			limit_ = 200;
+			step_ = 5.0f;
+			current_step_ = 0.0;
+			dir_ = 1;
+		}
+
 	}
 }

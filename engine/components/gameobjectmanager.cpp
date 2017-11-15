@@ -146,6 +146,20 @@ namespace enginecore {
 //			gameobjects_.clear();
 		}
 
+
+		void GameobjectManager::Reset() {
+			
+			for (auto &itr : active_objects_) {
+
+				itr.second->set_next(first_available_);
+				first_available_ = itr.second;
+				itr.second->Reset();
+			}
+
+			active_objects_.clear();
+		}
+
+
 		void GameobjectManager::Destroy() {
 
 	#ifdef TEST_MODE

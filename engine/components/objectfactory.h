@@ -17,6 +17,8 @@ namespace enginecore {
 			static ObjectFactory* GetInstance();
 			void CreateObjects(std::vector<GameObjectData> &leveldata);
 			void Destroy();
+			void ReloadLevel();
+
 		private:
 			ObjectFactory() =default;
 			~ObjectFactory() = default;

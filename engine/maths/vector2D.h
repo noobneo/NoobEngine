@@ -19,6 +19,7 @@ namespace enginecore {
 
 				x_ = copy.x_;
 				y_ = copy.y_;
+				return *this;
 			}
 		}Vector2D;
 

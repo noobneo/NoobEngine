@@ -46,12 +46,15 @@ namespace enginecore {
 			MainComponent();
 			virtual ~MainComponent();
 
+			virtual void Reset() = 0;
+
 			GameObject* owner_;
 		private:
 			friend class ComponentManager;
 			
 
 			int id_;
+
 
 			ComponentType component_type_;
 			MainComponent* next_;

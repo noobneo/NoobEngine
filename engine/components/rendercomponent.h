@@ -3,7 +3,7 @@
 
 #include "maincomponent.h"
 #include "../maths/vector2D.h"
-#include "../resourcemanager/sprite.h"
+#include "../graphics/sprite.h"
 namespace enginecore {
 
 	namespace component {
@@ -23,14 +23,15 @@ namespace enginecore {
 
 			virtual void Update();
 			virtual void Init(GameObject* owner);
+			virtual void Reset();
 
-			void set_sprite(resourcemanager::Sprite* image) { image_ = image; };
+			void set_sprite(graphics::Sprite* image) { image_ = image; };
 
 		private:
 			friend class ComponentManager;
 			friend class ObjectFactory;
 
-			resourcemanager::Sprite* image_;
+			graphics::Sprite* image_;
 			TransformComponent* transform_component_ref_;
 		};
 	}

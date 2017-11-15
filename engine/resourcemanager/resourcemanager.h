@@ -1,6 +1,7 @@
 #ifndef _RESOURCE_MANAGER_H_
 #define _RESOURCE_MANAGER_H_
 #include <string>
+#include "../graphics/sprite.h"
 
 namespace enginecore {
 
@@ -16,7 +17,7 @@ namespace enginecore {
 			static ResourceManager* GetInstance();
 
 			//create a class to wrap textures
-			Sprite* CreateSprite(std::string path);
+			graphics::Sprite* CreateSprite(std::string path);
 			void Destroy();
 
 		private:

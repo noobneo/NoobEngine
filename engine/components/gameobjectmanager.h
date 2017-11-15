@@ -16,6 +16,7 @@ Creation date: 25th October 2017
 #include <array>
 #include <unordered_map>
 #include "component-types.h"
+#include "../common/scenemanager.h"
 
 namespace enginecore {
 
@@ -48,6 +49,7 @@ namespace enginecore {
 
 		void ClearPool();
 		void PoolGameObjects();
+		void Reset();
 
 #ifdef TEST_MODE
 		void IteratePool();
@@ -57,6 +59,8 @@ namespace enginecore {
 	private:
 
 		friend class ObjectFactory;
+		friend class common::SceneManager;
+
 		static GameobjectManager* instance_;
 		
 		int gameobject_id_;

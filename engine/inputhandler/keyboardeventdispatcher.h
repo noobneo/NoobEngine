@@ -33,7 +33,7 @@ namespace enginecore {
 
 
 			void Destroy();
-
+			void Reset();
 			void OnKeyPressed(const Uint8*);
 			void OnKeyReleased(const Uint8*);
 			

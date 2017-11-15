@@ -88,6 +88,11 @@ namespace enginecore {
 
 		}
 
+		void KeyboardEventDispatcher::Reset() {
+
+			UnRegisterListeners();
+		}
+
 		void KeyboardEventDispatcher::Destroy() {
 
 #ifdef TEST_MODE

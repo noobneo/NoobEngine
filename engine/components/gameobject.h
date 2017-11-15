@@ -16,6 +16,7 @@ Creation date: 25th October 2017
 ---------------------------------------------------------*/
 #include <unordered_map>
 #include "component-types.h"
+#include "../maths/vector2D.h"
 
 namespace enginecore {
 
@@ -34,6 +35,7 @@ namespace enginecore {
 		int get_id() { return id_; };
 		void set_id(int id) {  id_  = id; };
 		
+		void SetPosition(math::Vector2D position);
 		void SetPositionX(float position_x);
 		void SetPositionY(float position_y);
 
@@ -41,9 +43,16 @@ namespace enginecore {
 		//template <typename T>
 		//T GetComponent(ComponentType type);
 		
-		inline float get_position_x() { return position_x_; };
-		inline float get_position_y() { return position_y_; };
+		inline math::Vector2D get_position() { return position_; };
+		inline float get_position_x() { return position_.x_; };
+		inline float get_position_y() { return position_.y_; };
 
+		void set_tag(std::string tag) { tag_ = tag; };
+		std::string get_tag() { return tag_; };
+
+		float get_jump_force() { return jump_force_; };
+		float get_max_speed() { return max_speed_ ; };
+		float get_move_force() { return move_force_ ; };
 
 	private:
 		GameObject();
@@ -61,6 +70,14 @@ namespace enginecore {
 		bool get_is_active() { return is_active_; };
 		GameObject* get_next() { return next_; };
 
+		void set_jump_force(float jump_force) { jump_force_ = jump_force; };
+		void set_max_speed(float max_speed)   { max_speed_ = max_speed; };
+		void set_move_force(float move_force) { move_force_ = move_force; };
+
+
+
+
+		void Reset();
 
 	private:
 		friend class GameobjectManager;
@@ -73,11 +90,14 @@ namespace enginecore {
 		
 		GameObject* next_;
 
-		float position_x_;
-		float position_y_;
+		math::Vector2D position_;
 
-		int width_;
-		int height_;
+		float jump_force_;
+		float max_speed_;
+		float move_force_;
+		float width_;
+		float height_;
+		std::string tag_;
 
 
 	};

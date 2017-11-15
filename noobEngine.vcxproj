@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -91,7 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,7 +126,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TEST_MODE;DEBUG;VERBOSITY_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -137,6 +137,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\event\collisionevent.cpp" />
+    <ClCompile Include="engine\enums.cpp" />
+    <ClCompile Include="engine\physics\aabbshape.cpp" />
+    <ClCompile Include="engine\physics\circleshape.cpp" />
+    <ClCompile Include="engine\physics\contactmanager.cpp" />
     <ClCompile Include="engine\components\bodycomponent.cpp" />
     <ClCompile Include="engine\components\animationcomponent.cpp" />
     <ClCompile Include="engine\components\controllercomponent.cpp" />
@@ -156,22 +161,30 @@
     <ClCompile Include="engine\inputhandler\keyboardlistener.cpp" />
     <ClCompile Include="engine\components\gameobject.cpp" />
     <ClCompile Include="engine\components\gameobjectmanager.cpp" />
-    <ClCompile Include="engine\components\physicscomponent.cpp" />
     <ClCompile Include="engine\components\objectfactory.cpp" />
     <ClCompile Include="engine\physics\physicsmanager.cpp" />
+    <ClCompile Include="engine\physics\manifold.cpp" />
+    <ClCompile Include="engine\event\even.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
     <ClCompile Include="engine\utils\textconverter.cpp" />
     <ClCompile Include="engine\resourcemanager\resourcemanager.cpp" />
     <ClCompile Include="engine\resourcemanager\textureloader.cpp" />
-    <ClCompile Include="engine\resourcemanager\sprite.cpp" />
-    <ClCompile Include="engine\renderer\renderer.cpp" />
+    <ClCompile Include="engine\graphics\sprite.cpp" />
+    <ClCompile Include="engine\graphics\renderer.cpp" />
     <ClCompile Include="engine\components\rendercomponent.cpp" />
     <ClCompile Include="engine\components\transformcomponent.cpp" />
     <ClCompile Include="engine\serializer\serializer.cpp" />
     <ClCompile Include="engine\components\shapecomponent.cpp" />
+    <ClCompile Include="engine\physics\shape.cpp" />
+    <ClCompile Include="engine\common\scenemanager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\event\collisionevent.h" />
+    <ClInclude Include="engine\game-global.h" />
+    <ClInclude Include="engine\physics\aabbshape.h" />
+    <ClInclude Include="engine\physics\circleshape.h" />
+    <ClInclude Include="engine\physics\contactmanager.h" />
     <ClInclude Include="engine\components\bodycomponent.h" />
     <ClInclude Include="engine\components\animationcomponent.h" />
     <ClInclude Include="engine\components\controllercomponent.h" />
@@ -197,17 +210,21 @@
     <ClInclude Include="engine\inputhandler\keyboardlistener.h" />
     <ClInclude Include="engine\resourcemanager\resourcemanager.h" />
     <ClInclude Include="engine\resourcemanager\textureloader.h" />
-    <ClInclude Include="engine\resourcemanager\sprite.h" />
-    <ClInclude Include="engine\renderer\renderer.h" />
+    <ClInclude Include="engine\graphics\sprite.h" />
+    <ClInclude Include="engine\graphics\renderer.h" />
     <ClInclude Include="engine\components\gameobject.h" />
     <ClInclude Include="engine\components\gameobjectmanager.h" />
-    <ClInclude Include="engine\components\physicscomponent.h" />
     <ClInclude Include="engine\components\rendercomponent.h" />
     <ClInclude Include="engine\components\transformcomponent.h" />
     <ClInclude Include="engine\serializer\serializer.h" />
     <ClInclude Include="engine\components\objectfactory.h" />
     <ClInclude Include="engine\components\shapecomponent.h" />
     <ClInclude Include="engine\physics\physicsmanager.h" />
+    <ClInclude Include="engine\physics\manifold.h" />
+    <ClInclude Include="engine\physics\shape.h" />
+    <ClInclude Include="engine\enums.h" />
+    <ClInclude Include="engine\common\scenemanager.h" />
+    <ClInclude Include="engine\event\even.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="playground\resources\enemy.bmp" />

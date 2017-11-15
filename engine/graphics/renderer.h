@@ -3,11 +3,13 @@
 #include <vector>
 #include "../../SDL2.0 Lib/include/SDL_surface.h"
 #include "../../SDL2.0 Lib/include/SDL_video.h"
-#include "../resourcemanager/sprite.h"
+#include "../graphics/sprite.h"
+#include "../common/scenemanager.h"
+
 namespace enginecore {
 
 
-	namespace renderer {
+	namespace graphics {
 
 
 		class Renderer
@@ -18,7 +20,7 @@ namespace enginecore {
 			void Draw();
 			void Destroy();
 
-			void PushToRenderQueue(resourcemanager::Sprite* sprite);
+			void PushToRenderQueue(graphics::Sprite* sprite);
 			void StoreGameWindowData(SDL_Window*  game_window, SDL_Surface* window_surface);
 			static Renderer* GetInstance();
 		
@@ -29,10 +31,12 @@ namespace enginecore {
 			Renderer& operator=(const Renderer&) = delete;
 			Renderer(const Renderer&) = delete;
 
+			void Reset();
 		private:
+			friend class common::SceneManager;
 
 			static Renderer* instance_;
-			std::vector<resourcemanager::Sprite*> sprites_;
+			std::vector<graphics::Sprite*> sprites_;
 
 			SDL_Surface* window_surface_;
 			SDL_Window* game_window_;

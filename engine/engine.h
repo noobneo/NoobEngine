@@ -37,6 +37,7 @@ Creation date: 14th October 2017
 		void Update();
 		void Pause();
 
+		
 		void InstantiateModules();
 
 	public: 
@@ -46,8 +47,9 @@ Creation date: 14th October 2017
 		void Run();
 
 		/*setters*/
+		inline void set_is_paused(bool is_paused) { is_paused_ = is_paused; };
 		inline void set_is_running(bool is_engine_running) { is_engine_running_ = is_engine_running; }
-
+		inline void set_is_scene_restart(bool is_scene_restart) { is_scene_restart_ =  is_scene_restart; };
 
 		/*getters*/
 		inline bool get_is_paused() { return is_paused_; }
@@ -60,6 +62,7 @@ Creation date: 14th October 2017
 		
 		bool is_paused_;
 		bool is_engine_running_;
+		bool is_scene_restart_;
 
 		std::string window_name_;
 

@@ -1,6 +1,4 @@
 #include "textureloader.h"
-#include "sprite.h"
-
 #include "../enginelogger/enginelogger.h"
 
 namespace enginecore {
@@ -12,7 +10,7 @@ namespace enginecore {
 
 		}
 
-		Sprite* TextureLoader::CreateTexture(std::string path) {
+		graphics::Sprite* TextureLoader::CreateTexture(std::string path) {
 
 			auto itr = textures_.find(path);
 			SDL_Surface* surface = nullptr;
@@ -34,7 +32,7 @@ namespace enginecore {
 			}
 
 
-			auto sprite = new Sprite();
+			graphics::Sprite* sprite = new graphics::Sprite();
 			sprite->set_surface(surface);
 			/*sprite*/
 

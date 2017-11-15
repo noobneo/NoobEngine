@@ -10,6 +10,7 @@ namespace enginecore {
 		
 		class ComponentManager;
 		class ObjectFactory;
+		class BodyComponent;
 
 		class ControllerComponent : public MainComponent
 		{
@@ -21,6 +22,7 @@ namespace enginecore {
 
 			virtual void Update();
 			virtual void Init(GameObject* owner);
+			virtual void Reset();
 
 #ifdef TEST_MODE
 
@@ -32,6 +34,9 @@ namespace enginecore {
 		private:
 			friend class ComponentManager;
 			friend class ObjectFactory;
+
+			BodyComponent* body_component_;
+			bool is_airborne_;
 		};
 	}
 }

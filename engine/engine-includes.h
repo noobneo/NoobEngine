@@ -13,12 +13,13 @@
 #include "utils\filehandler.h"
 #include "inputhandler\inputhandler.h"
 #include "inputhandler\keyboardlistener.h"
-#include "renderer\renderer.h"
+#include "graphics\renderer.h"
 #include "resourcemanager\resourcemanager.h"
 #include "components\gameobjectmanager.h"
 #include "serializer\serializer.h"
 #include "components\objectfactory.h"
 #include "components\componentmanager.h"
 #include "physics\physicsmanager.h"
+#include "common\scenemanager.h"
 
 #endif // !_ENGINE_INCLUDES_

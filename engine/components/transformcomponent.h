@@ -29,6 +29,7 @@ namespace enginecore {
 		private:
 			virtual void Update();
 			virtual void Init(GameObject* owner);
+			virtual void Reset();
 
 			TransformComponent();
 			~TransformComponent();

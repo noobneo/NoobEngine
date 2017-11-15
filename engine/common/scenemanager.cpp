@@ -5,7 +5,7 @@
 #include "../components/componentmanager.h"
 #include "../components/objectfactory.h"
 #include "../inputhandler/inputhandler.h"
-#include "../renderer/renderer.h"
+#include "../graphics/renderer.h"
 #include "../common/macros.h"
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
@@ -50,7 +50,7 @@ namespace enginecore {
 			//physics
 			physics::PhysicsManager::GetInstance()->Reset();
 			//render
-			renderer::Renderer::GetInstance()->Reset();
+			graphics::Renderer::GetInstance()->Reset();
 			//components
 			component::ComponentManager::GetInstance()->Reset();
 			//gameobjects

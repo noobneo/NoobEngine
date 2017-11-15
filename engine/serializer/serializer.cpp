@@ -91,16 +91,85 @@ namespace enginecore {
 
 						 
 						std::string file_name(obj["archetype"].GetString());
+						std::string tag(obj["tag"].GetString());
 						SerializeFromJson(file_name, gamedata,true);
 						
+						gamedata.back().tag_ = tag;
 						gamedata.back().object_name_ = file_name;
 						gamedata.back().pos_x_ = obj["x"].GetFloat();
 						gamedata.back().pos_y_ = obj["y"].GetFloat();
+
+						if (obj.HasMember("controller")) {
+							gamedata.back().has_controller_ = obj["controller"].GetBool();
+						}
+
+
+						if (obj.HasMember("body")) {
+
+							auto body = obj["body"].GetObject();
+
+							gamedata.back().has_body_ = true;
+							gamedata.back().has_animation_ = false;
+							if (body.HasMember("body_type")) {
+
+								std::string str_temp(body["body_type"].GetString());
+								gamedata.back().body_type_ = str_temp;
+							}
+
+
+							if (body.HasMember("mass")) {
+
+								gamedata.back().mass_ = body["mass"].GetFloat();
+							}
+
+							if (body.HasMember("shape")) {
+
+								auto shape = body["shape"].GetObject();
+
+								std::string str_temp(shape["shape_type"].GetString());
+								gamedata.back().shape_type_ = str_temp;
+
+								if (shape.HasMember("width")) {
+
+									gamedata.back().width_ = shape["width"].GetFloat();
+								}
+
+								if (shape.HasMember("height")) {
+
+									gamedata.back().height_ = shape["height"].GetFloat();
+								}
+
+
+
+							}
+						}
+
 
 						if (obj.HasMember("direction")) {
 							std::string str_temp(obj["direction"].GetString());
 							gamedata.back().direction_ = str_temp;
 						}
+
+
+						if (obj.HasMember("move_force")) {
+							
+							gamedata.back().move_force_ = obj["move_force"].GetFloat();
+						
+						}
+
+
+						if (obj.HasMember("max_speed")) {
+							
+							gamedata.back().max_speed_ = obj["max_speed"].GetFloat();
+						}
+
+
+						if (obj.HasMember("jump_force")) {
+							
+							gamedata.back().jump_force_ = obj["jump_force"].GetFloat();
+						}
+
+
 
 					}else if (name.find("animation") != std::string::npos) {
 
@@ -112,7 +181,37 @@ namespace enginecore {
 						std::string str_temp(obj["direction"].GetString());
 						data.direction_ = str_temp;
 
-					} else {
+					}
+					else if (name.find("body") != std::string::npos) {
+
+						auto obj = itr->value.GetObject();
+						data.has_body_ = true;
+
+						data.mass_ = obj["mass"].GetFloat();
+
+						std::string str_temp(obj["body_type"].GetString());
+						data.body_type_ = str_temp;
+						
+						if (obj.HasMember("shape")) {
+
+							auto shape_obj = obj["shape"].GetObject();
+							data.has_shape_ = true;
+
+							std::string str_temp(shape_obj["shape_type"].GetString());
+							data.shape_type_ = str_temp;
+
+							if (shape_obj.HasMember("radius")) {
+
+								data.radius_ = shape_obj["radius"].GetFloat();
+							}
+							else {
+
+								data.width_ = shape_obj["width"].GetFloat();
+								data.height_ = shape_obj["height"].GetFloat();
+							}
+						}
+
+					}else {
 
 							auto obj = itr->value.GetObject();
 							for (auto itr1 = obj.MemberBegin(); itr1 != obj.MemberEnd(); ++itr1) {

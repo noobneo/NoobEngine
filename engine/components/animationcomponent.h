@@ -27,6 +27,7 @@ namespace enginecore {
 			void set_step(float step) { step_ = step; };
 			void set_direction(std::string  direction) { direction_ = direction; };
 
+			virtual void Reset();
  
 		private:
 			friend class ComponentManager;

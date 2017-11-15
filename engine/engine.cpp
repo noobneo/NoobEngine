@@ -80,8 +80,8 @@ namespace enginecore {
 		resourcemanager::ResourceManager::GetInstance();
 
 		//renderer
-		renderer::Renderer::GetInstance();
-		renderer::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface());
+		graphics::Renderer::GetInstance();
+		graphics::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface());
 
 
 		//gameobjectmanager
@@ -100,41 +100,54 @@ namespace enginecore {
 		//physicsmanager
 		physics::PhysicsManager::GetInstance();
 
+		//scenemanager
+		common::SceneManager::GetInstance();
+
 	}
 
 	void Engine::Run() {
 
 
 		is_engine_running_ = true;
+
 		std::string str;	
 		char buf[100];
 		fps::FpsController::GetInstance()->GetStartFrameTick();
 		while (true == is_engine_running_)
 		{
 
-			if (inputhandler::InputHandler::GetInstance()->Update()) {
+			if ( inputhandler::InputHandler::GetInstance()->Update()) {
 
-				//start of loop
-				fps::FpsController::GetInstance()->CheckFrameRate();
-				
-				//PhysicsManager
-				physics::PhysicsManager::GetInstance()->Update();
+				if (is_scene_restart_) {
 
-				//ComponentManager
-				component::ComponentManager::GetInstance()->Update();
-				
-				//GameObjectManager
-				component::GameobjectManager::GetInstance()->Update();
+					common::SceneManager::GetInstance()->ResetManagers();
+				}
+					
+				//else 
+				{
+					//start of loop
+					fps::FpsController::GetInstance()->CheckFrameRate();
 
-				//update
-				renderer::Renderer::GetInstance()->Draw();
+					//PhysicsManager
+					physics::PhysicsManager::GetInstance()->Update();
 
-				//end of loop
-				fps::FpsController::GetInstance()->CapFrameRate();
+					//ComponentManager
+					component::ComponentManager::GetInstance()->Update();
 
-				sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
-				str = buf;
-				window_->SetWindowName(str);
+					//GameObjectManager
+					component::GameobjectManager::GetInstance()->Update();
+
+					//update
+					graphics::Renderer::GetInstance()->Draw();
+
+					//end of loop
+					fps::FpsController::GetInstance()->CapFrameRate();
+
+					sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
+					str = buf;
+					window_->SetWindowName(str);
+				}
+
 			}
 			else {
 
@@ -172,7 +185,7 @@ namespace enginecore {
 		resourcemanager::ResourceManager::GetInstance()->Destroy();
 
 		//renderer
-		renderer::Renderer::GetInstance()->Destroy();
+		graphics::Renderer::GetInstance()->Destroy();
 
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance()->Destroy();
@@ -189,6 +202,9 @@ namespace enginecore {
 		//physicsmanager
 		physics::PhysicsManager::GetInstance()->Destroy();
 
+
+		//scenemanager
+		common::SceneManager::GetInstance()->Destroy();
 
 		ENGINE_LOG("Engine Instance Destroyed");
 		CLEAN_DELETE(window_);	

@@ -13,7 +13,8 @@ Creation date: 17th October 2017
 
 #include "textconverter.h"
 #include "../common/macros.h"
-	
+#include <locale>         // std::locale, std::tolower
+
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
 #endif // TEST_MODE
@@ -92,6 +93,34 @@ namespace enginecore {
 		}
 
 
+		std::string	TextConverter::GetLowerCaseFromString(std::string text) {
+
+			std::locale loc;
+			std::string lower_case;
+			for (std::string::size_type i = 0; i < text.length(); ++i) {
+
+				lower_case += std::tolower(text[i], loc);
+			}
+
+			return lower_case;
+		}
+
+
+		std::string	TextConverter::GetUpperCaseFromString(std::string text) {
+
+
+			std::locale loc;
+			std::string lower_case;
+			for (std::string::size_type i = 0; i < text.length(); ++i) {
+
+				lower_case += std::toupper(text[i], loc);
+			}
+
+			return lower_case;
+		}
+
+
+
 		void TextConverter::Destroy() {
 
 			#ifdef TEST_MODE
@@ -99,6 +128,8 @@ namespace enginecore {
 			#endif
 			CLEAN_DELETE(TextConverter::instance_);
 		}
+
+
 
 
 		/*Tests  TextConverter*/

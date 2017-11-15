@@ -7,7 +7,7 @@
 
 namespace enginecore {
 
-	namespace resourcemanager {
+	namespace graphics {
 
 
 		Sprite::Sprite() {

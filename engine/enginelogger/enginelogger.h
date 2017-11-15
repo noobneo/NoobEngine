@@ -40,7 +40,7 @@ Creation date: 14th October 2017
 			- disable all logs
 	*/
 
-#if defined(DEBUG)
+#if defined(DEBUG_MODE)
 
 	#if defined(VERBOSITY_LEVEL)
 	
@@ -59,8 +59,7 @@ Creation date: 14th October 2017
 #else
 
 	#if defined(VERBOSITY_LEVEL)
-
-		#define ENGINE_LOG(format,...)				enginecore::EngineDebugLogPrint("Engine Debug Log : " , (format) , __VA_ARGS__)
+		#define ENGINE_LOG(format,...)
 		#define ENGINE_ERR_LOG(format,...)			enginecore::EngineDebugLogPrint("Engine Error Log : " , (format) , __VA_ARGS__)
 		#define ENGINE_VERBOSE_LOG(format,...)		
 

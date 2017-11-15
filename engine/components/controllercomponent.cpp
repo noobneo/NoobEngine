@@ -6,6 +6,8 @@
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
 #endif
+#include "bodycomponent.h"
+#include	"../common/scenemanager.h"
 
 namespace enginecore {
 
@@ -13,6 +15,8 @@ namespace enginecore {
 
 		ControllerComponent::ControllerComponent() {
 
+			body_component_ = nullptr;
+			is_airborne_ = false;
 		}
 
 
@@ -26,6 +30,7 @@ namespace enginecore {
 
 			owner_ = owner;
 			RegisterKeyBoardListener();
+			body_component_ = (BodyComponent*)(owner_->GetComponent(E_COMPONENT_TYPE_BODY));
 		}
 
 
@@ -51,56 +56,79 @@ namespace enginecore {
 		void ControllerComponent::OnKeyPressed(const Uint8 * key_state) {
 
 
-			int speed = 5;
-			if (key_state[SDL_SCANCODE_RIGHT]) {
+			/*serialize these values*/
 
-				ENGINE_LOG("Right Pressed");
-				owner_->SetPositionX(owner_->get_position_x() + speed);
+			if (inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_D)) {
 
-			}
-			else if (key_state[SDL_SCANCODE_LEFT]) {
+			//	ENGINE_LOG("Right Pressed");
+				if (body_component_->get_velocity().x_ <= owner_->get_max_speed())
+				body_component_->ApplyForceX(owner_->get_move_force());
 
-				owner_->SetPositionX(owner_->get_position_x() - speed);
-				ENGINE_LOG("Left Pressed");
+			}else if (inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_A)) {
 
-			}
-			else if (key_state[SDL_SCANCODE_UP]) {
 
-				owner_->SetPositionY(owner_->get_position_y() - speed);
-				ENGINE_LOG("Up Pressed");
+				if (abs(body_component_->get_velocity().x_) <= owner_->get_max_speed()) {
 
-			}
-			else if (key_state[SDL_SCANCODE_DOWN]) {
+					body_component_->ApplyForceX(-owner_->get_move_force());
+				}
+				//ENGINE_LOG("Left Pressed");
 
-				owner_->SetPositionY(owner_->get_position_y() + speed);
-				ENGINE_LOG("Down Pressed");
+			}/*else if (key_state[SDL_SCANCODE_DOWN]) {
+
+				ENGINE_LOG("Veclocity :%f", body_component_->get_position().y_);
+				body_component_->ApplyForceY(speed);
+				//ENGINE[_LOG("Down Pressed");
+			}*/
+
+
+			if (inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_SPACE) || inputhandler::InputHandler::GetInstance()->IsKeyPressed(SDL_SCANCODE_UP)) {
+
+
+				if (body_component_->get_velocity().y_ >= 0) {
+
+					body_component_->ApplyForceY(-owner_->get_jump_force());
+					is_airborne_ = true;
+					//body_component_->ApplyForceY(-jump_speed);
+				}
+
+				//ENGINE_LOG("Up Pressed");
+
 			}
 		}
 
 		void ControllerComponent::OnKeyReleased(const Uint8 * key_state) {
 
-			if (key_state[SDL_SCANCODE_RIGHT]) {
+			if (inputhandler::InputHandler::GetInstance()->IsKeyReleased(SDL_SCANCODE_A) || inputhandler::InputHandler::GetInstance()->IsKeyReleased(SDL_SCANCODE_D)) {
 
-				ENGINE_LOG("Right Released");
+				body_component_->set_velocityX(0.0f);
+			//	ENGINE_LOG("Right Released");
 
 			}
-			else if (key_state[SDL_SCANCODE_LEFT]) {
+		/*	else if (key_state[SDL_SCANCODE_A]) {
 
-				ENGINE_LOG("Left Released");
+				body_component_->set_velocityX(0.0f);
+			//	ENGINE_LOG("Left Released");
 
 			}
 			else if (key_state[SDL_SCANCODE_UP]) {
 
-				ENGINE_LOG("Up Released");
+				//ENGINE_LOG("Up Released");
 
-			}
-			else if (key_state[SDL_SCANCODE_DOWN]) {
+			}*/
+			else if (inputhandler::InputHandler::GetInstance()->IsKeyReleased(SDL_SCANCODE_R)) {
 
-				ENGINE_LOG("Down Released");
+				common::SceneManager::GetInstance()->RestartScene();
+			//	ENGINE_LOG("Down Released");
 			}
 		}
 #endif
 
+
+		void ControllerComponent::Reset() {
+
+			body_component_ = nullptr;
+			is_airborne_ = false;
+		}
 
 
 	}

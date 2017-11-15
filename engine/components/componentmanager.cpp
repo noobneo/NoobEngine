@@ -1,10 +1,10 @@
 #include "componentmanager.h"
 #include "rendercomponent.h"
-#include "physicscomponent.h"
+#include "bodycomponent.h"
+#include "shapecomponent.h"
 #include "transformcomponent.h"
 #include "controllercomponent.h"
 #include "animationcomponent.h"
-
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
 #include "gameobject.h"
@@ -18,14 +18,16 @@ namespace enginecore {
 
 		ComponentManager::ComponentManager() {
 
+			available_body_component_		= nullptr;
+			available_shape_component_		= nullptr;
 			available_render_component_		= nullptr;
-			available_physics_component_	= nullptr;
 			available_transform_component_	= nullptr;
 			available_controller_component_ = nullptr;
-			available_animation_component_ = nullptr;
+			available_animation_component_	= nullptr;
 
+			is_body_components_loaded_		= false;
+			is_shape_components_loaded_		= false;
 			is_render_components_loaded_	= false;
-			is_physics_components_loaded_	= false;
 			is_transform_components_loaded_ = false;
 			is_controller_components_loaded_= false;
 			is_animation_components_loaded_ = false;
@@ -68,15 +70,27 @@ namespace enginecore {
 
 		void ComponentManager::LoadPhyics() {
 
+
 			for (int i = 0; i < MAX_SIZE; ++i) {
 
-				physics_[i] = new PhysicsComponent();
-				physics_[i]->set_id(i);
-				physics_[i]->set_next(available_physics_component_);
-				physics_[i]->set_component_type(E_COMPONENT_TYPE_PHYSICS);
-				available_physics_component_ = physics_[i];
+				shape_[i] = new ShapeComponent();
+				shape_[i]->set_id(i);
+				shape_[i]->set_next(available_shape_component_);
+				shape_[i]->set_component_type(E_COMPONENT_TYPE_SHAPE);
+				available_shape_component_ = shape_[i];
 			}
-			is_physics_components_loaded_ = true;
+			is_shape_components_loaded_ = true;
+
+
+			for (int i = 0; i < MAX_SIZE; ++i) {
+
+				body_[i] = new BodyComponent();
+				body_[i]->set_id(i);
+				body_[i]->set_next(available_body_component_);
+				body_[i]->set_component_type(E_COMPONENT_TYPE_BODY);
+				available_body_component_ = body_[i];
+			}
+			is_body_components_loaded_ = true;
 		}
 
 		void ComponentManager::LoadTransform() {
@@ -121,10 +135,6 @@ namespace enginecore {
 			is_animation_components_loaded_ = true;
 		}
 
-
-
-
-
 		MainComponent* ComponentManager::GetControllerComponent(int id) {
 
 			if (!available_controller_component_) {
@@ -139,19 +149,27 @@ namespace enginecore {
 		}
 
 
-		MainComponent* ComponentManager::GetPhysicsComponent(int id) {
+		MainComponent* ComponentManager::GetBodyComponent(int id) {
 
-			if (!available_physics_component_) {
-
-				ENGINE_ERR_LOG("No Transform Component Available yet");
+			if (!available_body_component_) {
+				
+				ENGINE_ERR_LOG("No Body and Shape Component Available yet");
 			} 
 
+			MainComponent* body_temp = available_body_component_;
+			available_body_component_ = available_body_component_->get_next();
+			active_body_component_[id] = body_temp;
 
-			MainComponent* temp = available_physics_component_;
-			available_physics_component_ = available_physics_component_->get_next();
-			active_physics_component_[id] = temp;
-			return temp;
 
+			MainComponent* shape_temp = available_shape_component_;
+			available_shape_component_ = available_shape_component_->get_next();
+			active_shape_component_[id] = shape_temp;
+
+			/*attach body and shape*/
+			((BodyComponent*)body_temp)->set_shape_component((ShapeComponent*)shape_temp);
+			((ShapeComponent*)shape_temp)->set_body_component((BodyComponent*)body_temp);
+
+			return body_temp;
 		}
 
 		MainComponent* ComponentManager::GetRenderComponent(int id) {
@@ -243,10 +261,62 @@ namespace enginecore {
 			Destroy();
 		}
 
+		void ComponentManager::Reset() {
+
+			//transform
+			for (auto &itr : active_transform_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_transform_component_);
+				available_transform_component_ = itr.second;
+			}
+
+			//body
+			for (auto &itr : active_body_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_body_component_);
+				available_body_component_ = itr.second;
+			}
+
+			//shape
+			for (auto &itr : active_shape_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_shape_component_);
+				available_shape_component_ = itr.second;
+			}
+			//controller
+			for (auto &itr : active_controller_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_controller_component_);
+				available_controller_component_ = itr.second;
+			}
+			//animation
+			for (auto &itr : active_animation_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_animation_component_);
+				available_animation_component_ = itr.second;
+			}
+			//render
+			for (auto &itr : active_render_component_) {
+
+				itr.second->Reset();
+				itr.second->set_next(available_render_component_);
+				available_render_component_ = itr.second;
+			}
+
+			RemoveAllActiveComponents();
+		}
+
+
 		void ComponentManager::RemoveAllActiveComponents() {
 
+			active_body_component_.clear();
+			active_shape_component_.clear();
 			active_render_component_.clear();
-			active_physics_component_.clear();
 			active_transform_component_.clear();
 			active_controller_component_.clear();
 			active_animation_component_.clear();
@@ -272,15 +342,27 @@ namespace enginecore {
 				is_render_components_loaded_ = false;
 			}
 
-			if (is_physics_components_loaded_) {
+			if (is_body_components_loaded_) {
 
-				/*physics components*/
+				/*body components*/
 				for (int i = 0; i < MAX_SIZE; i++) {
 
-					delete physics_[i];
+					delete body_[i];
 				}
-				is_physics_components_loaded_ = false;
+				is_body_components_loaded_ = false;
 			}
+
+			if (is_shape_components_loaded_) {
+
+				/*shapes components*/
+				for (int i = 0; i < MAX_SIZE; i++) {
+
+					delete shape_[i];
+				}
+				is_shape_components_loaded_ = false;
+			}
+
+
 
 			if (is_transform_components_loaded_) {
 
@@ -295,7 +377,7 @@ namespace enginecore {
 
 			if (is_controller_components_loaded_) {
 
-				/*transform_ components*/
+				/*controller components*/
 				for (int i = 0; i < MAX_SIZE; i++) {
 
 					delete controller_[i];
@@ -305,7 +387,7 @@ namespace enginecore {
 
 
 			if (is_animation_components_loaded_) {
-				/*transform_ components*/
+				/*animation components*/
 				for (int i = 0; i < MAX_SIZE; i++) {
 
 					delete animation_[i];

@@ -65,6 +65,7 @@ namespace enginecore {
 		void FpsController::CheckFrameRate() {
 
 			dt_ = timer_->GetTicksSinceLastFrame();	
+			dt_ *= 100.0f;
 		}
 
 		/*void FpsController::UpdateFrameRate() {
@@ -81,13 +82,14 @@ namespace enginecore {
 
 		void FpsController::CapFrameRate() {
 
-	/*		while (dt_ < ideal_frame_rate_) {
+				/*while (dt_ < ideal_frame_rate_) {
 
 				dt_ = timer_->GetTicksLastFrame(); 	
 			}*/
 
 			float diff = ideal_frame_rate_ - dt_;
 			Sleep(DWORD(diff));		
+		//	CheckFrameRate();
 			Step();
 		}
 

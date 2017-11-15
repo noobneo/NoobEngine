@@ -69,10 +69,11 @@ namespace enginecore {
 				ENGINE_ERR_LOG("QueryPerformanceFrequency failed!");
 			}
 
-			freq_ = double(li.QuadPart) / 1000.0f;
-
 			QueryPerformanceCounter(&li);
 			start_counter_ = double(li.QuadPart);
+
+			freq_ = GetPerformceFrequency();
+
 		}
 
 
@@ -88,13 +89,21 @@ namespace enginecore {
 
 		float Timer::GetTicksSinceLastFrame() {
 
-			LARGE_INTEGER li;
-			QueryPerformanceCounter(&li);
+			float dt;
+			if (frame_start_ticks_) {
 
-			frame_end_ticks_ = double(li.QuadPart);
+				LARGE_INTEGER li;
+				QueryPerformanceCounter(&li);
+
+				frame_end_ticks_ = double(li.QuadPart);
 			
+				dt = float((frame_end_ticks_ - frame_start_ticks_) / GetPerformceFrequency());
 
-			float dt = float((frame_end_ticks_ - frame_start_ticks_) / GetPerformceFrequency());
+			}else {
+
+				dt = 16.6667f;
+			}
+
 			frame_start_ticks_ = frame_end_ticks_;
 
 			//	ENGINE_LOG("%f", dt);
@@ -124,10 +133,13 @@ namespace enginecore {
 
 		double Timer::GetPerformceFrequency() {
 
-			LARGE_INTEGER li;
-			QueryPerformanceCounter(&li);
+			if (freq_ <=0) {
 
-			freq_ = double(li.QuadPart) / 1000.0f;
+				LARGE_INTEGER li;
+				QueryPerformanceCounter(&li);
+
+				freq_ = double(li.QuadPart) / 1000.0f;
+			}
 
 			return freq_;
 		}

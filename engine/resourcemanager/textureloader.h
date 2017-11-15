@@ -5,20 +5,21 @@
 #include <string>
 #include "../../SDL2.0 Lib/include/SDL_surface.h"
 #include "../../SDL2.0 Lib/include/SDL_video.h"
+#include "../graphics/sprite.h"
 
 namespace enginecore{
 
 	namespace resourcemanager {
 
 		//forward declaration
-		class Sprite;
+
 		class ResourceManager;
 
 		class TextureLoader
 		{
 
 		private:
-			Sprite* CreateTexture(std::string path);
+			graphics::Sprite* CreateTexture(std::string path);
 		
 			TextureLoader();
 			~TextureLoader();

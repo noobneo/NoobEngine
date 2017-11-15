@@ -3,9 +3,10 @@
 
 #include "../../SDL2.0 Lib/include/SDL_surface.h"
 
+
 namespace enginecore {
 
-	namespace resourcemanager {
+	namespace graphics {
 
 		class Sprite 
 		{
@@ -27,15 +28,15 @@ namespace enginecore {
 			inline void set_is_dirty(bool is_dirty) { is_dirty_ = is_dirty; };
 			inline bool get_is_dirty() { return is_dirty_ ; };
 
+			Sprite();
 			~Sprite();
+			inline void set_surface(SDL_Surface* surface) { surface_ = surface; };
 		private:
 
-			Sprite();
 		
 
 			void UpdatePosition();
 
-			inline void set_surface(SDL_Surface* surface) { surface_ = surface; };
 
 		private:	
 
@@ -50,7 +51,7 @@ namespace enginecore {
 
 			SDL_Rect bounding_box_;
 			SDL_Surface* surface_;
-			friend class TextureLoader;
+			//friend class resourcemanager::TextureLoader;
 		};
 
 	}

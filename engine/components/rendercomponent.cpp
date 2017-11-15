@@ -42,6 +42,13 @@ namespace enginecore {
 
 			UpdateRenderPosition(transform_component_ref_->get_position());
 		}
+
+		void RenderComponent::Reset() {
+
+			image_ = nullptr;
+			transform_component_ref_ = nullptr;
+
+		}
 	}
 }
 

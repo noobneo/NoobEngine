@@ -11,6 +11,15 @@ namespace enginecore {
 
 		TransformComponent::TransformComponent() {
 
+
+			owner_ = nullptr;
+
+			scale_x_ = 1.0;
+			scale_x_ = 1.0;
+
+			math::Vector2DSet(&position_, 0.0f, 0.0f);
+
+
 		}
 
 
@@ -52,6 +61,16 @@ namespace enginecore {
 #ifdef TEST_MODE
 			ENGINE_LOG("Destroying Transform Component ");
 #endif // TEST_MODE
+		}
+
+		void TransformComponent::Reset() {
+
+			owner_ = nullptr;
+
+			scale_x_ = 1.0;
+			scale_x_ = 1.0;
+
+			math::Vector2DSet(&position_, 0.0f, 0.0f);
 		}
 
 	}
