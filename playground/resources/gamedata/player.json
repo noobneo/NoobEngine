@@ -1,9 +1,20 @@
 {
-        "sprite" : "playground/resources/player.bmp",
-        "transform" : {
-          
-          "x" : 300.0,
-          "y" : 100.0
-        },
-        "controller" : true
+  "body": {
+    "x": 0.0,
+    "y": 0.0,
+    "mass": 10.0,
+    "body_type": "dynamic",
+    "shape": {
+      "width": 74.0,
+      "height": 70.0,
+      "shape_type": "Aabb"
+    }
+  },
+  "controller": true,
+  "sprite": "playground/resources/player.bmp",
+  "transform": {
+
+    "x": 300.0,
+    "y": 100.0
+  }
 }
