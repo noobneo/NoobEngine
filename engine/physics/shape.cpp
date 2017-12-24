@@ -13,7 +13,7 @@ namespace enginecore {
 		Shape::~Shape(){
 
 
-#ifdef TEST_MODE
+#ifdef DESTRUCTOR_LOG_MODE
 			ENGINE_LOG("Destroying the shape");
 #endif // TEST_MODE
 

@@ -21,5 +21,7 @@
 #include "components\componentmanager.h"
 #include "physics\physicsmanager.h"
 #include "common\scenemanager.h"
+#include "event\eventmanager.h"
+#include "particlemanager\particlemanager.h"
 
 #endif // !_ENGINE_INCLUDES_

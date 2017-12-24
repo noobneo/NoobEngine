@@ -27,7 +27,7 @@ namespace enginecore {
 		strcat_s(buffer, format);
 		strcat_s(buffer, "\n\n");
 
-		const size_t total_size = max_chars + 1024;
+		const size_t total_size = max_chars + 5024;
 		char log_msg[total_size] = { 0 };
 
 		va_list arg_list;
@@ -51,7 +51,7 @@ namespace enginecore {
 		strcat_s(buffer, format);
 		strcat_s(buffer, "\n\n");
 
-		const size_t total_size = max_chars + 1024;
+		const size_t total_size = max_chars + 5024;
 		char log_msg[total_size] = { 0 };
 
 		va_list arg_list;

@@ -1,0 +1,88 @@
+
+
+{
+
+    "object0":{
+   "archetype" : "playground/resources/gamedata/gamestate.json",
+    "tag" : "game_state_manager"
+  },
+
+
+   "object14":{
+    "archetype" : "playground/resources/gamedata/wall_left.json",
+     "tag" : "wall_left",
+      "alpha" : 0.0,
+            "body": {
+      
+      "collision_tag" : 133
+    }
+  },
+
+"object0":{
+   "archetype" : "playground/resources/gamedata/ui/reload.json",
+    "tag" : "reload"
+  },
+
+   "object14":{
+    "archetype" : "playground/resources/gamedata/wall_left.json",
+     "tag" : "wall_left",
+      "alpha" : 0.0,
+      "x": 1050.0,  
+
+      "body": {
+      
+      "collision_tag" : 133
+    }
+  },
+
+
+    "object1":{
+      "archetype" : "playground/resources/gamedata/ai/bossai.json",
+      "tag" : "enemyboss"
+    },
+
+       "object4":{
+    "archetype" : "playground/resources/gamedata/weapon/pistollauncher.json",
+    "tag" : "gun",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true,   
+    "x": 300.0,
+    "y": 500.0,
+    "z_order" : 10
+  }
+  ,
+
+      "object1":{
+      "archetype" : "playground/resources/gamedata/player.json",
+      "x" : 100.0,
+      "y" : 500.0,
+      "tag" : "player",
+      "scaleX"    : 1,
+      "scaleY"    : 1,
+      "visible"  : true,
+      "max_speed":300,
+      "jump_force":3600,
+      "move_force":90,
+      "camera" : false
+    },
+
+
+    "object10": {
+    "archetype": "playground/resources/gamedata/platform1.json",
+    "x": 300.0,
+    "y": 300.0,
+    "tag" : "platform"
+  },
+
+
+    "object4":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "z_order" : 0
+  }
+
+  
+}

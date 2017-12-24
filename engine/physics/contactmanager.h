@@ -14,6 +14,7 @@ namespace enginecore{
 
 		class PhysicsManager;
 		class Shape;
+		class Event;
 
 		class ContactManager
 		{
@@ -34,6 +35,8 @@ namespace enginecore{
 
 			void ResolveContancts();
 			void PositionCorrection();
+
+			float clip(float n, float lower, float upper);
 			//CheckForCollisions();// checks for collision
 		private:
 			friend class PhysicsManager;

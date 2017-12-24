@@ -5,11 +5,13 @@
 #include "../components/componentmanager.h"
 #include "../components/objectfactory.h"
 #include "../inputhandler/inputhandler.h"
+#include "../event/eventmanager.h"
 #include "../graphics/renderer.h"
 #include "../common/macros.h"
-#ifdef TEST_MODE
+#include "../particlemanager/particlemanager.h"
+
 #include "../enginelogger/enginelogger.h"
-#endif // TEST_MODE
+#include "../serializer/serializer.h"
 
 
 namespace enginecore {
@@ -40,12 +42,12 @@ namespace enginecore {
 		}
 
 
-		void SceneManager::RestartScene() {
+	/*	void SceneManager::RestartScene() {
 
-			enginecore::Engine::GetInstance()->set_is_scene_restart(true);
-		}
+			enginecore::Engine::GetInstance()->set_is_scene_change(true);
+		}*/
 
-		void SceneManager::ResetManagers() {
+		void SceneManager::ResetAndSerializeScene() {
 
 			//physics
 			physics::PhysicsManager::GetInstance()->Reset();
@@ -57,10 +59,83 @@ namespace enginecore {
 			component::GameobjectManager::GetInstance()->Reset();
 			//inputhandler
 			inputhandler::InputHandler::GetInstance()->Reset();
+			//eventsmanager
+			events::EventManager::GetInstance()->Reset();
 
-			component::ObjectFactory::GetInstance()->ReloadLevel();
-			enginecore::Engine::GetInstance()->set_is_scene_restart(false);
+			//partic;es
+			particlesystem::ParticleManager::GetInstance()->Reset();
+
+			//component::ObjectFactory::GetInstance()->ReloadLevel();
+
+			if (!scene_path_.size()) {
+
+				scene_path_ = "gamelevel1";
+			}
+			std::string path = "playground/resources/gamedata/scenes/" + scene_path_ + ".json";
+			enginecore::serialize::Serializer::GetInstance()->SerializeGameData(path);
+			enginecore::Engine::GetInstance()->set_is_scene_change(false);
 		}
-	
+
+		void SceneManager::LoadScene(std::string path) {
+
+
+			previous_scene_path_ = scene_path_;
+			scene_path_ = path;
+			enginecore::Engine::GetInstance()->set_is_scene_change(true);
+		}
+
+		void SceneManager::LoadLastLevel() {
+
+			LoadScene(previous_scene_path_);
+		}
+
+		int SceneManager::GetLevelNoFromFileName(std::string name) {
+
+
+			int no=1;
+			if (name == "gamelevel1") {
+
+				no =  1;
+			}else if (name == "gamelevel2") {
+
+				no = 2;
+			}
+			else if (name == "bosslevel") {
+
+				no = 3;
+			}
+
+			return no;
+		}
+
+		void SceneManager::NextLevel() {
+
+			++levelno_;
+			levelno_ = levelno_ > enginecore::EngineConfig::config_->max_level_ ? 1 : levelno_;
+
+
+			std::string levelname("level");
+
+			switch (levelno_) {
+				
+			case 1:
+				levelname += "1";
+				break;
+
+			case 2:
+				levelname += "2";
+				break;
+
+			case 3:
+				levelname += "3";
+				break;
+			}
+
+			levelname += "menu";
+
+			LoadScene(levelname);
+		}
+
+
 	}
 }

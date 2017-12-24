@@ -18,6 +18,7 @@ Creation date: 25th October 2017
 #include "../enginelogger/enginelogger.h"
 #endif // TEST_MODE
 
+
 namespace enginecore {
 
 	namespace component {
@@ -27,12 +28,13 @@ namespace enginecore {
 			id_				= -1;
 			next_			= nullptr;
 			owner_			= nullptr;	
+			active_			= false;
 			component_type_ = E_COMPONENT_TYPE_NONE;
 		}
 
 
 		MainComponent::~MainComponent() {
-#ifdef TEST_MODE
+#ifdef DESTRUCTOR_LOG_MODE
 			ENGINE_LOG("DEstroying the MainComponent ");
 #endif // TEST_MODE
 		}

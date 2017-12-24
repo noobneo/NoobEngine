@@ -12,7 +12,7 @@
 
 #include "../fpscontroller/fpscontroller.h"
 
-
+#include "../components/gameobject.h"
 namespace enginecore {
 
 	namespace physics {
@@ -21,7 +21,7 @@ namespace enginecore {
 
 		PhysicsManager::PhysicsManager() {
 
-			gravity_ = 98 *PTM;
+			gravity_ =  enginecore::EngineConfig::config_->gravity_ * enginecore::EngineConfig::config_->ptm_;
 			bodies_.clear();
 			available_shape_aabb_ = nullptr;
 			available_shape_circle_ = nullptr;
@@ -153,7 +153,10 @@ namespace enginecore {
 
 					component::BodyComponent* body_component1 = static_cast<component::BodyComponent*>(it1.second);
 					component::BodyComponent* body_component2 = static_cast<component::BodyComponent*>(it2.second);
-					if (body_component1->get_id() != body_component2->get_id()) {
+
+					
+					
+					if (body_component1->get_id() != body_component2->get_id() && body_component1->get_active() & body_component2->get_active() && (!(body_component2->get_is_bullet() & body_component1->get_is_bullet()))) {
 
 						contact_manager_->CheckForCollision(body_component1, body_component1->get_position(), body_component2, body_component2->get_position());
 					}
@@ -164,12 +167,15 @@ namespace enginecore {
 			//resolve contacts
 			contact_manager_->ResolveContancts();
 			contact_manager_->PositionCorrection();
+			//contact_manager_->CallOnCollision();
 
 			//update position
 			for (auto &it : bodies_) {
 
 				component::BodyComponent* body_component = static_cast<component::BodyComponent*>(it.second);
-				body_component->UpdatePosition();
+				if (body_component->get_is_physics_on()) {
+					body_component->UpdatePosition();
+				}
 			}
 		}
 

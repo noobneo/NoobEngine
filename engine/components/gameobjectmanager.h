@@ -16,7 +16,24 @@ Creation date: 25th October 2017
 #include <array>
 #include <unordered_map>
 #include "component-types.h"
-#include "../common/scenemanager.h"
+
+
+
+namespace enginecore {
+	namespace events {
+
+		class EventManager;
+		class Event;
+	}
+}
+namespace enginecore {
+
+	namespace common {
+	
+		class SceneManager;
+	}
+
+}
 
 namespace enginecore {
 
@@ -33,11 +50,15 @@ namespace enginecore {
 		void Update();
 		void Destroy();
 
+
+		GameObject* GetGameObjectByTag(std::string name);
 		void DeleteGameobject(int id);
 		GameObject* CreateGameObject();
 		void InitializeGameObject();
 
 		static GameobjectManager* GetInstance();
+
+		inline std::unordered_map<int, GameObject*> get_active_objects() { return active_objects_; }
 
 	private:
 		GameobjectManager();
@@ -50,6 +71,7 @@ namespace enginecore {
 		void ClearPool();
 		void PoolGameObjects();
 		void Reset();
+		void BroadCastEvent(events::Event* event);
 
 #ifdef TEST_MODE
 		void IteratePool();
@@ -60,6 +82,7 @@ namespace enginecore {
 
 		friend class ObjectFactory;
 		friend class common::SceneManager;
+		friend class events::EventManager;
 
 		static GameobjectManager* instance_;
 		

@@ -17,6 +17,7 @@ namespace enginecore {
 			virtual void Reset();
 			 virtual void set_radius(float radius) { radius_ = radius; };
 
+			 inline float get_radius() { return radius_; };
 		private:
 			float radius_;
 		};

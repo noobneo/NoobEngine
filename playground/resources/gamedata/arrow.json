@@ -1,0 +1,21 @@
+{
+        "sprite" : {
+
+        "spritename":"playground/resources/animation/arrow.png",
+        "total_frames" : 6,
+	    "sprite_sheet_rows":1,
+	    "is_animated_sprite":true,
+      	"color" : {
+	    "r" : 1.0,
+	    "g" : 0.0,
+	    "b" : 0.0,
+	    "a" : 0.5
+	 	 }
+      },
+
+	"transform" : {
+	  
+	  "x" : 100.0,
+	  "y" : 100.0
+	}
+}

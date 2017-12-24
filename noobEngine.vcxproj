@@ -74,16 +74,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE1;DEBUG_MODE1;DESTRUCTOR_LOG_MODE_;SDL_TICKS;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USE_OPENGL;USE_OPEN_GL;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\glew\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link />
     <Link>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\glew\lib\Release\Win32;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -91,12 +92,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE1;DEBUG_MODE1;DESTRUCTOR_LOG_MODE_;SDL_TICKS;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USE_OPENGL;USE_OPEN_GL;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\glew\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;SBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\glew\lib\Release\Win32;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -107,15 +110,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\glew\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE1;DEBUG_MODE1;DESTRUCTOR_LOG_MODE_;SDL_TICKS;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USE_OPENGL;USE_OPEN_GL;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\glew\lib\Release\Win32;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,20 +129,28 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE;DEBUG_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\external\glew\include;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;$(MSBuildProjectDirectory)\external\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VERBOSITY_LEVEL;TEST_MODE1;DEBUG_MODE1;DESTRUCTOR_LOG_MODE_;SDL_TICKS;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USE_OPENGL;USE_OPEN_GL;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\external\glew\lib\Release\Win32;$(MSBuildProjectDirectory)\external\SDL2.0 Lib\lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="engine\event\collisionevent.cpp" />
+    <ClCompile Include="engine\components\bossai.cpp" />
+    <ClCompile Include="engine\components\boundingbox.cpp" />
+    <ClCompile Include="engine\components\enemy1ai.cpp" />
+    <ClCompile Include="engine\components\buttoncomponent.cpp" />
+    <ClCompile Include="engine\components\cameracomponent.cpp" />
+    <ClCompile Include="engine\components\bulletcomponent.cpp" />
+    <ClCompile Include="engine\components\bodyanimationcomponent.cpp" />
     <ClCompile Include="engine\enums.cpp" />
+    <ClCompile Include="engine\particlemanager\particle.cpp" />
     <ClCompile Include="engine\physics\aabbshape.cpp" />
     <ClCompile Include="engine\physics\circleshape.cpp" />
     <ClCompile Include="engine\physics\contactmanager.cpp" />
@@ -164,7 +176,15 @@
     <ClCompile Include="engine\components\objectfactory.cpp" />
     <ClCompile Include="engine\physics\physicsmanager.cpp" />
     <ClCompile Include="engine\physics\manifold.cpp" />
-    <ClCompile Include="engine\event\even.cpp" />
+    <ClCompile Include="engine\event\event.cpp" />
+    <ClCompile Include="engine\event\eventmanager.cpp" />
+    <ClCompile Include="engine\maths\mat4.cpp" />
+    <ClCompile Include="engine\components\mousecomponent.cpp" />
+    <ClCompile Include="engine\inputhandler\mouseeventdispatcher.cpp" />
+    <ClCompile Include="engine\inputhandler\mouselistener.cpp" />
+    <ClCompile Include="engine\components\healthcomponent.cpp" />
+    <ClCompile Include="engine\components\homingmissile.cpp" />
+    <ClCompile Include="engine\particlemanager\particlemanager.cpp" />
     <ClCompile Include="playground\src\main.cpp" />
     <ClCompile Include="engine\window\window.cpp" />
     <ClCompile Include="engine\utils\textconverter.cpp" />
@@ -178,10 +198,26 @@
     <ClCompile Include="engine\components\shapecomponent.cpp" />
     <ClCompile Include="engine\physics\shape.cpp" />
     <ClCompile Include="engine\common\scenemanager.cpp" />
+    <ClCompile Include="engine\maths\vec2.cpp" />
+    <ClCompile Include="engine\maths\vec3.cpp" />
+    <ClCompile Include="engine\maths\vec4.cpp" />
+    <ClCompile Include="engine\graphics\shader.cpp" />
+    <ClCompile Include="engine\components\weaponcomponent.cpp" />
+    <ClCompile Include="engine\components\uicomponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\event\collisionevent.h" />
+    <ClInclude Include="engine\components\bossai.h" />
+    <ClInclude Include="engine\components\boundingbox.h" />
+    <ClInclude Include="engine\components\component-includesh.h" />
+    <ClInclude Include="engine\components\enemy1ai.h" />
+    <ClInclude Include="engine\components\buttoncomponent.h" />
+    <ClInclude Include="engine\components\cameracomponent.h" />
+    <ClInclude Include="engine\components\bulletcomponent.h" />
+    <ClInclude Include="engine\components\bodyanimationcomponent.h" />
+    <ClInclude Include="engine\engine-includes.h" />
     <ClInclude Include="engine\game-global.h" />
+    <ClInclude Include="engine\maths\math-common.h" />
+    <ClInclude Include="engine\particlemanager\particle.h" />
     <ClInclude Include="engine\physics\aabbshape.h" />
     <ClInclude Include="engine\physics\circleshape.h" />
     <ClInclude Include="engine\physics\contactmanager.h" />
@@ -191,7 +227,6 @@
     <ClInclude Include="engine\components\componentmanager.h" />
     <ClInclude Include="engine\components\component-types.h" />
     <ClInclude Include="engine\components\maincomponent.h" />
-    <ClInclude Include="engine\engine-includes.h" />
     <ClInclude Include="engine\common\macros.h" />
     <ClInclude Include="engine\enginelogger\enginelogger.h" />
     <ClInclude Include="engine\engine.h" />
@@ -224,7 +259,22 @@
     <ClInclude Include="engine\physics\shape.h" />
     <ClInclude Include="engine\enums.h" />
     <ClInclude Include="engine\common\scenemanager.h" />
-    <ClInclude Include="engine\event\even.h" />
+    <ClInclude Include="engine\event\event.h" />
+    <ClInclude Include="engine\event\eventmanager.h" />
+    <ClInclude Include="engine\maths\mat4.h" />
+    <ClInclude Include="external\stb\stb_image.h" />
+    <ClInclude Include="engine\components\mousecomponent.h" />
+    <ClInclude Include="engine\inputhandler\mouseeventdispatcher.h" />
+    <ClInclude Include="engine\inputhandler\mouselistener.h" />
+    <ClInclude Include="engine\components\healthcomponent.h" />
+    <ClInclude Include="engine\components\homingmissile.h" />
+    <ClInclude Include="engine\particlemanager\particlemanager.h" />
+    <ClInclude Include="engine\maths\vec2.h" />
+    <ClInclude Include="engine\maths\vec3.h" />
+    <ClInclude Include="engine\maths\vec4.h" />
+    <ClInclude Include="engine\graphics\shader.h" />
+    <ClInclude Include="engine\components\weaponcomponent.h" />
+    <ClInclude Include="engine\components\uicomponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="playground\resources\enemy.bmp" />
@@ -232,6 +282,10 @@
     <Image Include="playground\resources\player.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="engine\shaders\default.frag" />
+    <None Include="engine\shaders\default.vert" />
+    <None Include="engine\shaders\default_texture.frag" />
+    <None Include="engine\shaders\default_texture.vert" />
     <None Include="playground\resources\gamedata\enemy.json" />
     <None Include="playground\resources\gamedata\level1.json" />
     <None Include="playground\resources\gamedata\player.json" />

@@ -1,0 +1,51 @@
+
+{
+
+       "object3":{
+      "archetype" : "playground/resources/gamedata/ui/bg1.json",
+      "tag" : "bg",
+      "sprite":{
+      "alpha" : 0.2
+      }
+    }
+
+    ,
+           "object2":{
+      "archetype" : "playground/resources/gamedata/bossimage.json",
+      "tag" : "bossimage",
+        "x" : 600.0
+    },
+
+    
+    "object1":{
+      "archetype" : "playground/resources/gamedata/ui/start.json",
+      "tag" : "bosslevel",
+      "x" : 560.0,
+      "y" : 245.0,
+      "button" : {
+
+        "file_to_open" : "gamelevel2"
+      }
+    },
+    
+     "object2":{
+      "archetype" : "playground/resources/gamedata/ui/level2title.json",
+      "tag" : "title"
+    },
+
+
+                "object2":{
+      "archetype" : "playground/resources/gamedata/player_image.json",
+      "tag" : "bossimage",
+        "x" : 600.0
+    },
+
+      "object2":{
+      "archetype" : "playground/resources/gamedata/weapon_image.json",
+      "tag" : "bossimage",
+        "x" : 611.0,
+        "y" : 297.0
+    }
+  
+
+}

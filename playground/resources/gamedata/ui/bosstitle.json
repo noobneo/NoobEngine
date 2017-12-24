@@ -1,0 +1,13 @@
+{
+    "sprite":{
+    "spritename":"playground/resources/images/bosslevel.png",
+    "texture_mode" : true
+  },
+
+
+  "transform": {
+
+    "x": 512.0,
+    "y": 600.0
+  }
+}

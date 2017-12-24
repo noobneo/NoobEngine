@@ -4,17 +4,22 @@
     "y": 0.0,
     "mass": 50.0,
     "body_type": "static",
+    "collision_tag" : 2,
     "shape": {
-      "width": 1280.0,
+      "width": 1024.0,
       "height": 120.0,
       "shape_type": "Aabb"
     }
   },
   "controller": false,
-  "sprite": "playground/resources/ground.bmp",
+  "sprite":{
+
+    "spritename":"playground/resources/images/ground.png"
+  },
+  
   "transform": {
 
-    "x": 300.0,
+    "x": 512.0,
     "y": 100.0
   }
 }

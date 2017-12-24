@@ -11,6 +11,16 @@ namespace enginecore{
 
 	namespace resourcemanager {
 
+
+		typedef struct Texture {
+
+			int width_;
+			int height_;
+			int nrChannels_;
+			unsigned char*data_;
+
+		}Texture;
+
 		//forward declaration
 
 		class ResourceManager;
@@ -25,7 +35,7 @@ namespace enginecore{
 			~TextureLoader();
 			
 		private:
-			std::unordered_map<std::string, SDL_Surface*> textures_;
+			std::unordered_map<std::string, Texture *> textures_;
 			friend class ResourceManager;
 		};
 	}

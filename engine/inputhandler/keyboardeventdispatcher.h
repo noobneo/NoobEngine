@@ -23,7 +23,7 @@ namespace enginecore {
 	namespace inputhandler {
 
 
-		class KeyboardEventListener;
+		//class KeyboardEventListener;
 
 		class KeyboardEventDispatcher
 		{

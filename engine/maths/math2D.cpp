@@ -13,6 +13,7 @@ Creation date: September 13th 2017
 
 #include "math2D.h"
 #include <math.h>
+#include "math-common.h"
 
 /*
 This function checks if the point P is colliding with the circle whose

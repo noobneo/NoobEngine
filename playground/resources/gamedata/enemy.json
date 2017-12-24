@@ -1,14 +1,12 @@
 {
-        "sprite" : "playground/resources/enemy.bmp",
-        "transform" : {
-          
-          "x" : 100.0,
-          "y" : 100.0
-        },
-       "animation" : {
-          
-          "limit" :200.0,
-          "step": 5.0,
-          "direction": "x"
-        }
+        "sprite" : {
+
+        "spritename":"playground/resources/box.png"
+      },
+
+	"transform" : {
+	  
+	  "x" : 100.0,
+	  "y" : 100.0
+	}
 }

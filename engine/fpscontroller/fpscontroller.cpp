@@ -17,6 +17,7 @@ Creation date: 16th October 2017
 #include "../assert/assert.h"
 #include "../enginelogger/enginelogger.h"
 #include <Windows.h>
+#include "../game-global.h"
 
 namespace enginecore {
 
@@ -26,7 +27,7 @@ namespace enginecore {
 
 		FpsController::FpsController() {
 
-			desired_fps_ = MAX_FPS;
+			desired_fps_ = enginecore::EngineConfig::config_->fps_;
 			current_fps_ = 0.0f;
 			ideal_frame_rate_ = 1000.0f / desired_fps_; // its in milliseconds
 
@@ -62,10 +63,15 @@ namespace enginecore {
 			timer_->GetStartFrameTick();
 		}
 
-		void FpsController::CheckFrameRate() {
+		void FpsController::GetTimeSinceLastFrame() {
 
-			dt_ = timer_->GetTicksSinceLastFrame();	
-			dt_ *= 100.0f;
+#ifdef SDL_TICKS
+			 timer_->GetStartTicks();
+#else
+			dt_ = timer_->GetTimeSinceLastFrame();	
+
+#endif // SDL_TICKS
+		//	dt_ *= 100.0f;
 		}
 
 		/*void FpsController::UpdateFrameRate() {
@@ -79,18 +85,41 @@ namespace enginecore {
 
 			//ENGINE_LOG("dt:%f",1.0f/(dt_*10));
 		}
+	/*	1 / 60;
+		0.0167-- > seconds;
+		0.0167 * 1000 - >milli seconds
 
-		void FpsController::CapFrameRate() {
+			16.67*/
 
-				/*while (dt_ < ideal_frame_rate_) {
+void FpsController::CapFrameRate() {
 
-				dt_ = timer_->GetTicksLastFrame(); 	
-			}*/
+#ifdef SDL_TICKS
+	float diff = timer_->GetEndTicks();
 
-			float diff = ideal_frame_rate_ - dt_;
-			Sleep(DWORD(diff));		
-		//	CheckFrameRate();
-			Step();
+	while (diff < ideal_frame_rate_) {
+
+		diff = timer_->GetEndTicks();
+	}
+
+	dt_ = diff *.001f;
+
+	/*assum paused or break point*/
+	if (dt_ > .1f) {
+
+		dt_ = 0.167f;
+	}
+
+#else
+		float diff = ideal_frame_rate_ - dt_;
+		diff = diff > 0.0f ? diff : 0.0f;
+		Sleep(DWORD(diff));
+
+		//CheckFrameRate();
+		Step();
+
+#endif // SDL_TICKS
+
+
 		}
 
 		void FpsController::Destroy() {

@@ -25,7 +25,7 @@ namespace enginecore {
 
 		CircleShape::~CircleShape() {
 
-#ifdef TEST_MODE
+#ifdef DESTRUCTOR_LOG_MODE
 			ENGINE_LOG("Destroying the CircleShape");
 #endif // TEST_MODE
 

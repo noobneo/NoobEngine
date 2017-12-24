@@ -1,0 +1,21 @@
+{  "body": {
+    "mass": 0.0,
+    "body_type": "static",
+    "collision_tag" : 11,
+    "shape": {
+      "width": 400.0,
+      "height": 100.0,
+      "shape_type": "Aabb"
+    }
+  },
+  
+    "sprite":{
+    "spritename":"playground/resources/images/next_level.png",
+	"texture_mode" : true
+  },
+  "transform": {
+
+    "x": 0.0,
+    "y": 300.0
+  }
+}

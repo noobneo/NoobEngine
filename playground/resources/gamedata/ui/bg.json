@@ -1,0 +1,18 @@
+{
+  
+    "sprite":{
+    "spritename":"playground/resources/bg/bg.jpg",
+    "total_frames" :1 ,
+    "sprite_sheet_rows":1,  
+    "is_animated_sprite" : true,
+    "animation_speed" : 5,
+    "smoothness" : 100.0,
+    "texture_mode" : true,
+    "z_order" : 0
+  },
+  "transform": {
+
+    "x": 512.0,
+    "y": 400.0
+  }
+}

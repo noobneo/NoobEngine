@@ -1,0 +1,17 @@
+{
+  
+"sprite":{
+    "spritename":"playground/resources/buttons/control.png",
+	"texture_mode" : true
+  },
+  "transform": {
+
+    "x": 712.0,
+    "y": 200.0
+  },
+
+    "button" : {
+      
+  	"file_to_open" : "controls"
+  }
+}

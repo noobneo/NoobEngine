@@ -1,0 +1,17 @@
+{
+  
+    "sprite":{
+    "spritename":"playground/resources/buttons/level2.png",
+     "texture_mode" : true
+  },
+  "transform": {
+
+    "x": 512.0,
+    "y": 400.0
+  },
+
+    "button" : {
+
+  	"file_to_open" : "gamelevel2"
+  }
+}

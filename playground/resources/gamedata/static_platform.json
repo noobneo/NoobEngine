@@ -1,0 +1,28 @@
+{
+  "body": {
+    "mass": 0.0,
+    "body_type": "static",
+    "collision_tag" : 1,
+    "shape": {
+      "width": 92.0,
+      "height": 117.0,
+      "shape_type": "Aabb"
+    }
+  },
+  "sprite": {
+  "spritename":"playground/resources/images/box.png",
+  "color" : {
+    "r" : 1.0,
+    "g" : 0.0,
+    "b" : 0.0
+  },
+  "spriteframes" : {
+      "0" : "idle"
+    }
+},
+  "transform": {
+
+    "x": 300.0,
+    "y": 500.0
+  }
+}

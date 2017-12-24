@@ -15,11 +15,15 @@ Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 16th October 2017
 ---------------------------------------------------------*/
 
+#define INT_LONG __int64
+#include "../../external/SDL2.0 Lib/include/SDL_timer.h"
+
 namespace enginecore {
 
 	namespace fps {
 
 		class Timer
+		
 		{
 		private:
 			Timer();
@@ -37,22 +41,36 @@ namespace enginecore {
 			void Init();
 			void Destroy();
 			void GetStartFrameTick();
-	
-			double GetStartCounter();
-			double GetPerformceFrequency();
+			float GetStartCounter();
+			float GetPerformceFrequency();
 
 			/*float GetTicksLastFrame();*/
-			float GetTicksSinceLastFrame();
+			float GetTimeSinceLastFrame();
+
+#ifdef SDL_TICKS
+			void GetStartTicks();
+			float GetEndTicks();
+#endif // SDL_TICKS
+
+
 
 		private:
 
 			static Timer* instance_;
 
-			double freq_;
-			double start_counter_;
-			double frame_start_ticks_;
-			double frame_end_ticks_;
+			float freq_;
+			INT_LONG start_counter_;  
+			INT_LONG frame_start_ticks_;
+			INT_LONG frame_end_ticks_;
 			float last_frame_time_;
+
+#ifdef SDL_TICKS
+			
+			float start_ticks_;
+			float end_ticks_;
+#endif // SDL_TICKS
+
+
 		};
 	}
 }

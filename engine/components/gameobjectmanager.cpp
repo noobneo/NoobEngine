@@ -17,7 +17,7 @@ Creation date: 25th October 2017
 
 #include "../common/macros.h"
 #include "../enginelogger/enginelogger.h"
-
+#include "../event/event.h"
 
 namespace enginecore {
 
@@ -60,7 +60,6 @@ namespace enginecore {
 			GameObject *go = first_available_;
 
 			first_available_ = go->get_next();
-			go->set_is_active(true);
 			active_objects_[go->get_id()] = go;
 			return go;
 		}
@@ -75,8 +74,21 @@ namespace enginecore {
 			GameObject *go = first_available_;
 
 			first_available_ = go->get_next();
-			go->set_is_active(true);
 			active_objects_[go->get_id()] = go;
+		}
+
+
+		GameObject* GameobjectManager::GetGameObjectByTag(std::string name) {
+
+			for (auto &it : active_objects_) {
+
+				if (it.second->get_tag() == name && it.second->get_active()) {
+
+					return it.second;
+				}
+			}
+
+			return nullptr;
 		}
 
 		void GameobjectManager::PoolGameObjects() {
@@ -126,7 +138,6 @@ namespace enginecore {
 
 					itr.second->set_next(first_available_->get_next());
 					first_available_ = itr.second;
-					itr.second->set_is_active(false);
 					active_objects_.erase(id);
 					return;
 				}
@@ -159,6 +170,14 @@ namespace enginecore {
 			active_objects_.clear();
 		}
 
+
+		void GameobjectManager::BroadCastEvent(events::Event* event) {
+
+			for (auto &itr : active_objects_) {
+
+				itr.second->HandleEvent(event);
+			}
+		}
 
 		void GameobjectManager::Destroy() {
 

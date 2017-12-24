@@ -23,6 +23,7 @@ Creation date: 17th October 2017
 #include "../engine.h"
 
 #include "keyboardeventdispatcher.h"
+#include "mouseeventdispatcher.h"
 
 namespace enginecore{
 
@@ -97,11 +98,11 @@ void InputHandler::Destroy() {
 #endif // TEST_MODE
 
 	KeyboardEventDispatcher::GetInstance()->Destroy();
+	MouseEventDispatcher::GetInstance()->Destroy();
 	CLEAN_DELETE(InputHandler::instance_);
 }
 
 bool InputHandler::Update() {
-
 
 	memcpy(previous_key_board_state_, current_key_board_state_, sizeof(Uint8)*MAX_KEYS);
 	memcpy(current_key_board_state_, pump_state_, sizeof(Uint8)*MAX_KEYS);
@@ -116,14 +117,16 @@ bool InputHandler::Update() {
 		}
 	}
 
-	if (event_.type == SDL_KEYDOWN) {
+	/*if (event_.type == SDL_KEYDOWN) {
 		
 	}
 
 	if (event_.type == SDL_KEYUP) {
-	}
+	}*/
 		DelegateKeyPressed();
 		DelegateKeyReleased();
+
+		MouseEventDispatcher::GetInstance()->DispatchEvent(event_);
 
 	return true;
 }
@@ -143,6 +146,7 @@ bool InputHandler::Update() {
 		void InputHandler::Reset() {
 
 			KeyboardEventDispatcher::GetInstance()->Reset();
+			MouseEventDispatcher::GetInstance()->Reset();
 		}
 		InputHandler::~InputHandler() {
 #ifdef TEST_MODE

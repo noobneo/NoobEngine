@@ -1,0 +1,46 @@
+{
+"tag" : "gun",
+  "body": {
+    "mass": 50.0,
+    "body_type": "dynamic",
+    "is_physics_on" : true,
+     "velocityY" : 0.0,
+     "collision_tag" : 3,
+    "shape": {
+      "width": 70.0,
+      "height": 22.0,
+      "shape_type": "Aabb"
+    }
+  },
+    "sprite":{
+
+    "spritename":"playground/resources/images/pistollauncher.png",
+	"anchor_y" : 1.0,
+      "color" : {
+    "r" : 1.0,
+    "g" : 1.0,
+    "b" : 1.0
+  }
+  },
+  "transform": {
+
+    "x": 50.0,
+    "y": 100.0
+  },
+  "weapon" : {
+    "firerate" : 0.1,
+    "spray_rate" :1,
+    "bullet_speed" : 15000,
+    "damage" : 10,
+    "magsize" : 10,
+    "reloadtime" : 1.0,
+    "recoil" : 300,
+    "throw_force": 50.0,
+    "mousecontroller" : true,
+    "is_launcher" : true,
+    "listen_mouse" : false,
+    "bullet" : "playground/resources/gamedata/weapon/pistolhoming.json"
+  },
+	
+  "mouse_component" : true
+}

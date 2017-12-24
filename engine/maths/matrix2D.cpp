@@ -14,6 +14,7 @@ Creation date: September 13th 2017
 #include "matrix2D.h"
 #include <string.h>
 #include <math.h>
+#include "math-common.h"
 /*
 This function sets the matrix Result to the identity matrix
 */

@@ -1,0 +1,15 @@
+
+
+{
+
+    "object4":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "z_order" : 0,
+   "mouse_component" : true
+  }
+
+  
+}

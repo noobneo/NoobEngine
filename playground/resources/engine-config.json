@@ -1,0 +1,15 @@
+{
+
+  "max_objects": 200,
+  "max_levels": 3,
+  "gravity": 98.0,
+  "ptm": 700,
+  "fps": 60.0,
+  "max_recoil": 2000,
+  "debug_on": true,
+  "texture_mode": true,
+  "start_scene": "playground/resources/gamedata/scenes/mainmenu.json",
+  "screen_width": 1024,
+  "screen_height": 800,
+  "game_name": "Shape Mafia"
+}

@@ -1,0 +1,29 @@
+{
+  "body": {
+    "x": 0.0,
+    "y": 0.0,
+    "mass": 50.0,
+    "body_type": "static",
+    "collision_tag" : 2,
+    "shape": {
+      "width": 100.0,
+      "height": 800.0,
+      "shape_type": "Aabb"
+    }
+  },
+  "controller": false,
+  "sprite":{
+
+    "spritename":"playground/resources/images/wall.png",
+    "sprite": {
+
+      "a" : 0.0
+    }
+  },
+  
+  "transform": {
+
+    "x": 10.0,
+    "y": 400.0
+  }
+}

@@ -1,0 +1,11 @@
+{
+
+	"events" : {
+		"event" : "E_GAME_OVER",
+		"event" : "E_GAMEWIN",
+		"event1" : "E_RESTART",
+		"event2" : "E_MAINMENU",
+		"event3" : "E_NEXT_LEVEL"
+	}
+	
+}

@@ -1,0 +1,36 @@
+{
+  "offsetX" : 100.0,
+  "offsetY" : 0.0,
+  "tag" : "bullet",
+  "active" : false,
+  "body": {
+    "mass": 60.0,
+    "body_type": "dynamic",
+	   "is_bullet": true,
+    "is_physics_on" : false,
+     "velocityY" : 0.0,
+     "collision_tag" : 6,
+    "shape": {
+      "width": 32.0,
+      "height": 32.0,
+      "shape_type": "Aabb"
+    }
+  },
+    "sprite":{
+  "color" : {
+    "r" : 1.0,
+    "g" : 1.0,
+    "b" : 0.0
+  },
+    "spritename":"playground/resources/images/machingunbullet.bmp"
+  },
+  "transform": {
+
+    "x": 250.0,
+    "y": 600.0
+  },
+  "bullet" : {
+    "bullet_damage" : 50,
+    "time_out" : 0.9
+  }
+}

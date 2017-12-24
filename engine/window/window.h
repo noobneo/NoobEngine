@@ -38,6 +38,10 @@ namespace enginecore {
 			inline SDL_Surface* get_window_surface() { return window_surface_; };
 			inline SDL_Window*	get_game_window() { return game_window_; };
 
+
+			inline int get_width() { return width_; };
+			inline int get_height() { return height_; };
+
 		private:
 
 			Window(const Window &) = delete;
@@ -52,6 +56,8 @@ namespace enginecore {
 
 			SDL_Window * game_window_;
 			SDL_Surface* window_surface_;
+			SDL_GLContext opengl_context_;
+
 
 		};
 	}//namespace gamewindow

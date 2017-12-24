@@ -43,7 +43,7 @@ namespace enginecore {
 			void Destroy();
 			
 			void CapFrameRate();
-			void CheckFrameRate();
+			void GetTimeSinceLastFrame();
 			void GetStartFrameTick();
 			/*void UpdateFrameRate();*/
 

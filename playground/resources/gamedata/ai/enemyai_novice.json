@@ -1,0 +1,44 @@
+{
+  "body": {
+    "mass": 50.0,
+    "body_type": "dynamic",
+    "collision_tag" : 10,
+    "shape": {
+      "width": 91.0,
+      "height": 129.0,
+      "shape_type": "Aabb"
+    }
+  },
+    "sprite":{
+    "spritename":"playground/resources/images/enemy.png",
+    "color" : {
+        "r" : 1.0,
+        "g" : 0.0,
+        "b" : 0.0
+        }
+  },
+"health" : 500,
+  "transform": {
+
+    "x": 512.0,
+    "y": 400.0
+  },
+
+  "Ai" : {
+    "type" : "EnemyAi1",
+    "fire_speed" : 0.5,
+    "stroll_limit" : 600 ,
+    "max_idle" : 700,
+	 "sensor_rangeX" : 10,
+	 "sensor_rangeY" : 5,
+    "angle":30,
+    "target_name" : "player"
+  },
+
+    "child": {
+      "archetype" : "playground/resources/gamedata/weapon/enemymachingun.json",
+       "offsetX" : 10.0,
+       "offsetY" : 10.0,
+       "z_order" : 10
+    }
+}

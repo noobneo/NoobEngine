@@ -1,0 +1,58 @@
+{
+  
+
+   "object3":{
+      "archetype" : "playground/resources/gamedata/ui/bg1.json",
+      "tag" : "bg",
+      "z_order" : 0,
+      "sprite":{
+      "alpha" : 0.2
+      }
+    },  
+
+
+
+    "object0":{
+   "archetype" : "playground/resources/gamedata/gamestate.json",
+    "tag" : "game_state_manager"
+  },
+  
+   "object2":{
+      "archetype" : "playground/resources/gamedata/ui/gameovertext.json",
+      "tag" : "text",
+      "z_order":5
+    },
+
+      "object2":{
+      "archetype" : "playground/resources/gamedata/bossimage.json",
+      "tag" : "bossimage",
+        "x" : 600.0
+    },
+
+
+    "object1":{
+      "archetype" : "playground/resources/gamedata/ui/retrybtn.json",
+      "tag" : "retrybtn",
+       "y" : 250.0
+    },
+
+       "object1":{
+      "archetype" : "playground/resources/gamedata/ui/menubtn.json",
+      "tag" : "mainmenubtn",
+       "y" :150.0
+    },
+
+      "object2":{
+      "archetype" : "playground/resources/gamedata/player_image.json",
+      "tag" : "bossimage",
+        "x" : 600.0
+    },
+
+      "object2":{
+      "archetype" : "playground/resources/gamedata/weapon_image.json",
+      "tag" : "bossimage",
+        "x" : 611.0,
+        "y" : 297.0
+    }
+  
+}

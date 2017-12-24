@@ -19,6 +19,7 @@ Creation date: 14th October 2017
 
 #include "components\gameobject.h"
 
+
  namespace enginecore {
 
 
@@ -36,7 +37,7 @@ Creation date: 14th October 2017
 		void ShutDown();
 		void Update();
 		void Pause();
-
+		void ConfigInit();
 		
 		void InstantiateModules();
 
@@ -49,11 +50,12 @@ Creation date: 14th October 2017
 		/*setters*/
 		inline void set_is_paused(bool is_paused) { is_paused_ = is_paused; };
 		inline void set_is_running(bool is_engine_running) { is_engine_running_ = is_engine_running; }
-		inline void set_is_scene_restart(bool is_scene_restart) { is_scene_restart_ =  is_scene_restart; };
+		inline void set_is_scene_change(bool is_scene_restart) { is_scene_change_ =  is_scene_restart; };
 
 		/*getters*/
 		inline bool get_is_paused() { return is_paused_; }
 		inline std::string Engine::get_version() { return "NoobEngine 0.1v";}
+		inline int get_window_height() { return window_->get_height(); };
 
 	private:
 
@@ -62,13 +64,14 @@ Creation date: 14th October 2017
 		
 		bool is_paused_;
 		bool is_engine_running_;
-		bool is_scene_restart_;
+		bool is_scene_change_;
 
 		std::string window_name_;
 
 		gamewindow::Window* window_;
 
 		static Engine* instance_;
+	
 
 
 #ifdef TEST_MODE

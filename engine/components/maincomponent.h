@@ -18,6 +18,14 @@ Creation date: 25th October 2017
 
 namespace enginecore {
 
+	namespace events {
+
+		class Event;
+	}
+}
+
+namespace enginecore {
+
 	namespace component {
 
 		class GameObject;
@@ -36,11 +44,19 @@ namespace enginecore {
 			void set_next(MainComponent* next) { next_= next; };
 			MainComponent* get_next() { return next_; };
 
+			virtual void HandleEvent(events::Event *event) = 0;
+
 			void set_id(int id) { id_ = id; };
 			int get_id() { return id_; };
 
+			virtual void set_active(bool active) { active_ = active; };
+			virtual bool get_active() { return active_; };
+
 			virtual void Update() = 0;
 			virtual void Init(GameObject* owner) = 0;
+
+			virtual void Detach() {};
+			virtual void UpdateProperties() {};
 
 		protected:
 			MainComponent();
@@ -58,6 +74,9 @@ namespace enginecore {
 
 			ComponentType component_type_;
 			MainComponent* next_;
+		protected:
+
+			bool active_;
 
 
 			

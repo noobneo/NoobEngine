@@ -1,0 +1,35 @@
+{
+  "offsetX": 100,
+  "offsetY": 0,
+  "tag": "enemyboss",
+  "active": false,
+  "body": {
+    "mass": 10,
+    "body_type": "kinematic",
+    "is_physics_on": false,
+    "is_bullet": false,
+    "velocityY": 0,
+    "collision_tag": 133,
+    "shape": {
+      "width": 32,
+      "height": 32,
+      "shape_type": "Aabb"
+    }
+  },
+  "sprite": {
+    "spritename": "playground/resources/images/missile.png",
+    "color": {
+      "r": 1,
+      "g": 1,
+      "b": 0
+    }
+  },
+  "homming_missile": {
+    "rotation_speed": 10,
+    "target_name": "player"
+  },
+  "transform": {
+    "x": 250,
+    "y": 600
+  }
+}

@@ -25,6 +25,7 @@ Creation date: 16th October 2017
 using namespace std::placeholders;
 #define FUNCTION_CALLBACK(function_name,arg1) std::bind(&function_name , arg1,std::placeholders::_1)   
 #define FUNCTION_CALLBACK1(function_name,arg1,arg2,arg3,arg4) std::bind(&function_name , arg1,arg2,arg3,arg4,std::placeholders::_1) 
+#define FUNCTION_CALLBACK2(function_name,arg1) std::bind(&function_name , arg1,std::placeholders::_1 ,std::placeholders::_2,std::placeholders::_3 )   
 
 
 #endif // ! __MACROS_H__

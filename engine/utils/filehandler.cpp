@@ -45,6 +45,33 @@ namespace enginecore {
 			return FileHandler::instance_;
 		}
 
+
+		std::string FileHandler::ReadFile(std::string filename) {
+
+	
+			FILE* file = fopen(filename.c_str() , "rt");
+			fseek(file, 0, SEEK_END);
+
+			unsigned long length = ftell(file);
+
+#ifdef TEST_MODE
+			ENGINE_LOG("File length : %d",length);
+#endif
+
+
+			char *buffer = new char[length + 1];
+			memset(buffer, 0, length+1);
+			fseek(file, 0, SEEK_SET);
+
+			fread(buffer, sizeof(char), length, file);
+
+			std::string filedata(buffer);
+
+			delete[]buffer;
+			fclose(file);
+
+			return filedata;
+		}
 		
 		void FileHandler::Destroy() {
 

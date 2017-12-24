@@ -1,6 +1,21 @@
 #ifndef _LINESEGMENT2D_H_
 #define _LINESEGMENT2D_H_
 
+/*-------------------------------------------------------
+Copyright (C) 2017 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+File Name: LineSegment2D.cpp
+Purpose: Vector2D class which builds the line segment
+Language: C/C++
+Platform: Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24210 ,x86  .Windows
+Project: CS529_ajaytanwar_2
+Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
+Creation date: October 4th 2017
+---------------------------------------------------------*/
+
+
+
 #include "vector2D.h"
 
 namespace enginecore {

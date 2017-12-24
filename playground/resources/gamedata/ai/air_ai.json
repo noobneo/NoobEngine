@@ -1,0 +1,60 @@
+{
+        "sprite" : {
+
+        "spritename":"playground/resources/animation/animatedai.png",
+            "total_frames" : 7,
+    "sprite_sheet_rows":1,  
+    "is_animated_sprite" : true,
+		      "color" : {
+			"r" : 0.5,
+			"g" : 0.3,
+			"b" : 1.0
+		  }
+      },
+
+        "transform" : {
+          
+          "x" : 100.0,
+          "y" : 100.0
+        },
+       "animation" : {
+          
+          "limit" :1300.0,
+          "step": 5.0,
+          "direction": "x"
+        },
+		 "Ai" : {
+		"type" : "EnemyAi1",
+		"fire_speed" : 0.5,
+		"is_air_borne" : true,
+		"stroll_limit" : 600 ,
+		"max_idle" : 700,
+		"sensor_rangeX" : 5,
+		"sensor_rangeY" : 5,
+		"angle":30,
+		"target_name" : "player"
+	  },
+  "health" : 100,
+    "child": {
+      "archetype" : "playground/resources/gamedata/weapon/enemypistol.json",
+       "offsetX" : -10.0,
+       "offsetY" : -35.0,
+      "sprite" : {  
+        "alpha" : 0.0
+      },
+      "z_order" : -1
+    }
+	,
+    "body": {
+      "body_type": "kinematic",
+      "collision_tag" : 33,
+      "mass" : 0.0,
+      "gravity_scale" : 0.0,
+      "velocityX" : 60.0,
+      "shape": {
+        "shape_type": "Aabb",
+        "width": 140.0,
+        "height": 96.0
+      }
+    }
+}

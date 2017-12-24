@@ -12,6 +12,8 @@ Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 14th October 2017
 ---------------------------------------------------------*/
 
+#include <iostream>
+#include "game-global.h" 
 #include "engine-includes.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
@@ -26,12 +28,13 @@ extern "C" FILE * __cdecl __iob_func(void)
 
 namespace enginecore {
 
+
 	//static member initialization
 
 	Engine* Engine::instance_ = nullptr;
+	EngineConfig* EngineConfig::EngineConfig::config_ = nullptr;
 
-
-	Engine::Engine() : width_(800), height_(800), is_paused_(false), is_engine_running_(false), window_name_(""), window_(nullptr){
+	Engine::Engine() : width_(1024), height_(800), is_paused_(false), is_engine_running_(false), window_name_(""), window_(nullptr){
 
 		Init();
 	}
@@ -52,7 +55,14 @@ namespace enginecore {
 
 		ENGINE_LOG("Engine Instance Created");
 
-		window_ = new gamewindow::Window(width_, height_, "NoobEngine 0.1v");
+
+	//	enginecore::serialize::Serializer::GetInstance()->LoadConfig("playground/resources/gamedata/engine-config.json" , );
+		ConfigInit();
+
+		width_ = EngineConfig::config_->screen_width_;
+		height_ = EngineConfig::config_->screen_height_;
+
+		window_ = new gamewindow::Window(width_, height_, EngineConfig::config_->game_name_);
 
 		if (window_->CreateWindow()) {
 
@@ -62,6 +72,25 @@ namespace enginecore {
 		}
 	}
 
+
+	void Engine::ConfigInit() {
+
+		EngineConfigData data = serialize::Serializer::GetInstance()->SerializeEngineData("playground/resources/engine-config.json");
+		EngineConfig::config_ = new EngineConfig();
+		EngineConfig::config_->fps_	 = data.fps_;
+		EngineConfig::config_->debug_on_=  data.debug_on_		;
+		EngineConfig::config_->texture_mode_=  data.texture_mode_	;
+		EngineConfig::config_->ptm_ =  data.ptm_			;
+		EngineConfig::config_->max_level_ =  data.max_level_		;
+		EngineConfig::config_->max_recoil_ =  data.max_recoil_	;
+		EngineConfig::config_->start_scene_ = data.start_scene_	;
+		EngineConfig::config_->max_objects_  = data.max_objects_	;
+		EngineConfig::config_->gravity_ =  data.gravity_		;
+		EngineConfig::config_->screen_height_ = data.screen_height_;
+		EngineConfig::config_->screen_width_ = data.screen_width_;
+		EngineConfig::config_->game_name_ = data.game_name_;
+
+	}
 
 
 	void Engine::InstantiateModules() {
@@ -81,8 +110,8 @@ namespace enginecore {
 
 		//renderer
 		graphics::Renderer::GetInstance();
-		graphics::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface());
-
+		graphics::Renderer::GetInstance()->StoreGameWindowData(window_->get_game_window(), window_->get_window_surface() , window_);
+		graphics::Renderer::GetInstance()->Init();
 
 		//gameobjectmanager
 		component::GameobjectManager::GetInstance();
@@ -103,7 +132,16 @@ namespace enginecore {
 		//scenemanager
 		common::SceneManager::GetInstance();
 
+		//eventmanager
+		events::EventManager::GetInstance();
+
+		//particle sysetem
+		particlesystem::ParticleManager::GetInstance();
+
+		serialize::Serializer::GetInstance()->SerializeGameData(EngineConfig::config_->start_scene_);
+
 	}
+
 
 	void Engine::Run() {
 
@@ -112,21 +150,25 @@ namespace enginecore {
 
 		std::string str;	
 		char buf[100];
-		fps::FpsController::GetInstance()->GetStartFrameTick();
+		//fps::FpsController::GetInstance()->GetStartFrameTick();
+
+		//graphics::Renderer::GetInstance()->Init();
 		while (true == is_engine_running_)
 		{
 
 			if ( inputhandler::InputHandler::GetInstance()->Update()) {
 
-				if (is_scene_restart_) {
+				if (is_scene_change_) {
 
-					common::SceneManager::GetInstance()->ResetManagers();
+					common::SceneManager::GetInstance()->ResetAndSerializeScene();
 				}
 					
+				
 				//else 
 				{
 					//start of loop
-					fps::FpsController::GetInstance()->CheckFrameRate();
+					fps::FpsController::GetInstance()->GetTimeSinceLastFrame();
+					//fps::FpsController::GetInstance()->GetStartFrameTick();
 
 					//PhysicsManager
 					physics::PhysicsManager::GetInstance()->Update();
@@ -140,8 +182,15 @@ namespace enginecore {
 					//update
 					graphics::Renderer::GetInstance()->Draw();
 
+					//events
+					events::EventManager::GetInstance()->Update(fps::FpsController::GetInstance()->get_dt());
+
+
+
 					//end of loop
 					fps::FpsController::GetInstance()->CapFrameRate();
+
+
 
 					sprintf_s(buf, "%f", fps::FpsController::GetInstance()->get_dt());
 					str = buf;
@@ -206,10 +255,19 @@ namespace enginecore {
 		//scenemanager
 		common::SceneManager::GetInstance()->Destroy();
 
+		//eventmanager
+		events::EventManager::GetInstance()->Destroy();
+
+		//particle sysetem
+		particlesystem::ParticleManager::GetInstance()->Destroy();
+
 		ENGINE_LOG("Engine Instance Destroyed");
 		CLEAN_DELETE(window_);	
 
+		CLEAN_DELETE(EngineConfig::config_);
+
 		CLEAN_DELETE(Engine::instance_);
+
 
 		ENGINE_LOG("Exiting Engine");
 	}

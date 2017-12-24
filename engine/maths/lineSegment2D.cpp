@@ -3,7 +3,7 @@
 Copyright (C) 2017 DigiPen Institute of Technology.
 Reproduction or disclosure of this file or its contents without the prior
 written consent of DigiPen Institute of Technology is prohibited.
-File Name: LineSegment2D.c
+File Name: LineSegment2D.cpp
 Purpose: Vector2D class which builds the line segment
 Language: C/C++
 Platform: Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24210 ,x86  .Windows

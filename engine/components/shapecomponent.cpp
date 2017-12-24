@@ -1,3 +1,18 @@
+
+/*-------------------------------------------------------
+Copyright (C) 2017 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+File Name: shapecomponent.cpp
+Purpose: shape component for the gameobjects used for collision purpose
+Language: C/C++
+Platform: Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24210 , x64 ,Windows 7
+Project: CS529_ajaytanwar
+Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
+Creation date: 16th October 2017
+---------------------------------------------------------*/
+
+
 #include "shapecomponent.h"
 #include "../physics/physicsmanager.h"
 
@@ -45,9 +60,16 @@ namespace enginecore {
 			shape_->set_dimensions(width , height);
 		}
 
+		void ShapeComponent::HandleEvent(events::Event *event) {
+
+
+		}
+
+
 
 		void ShapeComponent::Reset() {
 
+			active_ = false;
 			physics::PhysicsManager::GetInstance()->RemoveShape(shape_);
 			shape_type_ = physics::E_SHAPE_AABB;
 			shape_ = nullptr;

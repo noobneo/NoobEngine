@@ -60,7 +60,7 @@ Creation date: 14th October 2017
 
 	#if defined(VERBOSITY_LEVEL)
 		#define ENGINE_LOG(format,...)
-		#define ENGINE_ERR_LOG(format,...)			enginecore::EngineDebugLogPrint("Engine Error Log : " , (format) , __VA_ARGS__)
+		#define ENGINE_ERR_LOG(format,...)			enginecore::EngineDebugLogPrint("Engine Log : " , (format) , __VA_ARGS__)
 		#define ENGINE_VERBOSE_LOG(format,...)		
 
 	#else

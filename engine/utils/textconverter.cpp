@@ -17,6 +17,7 @@ Creation date: 17th October 2017
 
 #ifdef TEST_MODE
 #include "../enginelogger/enginelogger.h"
+#include "filehandler.h"
 #endif // TEST_MODE
 
 namespace enginecore {
@@ -163,6 +164,8 @@ namespace enginecore {
 			ENGINE_LOG("Printing bool from string (0) : %i", GetBoolFromString(str_b2));
 			ENGINE_LOG("Printing bool from string (false) : %i", GetBoolFromString(str_b3));
 			ENGINE_LOG("Printing bool from string (true) : %i", GetBoolFromString(str_b4));
+
+			//ENGINE_LOG("File Text : %s", FileHandler::GetInstance()->ReadFile("README.md").c_str());
 
 
 		}

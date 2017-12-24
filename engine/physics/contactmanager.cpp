@@ -3,8 +3,12 @@
 #include "../components/shapecomponent.h"
 #include "../components/bodycomponent.h"
 #include "aabbshape.h"
+#include "circleshape.h"
 #include "shape.h"
 #include "../enginelogger/enginelogger.h"
+#include "../event/eventmanager.h"
+#include "../event/event.h"
+#include <algorithm>
 
 namespace enginecore {
 
@@ -27,46 +31,68 @@ namespace enginecore {
 			if (manifold.body1_->get_type() == E_BODY_TYPE_STATIC && manifold.body2_->get_type() == E_BODY_TYPE_STATIC)
 				return false;
 
+			if (manifold.body1_->get_collision_tag() ==  manifold.body2_->get_collision_tag())
+				return false;
+
 
 			AabbShape *A = (AabbShape*)manifold.body1_->get_shape_component()->get_shape();
 			AabbShape* B = (AabbShape*)manifold.body2_->get_shape_component()->get_shape();
 
 			// Vector from A to B
+#ifdef USE_SDL
+			float max_x1 = (A->get_width()) + manifold.body1_->get_position().x_;
+			float min_x1 = manifold.body1_->get_position().x_);
 
-			float max_width1 = A->get_width() + manifold.body1_->get_position().x_;
-			float min_width1 = manifold.body1_->get_position().x_;
-			float max_width2 = B->get_width() + manifold.body2_->get_position().x_;
-			float min_width2 = manifold.body2_->get_position().x_ ;
+			float max_x2 = B->get_width() + manifold.body2_->get_position().x_;
+			float min_x2 = manifold.body2_->get_position().x_  ;
 
-			float max_height1 = A->get_height() + manifold.body1_->get_position().y_;
-			float min_height1 = manifold.body1_->get_position().y_ ;
-			float max_height2 = B->get_height() + manifold.body2_->get_position().y_;
-			float min_height2 = manifold.body2_->get_position().y_ ;
+			float max_y1 = (A->get_height()) + manifold.body1_->get_position().y_;
+			float min_y1 = manifold.body1_->get_position().y_ ;
 
+			float max_y2 = (B->get_height()) + manifold.body2_->get_position().y_;
+			float min_y2 = manifold.body2_->get_position().y_;
+#else 
+			float max_x1 = (A->get_width()*0.5f) + manifold.body1_->get_position().x_;
+			float min_x1 = manifold.body1_->get_position().x_ - (A->get_width() *0.5f);
 
-			if (max_width1 < min_width2 || min_width1 > max_width2) {
+			float max_x2 = (B->get_width() *0.5f) + manifold.body2_->get_position().x_;
+			float min_x2 = manifold.body2_->get_position().x_ - (B->get_width() *0.5f);
+
+			float max_y1 = (A->get_height()*0.5f) + manifold.body1_->get_position().y_;
+			float min_y1 = manifold.body1_->get_position().y_ - (A->get_height() *0.5f);
+
+			float max_y2 = (B->get_height()*0.5f) + manifold.body2_->get_position().y_;
+			float min_y2 = manifold.body2_->get_position().y_ - (B->get_height() * 0.5f);
+#endif
+
+			if (max_x1 < min_x2 || min_x1 > max_x2) {
 
 				return false;
 			}
 
-			if (max_height1 < min_height2 || min_height1 > max_height2) {
+			if (max_y1 < min_y2 || min_y1 > max_y2) {
 
 				return false;
 			}
 
 			float aw_extent = A->get_width() * 0.5f;// (max_width1 - min_width1 + A->get_width() / 2);
-			float bw_extent = B->get_width() * 0.5f ;// (max_width2 - min_width2 + B->get_width() / 2);
 			float ah_extent = A->get_height() * 0.5f;// (max_height1 - min_height1 + );
+			float bw_extent = B->get_width() * 0.5f ;// (max_width2 - min_width2 + B->get_width() / 2);
 			float bh_extent = B->get_height() * 0.5f;// (max_height2 - min_height2 + B->get_height() / 2);
 
 			math::Vector2D n;
+		
+#ifdef USE_SDL
 			math::Vector2D c1;
 			math::Vector2D c2;
 
-			math::Vector2DSet(&c1, min_width1 + aw_extent, min_height1 + ah_extent);
-			math::Vector2DSet(&c2, min_width2 + bw_extent, min_height2 + bh_extent);
-
-			math::Vector2DSub(&n, &c1, &c2);
+		    math::Vector2DSet(&c1, manifold.body1_->get_position().x_+ aw_extent, manifold.body1_->get_position().y_+ ah_extent);
+			math::Vector2DSet(&c2, manifold.body2_->get_position().x_+bw_extent, manifold.body2_->get_position().y_+ bh_extent);
+			math::Vector2DSub(&n, &manifold.body1_->get_position(), &manifold.body2_->get_position());
+#else
+		
+			math::Vector2DSub(&n, &manifold.body1_->get_position(), &manifold.body2_->get_position());
+#endif
 		//	ENGINE_LOG("Collision");
 
 			// Calculate half extents along x axis for each object
@@ -134,8 +160,103 @@ namespace enginecore {
 
 		bool ContactManager::AabbToCircle(Manifold& manifold) {
 
+			return false;//
 
-			return false;
+			if (manifold.body1_->get_type() == E_BODY_TYPE_STATIC && manifold.body2_->get_type() == E_BODY_TYPE_STATIC)
+				return false;
+
+			if (manifold.body1_->get_collision_tag() == manifold.body2_->get_collision_tag())
+				return false;
+
+
+			AabbShape *A = (AabbShape*)manifold.body1_->get_shape_component()->get_shape();
+			CircleShape* B = (CircleShape*)manifold.body2_->get_shape_component()->get_shape();
+
+
+			math::Vector2D closest;
+			math::Vector2D n;
+			math::Vector2DSub(&n, &manifold.body1_->get_position(), &manifold.body2_->get_position());
+
+				// Closest point on A to center of B
+
+				
+			math::Vector2DSet(&closest, n.x_, n.y_);
+		
+
+			float max_x1 = (A->get_width()*0.5f) + manifold.body1_->get_position().x_;
+			float min_x1 = manifold.body1_->get_position().x_ - (A->get_width() *0.5f);
+
+			float max_y1 = (A->get_height()*0.5f) + manifold.body1_->get_position().y_;
+			float min_y1 = manifold.body1_->get_position().y_ - (A->get_height() *0.5f);
+
+
+			float aw_extent = A->get_width() * 0.5f;// (max_width1 - min_width1 + A->get_width() / 2);
+			float ah_extent = A->get_height() * 0.5f;// (max_height1 - min_height1 + );
+
+
+				// Clamp point to edges of the AABB
+			closest.x_ = clip(-max_x1, max_x1, closest.x_);
+			closest.y_ = clip(-ah_extent, ah_extent, closest.y_);
+
+				bool inside = false;
+
+				// Circle is inside the AABB, so we need to clamp the circle's center
+				// to the closest edge
+				if (n.x_ == closest.x_ && n.y_ ==closest.y_)
+				{
+					inside = true;
+
+						// Find closest axis
+						if (abs(n.x_) > abs(n.y_))
+						{
+							// Clamp to closest extent
+							if (closest.x_ > 0)
+								closest.x_ = aw_extent;
+							else
+								closest.x_ = -aw_extent;
+						}
+
+					// y axis is shorter
+						else
+						{
+							// Clamp to closest extent
+							if (closest.y_ > 0)
+								closest.y_ = ah_extent;
+							else
+								closest.y_ = -ah_extent;
+						}
+				}
+
+				math::Vector2D normal;
+				math::Vector2DSub(&normal, &n , &closest);
+
+					float d = math::Vector2DSquareLength(&normal);
+					float r = B->get_radius();
+
+				// Early out of the radius is shorter than distance to closest point and
+				// Circle not inside the AABB
+					if (d > r * r && !inside)
+						return false;
+
+					// Avoided sqrt until we needed
+					d = sqrt(d);
+
+					// Collision normal needs to be flipped to point outside if circle was
+					// inside the AABB
+					if (inside)
+					{
+						
+							math::Vector2DSet(&manifold.contacts_.normal, -n.x_, -n.y_);
+							manifold.contacts_.penetration = r - d;
+					}
+					else
+					{
+						math::Vector2DSet(&manifold.contacts_.normal, n.x_, n.y_);
+						manifold.contacts_.penetration = r - d;
+					}
+
+					return true;
+
 		}
 
 
@@ -146,8 +267,13 @@ namespace enginecore {
 
 		bool ContactManager::CircleToAabb(Manifold& manifold) {
 
-			Manifold temp;
+		
 			return false;
+		}
+
+
+		float ContactManager:: clip(float n, float lower, float upper) {
+			return std::max(lower, std::min(n, upper));
 		}
 
 
@@ -192,6 +318,16 @@ namespace enginecore {
 			for (auto &manifold : contacts_) {
 
 				manifold.PositionCorrection();
+
+				events::Event ce;
+				ce.set_type(events::E_EVENT_COLLISION);
+				ce.set_body1(manifold.body1_);
+				ce.set_body2(manifold.body2_);
+				events::EventManager::GetInstance()->SendEvent(&ce, manifold.body1_);
+				ce.set_body1(manifold.body2_);
+				ce.set_body2(manifold.body1_);
+				events::EventManager::GetInstance()->SendEvent(&ce, manifold.body2_);
+
 				//manifold.body1_->UpdatePosition();
 				//manifold.body2_->UpdatePosition();
 			}

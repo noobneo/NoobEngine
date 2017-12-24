@@ -1,0 +1,46 @@
+{
+  "tag" : "enemygun",
+  "body": {
+    "mass": 50.0,
+    "body_type": "dynamic",
+    "is_physics_on" : true,
+     "velocityY" : 0.0,
+     "collision_tag" : 10,
+    "shape": {
+      "width": 70.0,
+      "height": 22.0,
+      "shape_type": "Aabb"
+    }
+  },
+    "sprite":{
+
+    "spritename":"playground/resources/images/pistol.png",
+      "color" : {
+		"r" : 0.0,
+		"g" : 1.0,
+		"b" : 0.0
+	  },
+    "anchor_x":0.0
+  },
+  "transform": {
+
+    "x": 50.0,
+    "y": 100.0
+  },
+  
+  "weapon" : {
+    "firerate" :1.0,
+    "spray_rate" :1,
+    "bullet_speed" : 15000,
+    "damage" : 10,
+    "magsize" : 10,
+    "reloadtime" : 1.0,
+    "recoil" : 100,
+    "throw_force": 50.0,
+    "mousecontroller" : true,
+    "listen_mouse" : false,
+    "bullet" : "playground/resources/gamedata/weapon/enemybullet.json"
+  },
+
+  "mouse_component" : false
+}

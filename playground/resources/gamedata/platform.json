@@ -1,0 +1,31 @@
+{
+        "sprite" : {
+
+        "spritename":"playground/resources/images/big_platform.png"
+      },
+
+        "transform" : {
+          
+          "x" : 100.0,
+          "y" : 100.0
+        },
+       "animation" : {
+          
+          "limit" :1000.0,
+          "step": 5.0,
+          "direction": "x"
+        },
+
+    "body": {
+      "body_type": "kinematic",
+      "collision_tag" : 2,
+      "mass" : 0.0,
+      "gravity_scale" : 0.0,
+      "velocityY" : -60.0,
+      "shape": {
+        "shape_type": "Aabb",
+        "width": 114.0,
+        "height": 42.0
+      }
+    }
+}

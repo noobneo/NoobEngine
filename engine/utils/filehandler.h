@@ -14,6 +14,7 @@ Author: Ajay Singh Tanwar, ajay.tanwar, 60001317
 Creation date: 17th October 2017
 ---------------------------------------------------------*/
 
+#include<string>
 
 namespace enginecore {
 
@@ -25,6 +26,9 @@ namespace enginecore {
 
 
 	public :
+
+
+		std::string ReadFile(std::string filename);
 
 		void Destroy();
 

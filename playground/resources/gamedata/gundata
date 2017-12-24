@@ -1,0 +1,27 @@
+
+///////////////smal range rockets
+mass :30.0
+
+bullet_spped : 2000
+
+_______________________________
+
+pistol
+
+mass : 100
+bullet_spped : 15000
+
+
+___________________machingun
+
+mass: 60
+bullet_spped : 15000
+
+
+_
+__________________________________________ANIMATED BODIES 
+
+KINEMATIC
+GIVE VELOCITY
+mass  = 0.0
+gravity_Scale 0.0

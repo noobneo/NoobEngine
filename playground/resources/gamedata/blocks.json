@@ -1,0 +1,16 @@
+{
+        "sprite" : {
+
+        "spritename":"playground/resources/enemy.bmp"
+      },
+
+        "transform" : {
+          
+          "x" : 100.0,
+          "y" : 100.0
+        },
+        "events" : {
+
+          "event1" : "player_hit"  
+        }
+}

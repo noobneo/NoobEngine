@@ -1,12 +1,9 @@
-#ifndef  _SERIALIZER_H_
+#ifndef _SERIALIZER_H_
 #define _SERIALIZER_H_
 
 #include "serialized-data.h"
-#ifdef TEST_MODE
-	#include "../../external/rapidjson/rapidjson.h"
+#include "../../external/rapidjson/rapidjson.h"
 #include "../../external/rapidjson/document.h"
-#endif // TEST_MODE
-
 #include <string>
 
 namespace enginecore {
@@ -21,6 +18,8 @@ namespace enginecore {
 
 			static Serializer* GetInstance();
 			void Destroy();
+
+			EngineConfigData SerializeEngineData(std::string filename);
 
 			void SerializeGameData(std::string filename);
 

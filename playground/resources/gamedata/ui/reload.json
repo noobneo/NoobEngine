@@ -1,0 +1,20 @@
+{
+    "active" : false,
+    "sprite":{
+    "spritename":"playground/resources/images/reload.png",
+    "texture_mode" : true
+  },
+
+  "transform": {
+
+    "x": 150.0,
+    "y": 750.0,
+    "scale_x":0.3,
+    "scale_y":0.3
+  },
+    "events":{
+
+    "event1" : "E_RELOAD",
+    "event2" : "E_RELOAD_DONE"
+  }
+}

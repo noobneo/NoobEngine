@@ -1,0 +1,17 @@
+{
+  
+"sprite":{
+    "spritename":"playground/resources/buttons/retry.png",
+	"texture_mode" : true
+  },
+  "transform": {
+
+    "x": 512.0,
+    "y": 200.0
+  },
+
+    "button" : {
+      
+  	"file_to_open" : "level1"
+  }
+}

@@ -29,11 +29,11 @@ namespace enginecore {
 
 		Timer::Timer()	{
 
-			freq_ = 0.0f;
-			start_counter_ = 0.0f;
+			freq_ = 0;
+			start_counter_ = 0;
 			last_frame_time_ = 0.0f;
-			frame_end_ticks_ = 0.0f;
-			frame_start_ticks_ = 0.0f;
+			frame_end_ticks_ = 0;
+			frame_start_ticks_ = 0;
 
 			Init();
 
@@ -70,9 +70,9 @@ namespace enginecore {
 			}
 
 			QueryPerformanceCounter(&li);
-			start_counter_ = double(li.QuadPart);
+			start_counter_ = li.QuadPart;
 
-			freq_ = GetPerformceFrequency();
+			GetPerformceFrequency();
 
 		}
 
@@ -83,36 +83,32 @@ namespace enginecore {
 			LARGE_INTEGER li;
 			QueryPerformanceCounter(&li);
 
-			frame_start_ticks_ = double(li.QuadPart);
+			frame_start_ticks_ = (li.QuadPart);
 		}
 
 
-		float Timer::GetTicksSinceLastFrame() {
+		float Timer::GetTimeSinceLastFrame() {
 
 			float dt;
+			LARGE_INTEGER li;
+			QueryPerformanceCounter(&li);
+			frame_end_ticks_ = (li.QuadPart);
+
 			if (frame_start_ticks_) {
 
-				LARGE_INTEGER li;
-				QueryPerformanceCounter(&li);
-
-				frame_end_ticks_ = double(li.QuadPart);
+				__int64 elapsed_t;
+				elapsed_t = (frame_end_ticks_ - frame_start_ticks_);
+				dt = (float(elapsed_t)) / (freq_);
 			
-				dt = float((frame_end_ticks_ - frame_start_ticks_) / GetPerformceFrequency());
-
 			}else {
 
 				dt = 16.6667f;
 			}
-
-			frame_start_ticks_ = frame_end_ticks_;
-
 			//	ENGINE_LOG("%f", dt);
 
+			frame_start_ticks_ = frame_end_ticks_;
 			return dt;
 		}
-
-
-
 
 		/*float Timer::GetTicksLastFrame() {
 
@@ -130,26 +126,47 @@ namespace enginecore {
 		}
 		*/
 
-
-		double Timer::GetPerformceFrequency() {
+		///////////////////////////////////////////////////////////////////////
+		float Timer::GetPerformceFrequency() {
 
 			if (freq_ <=0) {
 
 				LARGE_INTEGER li;
 				QueryPerformanceCounter(&li);
 
-				freq_ = double(li.QuadPart) / 1000.0f;
+				freq_ = li.QuadPart *.001f;
 			}
 
 			return freq_;
 		}
 
-		double Timer::GetStartCounter() {
+		float Timer::GetStartCounter() {
+
 
 			LARGE_INTEGER li;
 			QueryPerformanceCounter(&li);
-			return double(double(li.QuadPart) - double(start_counter_)) / freq_;
+			return (float(li.QuadPart - start_counter_)) / freq_;
 		}
+
+
+#ifdef SDL_TICKS
+		void Timer::GetStartTicks() {
+
+			start_ticks_ = (float)SDL_GetTicks();
+		}
+
+
+		float Timer::GetEndTicks() {
+
+			end_ticks_ = (float)SDL_GetTicks();
+			
+			float delta = (end_ticks_ - start_ticks_);
+
+			return delta;
+		}
+
+#endif // SDL_TICKS
+
 
 		void Timer::Destroy() {
 

@@ -1,0 +1,82 @@
+
+{
+    "object1":{
+      "archetype" : "playground/resources/gamedata/ui/level1btn.json",
+      "tag" : "start"
+    },
+
+     "object1":{
+      "archetype" : "playground/resources/gamedata/ui/level2btn.json",
+      "tag" : "level2btn"
+    },
+
+       "object1":{
+      "archetype" : "playground/resources/gamedata/ui/bosslevelbtn.json",
+      "tag" : "bosslevelbtn"
+    },
+
+   "object1":{
+      "archetype" : "playground/resources/gamedata/ui/controlbtn.json",
+      "tag" : "control"
+    },
+
+     "object2":{
+      "archetype" : "playground/resources/gamedata/ui/gametitle.json",
+      "tag" : "title"
+    },  
+
+       "object3":{
+      "archetype" : "playground/resources/gamedata/ui/bg.json",
+      "tag" : "bg",
+      "z_order" : 0,
+
+      "sprite":{
+      "alpha" : 0.2
+      }
+    },  
+
+
+     "object4":{
+    "archetype" : "playground/resources/gamedata/dynamic_platform.json",
+    "tag" : "target",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true,   
+    "x": 520.0,
+    "y": 300.0
+  }
+  ,
+
+
+    "object4":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "z_order" : 0
+  },
+
+
+
+  "object2": {
+    "archetype": "playground/resources/gamedata/ai/air_ai_vert.json",
+    "x": 900.0,
+    "y": 500.0,
+    "tag" : "enemy",
+    "scaleX": 1,
+    "scaleY": 1,
+    "visible": true,
+    "direction": "y", 
+  "Ai" : {
+    "type" : "EnemyAi1",
+    "fire_speed" : 0.5,
+    "is_air_borne" : true,
+    "stroll_limit" : 600 ,
+    "max_idle" : 700,
+    "sensor_rangeX" : 15,
+    "sensor_rangeY" : 15,
+    "angle":30,
+    "target_name" : "target"
+   }
+  }
+}

@@ -26,7 +26,7 @@ namespace enginecore {
 
 			void AddBodyToUpdateQueue(component::MainComponent* body);
 
-			inline void set_gravity(float gravity) { gravity_ = gravity;};
+			//inline void set_gravity(float gravity) { gravity_ = gravity;};
 			inline float get_gravity() { return gravity_; };
 
 		private:

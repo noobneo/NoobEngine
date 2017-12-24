@@ -1,0 +1,321 @@
+{
+
+  "object0":{
+   "archetype" : "playground/resources/gamedata/gamestate.json",
+    "tag" : "game_state_manager"
+  },
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 200.0,
+    "y" : 500.0,
+     "tag" : "torch"
+  },
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 1200.0,
+    "y" : 500.0,
+     "tag" : "torch"
+  },
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 500.0,
+    "y" : 700.0,
+     "tag" : "torch"
+  },
+
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 1500.0,
+    "y" : 200.0,
+     "tag" : "torch"
+  },
+
+
+"object0":{
+   "archetype" : "playground/resources/gamedata/ui/reload.json",
+    "tag" : "reload"
+  },
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 2500.0,
+    "y" : 700.0,
+     "tag" : "torch"
+  },
+
+
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 3500.0,
+    "y" : 700.0,
+     "tag" : "torch"
+  },
+
+
+
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 4500.0,
+    "y" : 700.0,
+     "tag" : "torch"
+  },
+
+
+
+
+
+ "object1":{
+    "archetype" : "playground/resources/gamedata/torch.json",
+    "x" : 2000.0,
+    "y" : 700.0,
+     "tag" : "torch"
+  },
+
+
+
+
+   "object1":{
+    "archetype" : "playground/resources/gamedata/arrow.json",
+    "x" : 300.0,
+    "y" : 600.0,
+     "tag" : "torch"
+  },
+
+
+   "object11":{
+    "archetype" : "playground/resources/gamedata/weapon/pistol.json",
+    "x" : 300.0,
+    "y" : 500.0,
+     "tag" : "gun",
+     "z_order" : 10
+  },
+
+    "object1":{
+      "archetype" : "playground/resources/gamedata/player.json",
+      "x" : 100.0,
+      "y" : 500.0,
+      "tag" : "player",
+      "scaleX"    : 1,
+      "scaleY"    : 1,
+      "visible"  : true,
+      "max_speed":300,
+      "jump_force":2600,
+      "move_force":90
+    },
+
+ "object2": {
+    "archetype": "playground/resources/gamedata/ai/air_ai.json",
+    "x": 700.0,
+    "y": 500.0,
+    "tag" : "enemy",
+    "scaleX": 1,
+    "scaleY": 1,
+    "visible": true,
+    "direction": "x"
+  },
+
+
+ "object2": {
+    "archetype": "playground/resources/gamedata/ai/air_ai.json",
+    "x": 2000.0,
+    "y": 500.0,
+    "tag" : "enemy",
+    "scaleX": 1,
+    "scaleY": 1,
+    "visible": true,
+    "direction": "x"
+  },
+
+  "object4":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+    "object5":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "x" : 1546,
+    "y": 150,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+    "object6":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "x" : 2060,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+
+  "object7":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "x" : 3072,
+    "y": 250,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+
+  "object8":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "x" : 4018,
+    "y": 150,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+
+    "object9":{
+    "archetype" : "playground/resources/gamedata/ground.json",
+    "tag" : "ground",
+    "x" : 5022,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  }
+  ,
+
+
+ "object12":{
+    "archetype" : "playground/resources/gamedata/weapon/machinegun.json",
+    "x" : 2050.0,
+    "y" : 800.0,
+     "tag" : "gun",
+     "z_order" : 10
+  },
+
+
+    "object13":{
+    "archetype" : "playground/resources/gamedata/box.json",
+    "x" : 500.0,
+    "y" : 200.0,
+    "tag" : "enemy5",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true,
+    "has_children" : false,
+    "controller": false,
+     "body": {
+      "body_type": "static",
+      "collision_tag" : 5,
+      "mass" : 40.0,
+      "gravity_scale" : 1.0,
+      "shape": {
+        "shape_type": "Aabb",
+        "width": 72.0,
+        "height": 71.0
+      }
+    }
+  },
+  
+  "object13":{
+    "archetype" : "playground/resources/gamedata/box.json",
+    "x" : 1500.0,
+    "y" : 200.0,
+    "tag" : "box",
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true,
+    "has_children" : false,
+    "controller": false,
+     "body": {
+      "body_type": "dynamic",
+      "collision_tag" : 5,
+      "mass" : 40.0,
+      "gravity_scale" : 1.0,
+      "shape": {
+        "shape_type": "Aabb",
+        "width": 72.0,
+        "height": 71.0
+      }
+    }
+  },
+  
+    "object16":{
+    "max_speed":100,
+    "move_force":5,
+    "archetype" : "playground/resources/gamedata/ai/enemyai_novice.json",
+    "tag" : "enemy",
+    "x" : 1200.0,
+    "y" : 500.0,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  }
+,
+
+   "object14":{
+    "archetype" : "playground/resources/gamedata/wall_left.json",
+     "tag" : "wall_left"
+  },
+
+
+    "object15":{
+    "max_speed":100,
+    "move_force":5,
+    "archetype" : "playground/resources/gamedata/ai/enemyai_medium.json",
+    "tag" : "enemy",
+    "x" : 4000.0,
+    "y" : 500.0,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+
+
+    "object16":{
+    "max_speed":100,
+    "move_force":5,
+    "archetype" : "playground/resources/gamedata/ai/enemyai_medium.json",
+    "tag" : "enemy",
+    "x" : 2500.0,
+    "y" : 500.0,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  },
+
+
+ "object2": {
+    "archetype": "playground/resources/gamedata/ai/air_ai.json",
+    "x": 4500.0,
+    "y": 500.0,
+    "tag" : "enemy",
+    "scaleX": 1,
+    "scaleY": 1,
+    "visible": true,
+    "direction": "x"
+  },
+
+
+
+  "object8":{
+    "archetype" : "playground/resources/gamedata/ui/nextlevel.json",
+    "tag" : "next_level",
+    "x" : 5018,
+    "y": 350,
+    "scaleX"    : 1,
+    "scaleY"    : 1,
+    "visible": true
+  }
+
+
+
+}

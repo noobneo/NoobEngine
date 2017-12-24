@@ -1,10 +1,6 @@
 #ifndef _VECTOR2_H_
 #define _VECTOR2_H_
 
-#define MATH_PI      3.1415926535897932384626433832795
-#define EPSILON 0.0001f
-
-
 namespace enginecore {
 
 	namespace math {
@@ -21,6 +17,16 @@ namespace enginecore {
 				y_ = copy.y_;
 				return *this;
 			}
+
+			Vector2D operator*(int scal) {
+
+				Vector2D v;
+				v.x_ = x_*scal;
+				v.y_ = y_*scal;
+				return v;
+			}
+
+
 		}Vector2D;
 
 		
