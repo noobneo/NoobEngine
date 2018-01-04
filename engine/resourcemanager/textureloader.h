@@ -11,7 +11,9 @@ namespace enginecore{
 
 	namespace resourcemanager {
 
-
+		/*
+		* @brief: texture data
+		*/
 		typedef struct Texture {
 
 			int width_;
@@ -29,9 +31,20 @@ namespace enginecore{
 		{
 
 		private:
+
+			/*
+			* @function : CreateTexture(std::string path)
+			* @param: path is the filepath of the texture 
+			* @return: returns the newly sprite created
+			* @brief: creates and returns the sprite created with the texture.  Also stores the 
+			* texture in a map.
+			*/
 			graphics::Sprite* CreateTexture(std::string path);
 		
+			//ctor
 			TextureLoader();
+
+			//dtor
 			~TextureLoader();
 			
 		private:

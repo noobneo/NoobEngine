@@ -26,24 +26,53 @@ Creation date: 14th October 2017
 	class Engine
 	{
 	private:
+		//ctor
 		Engine();
+		//dtor
 		~Engine();
 
 		//disable copy constructor and copy assignment constructor
 		Engine(const Engine& copy) = delete;
 		Engine& operator=(const Engine& copy) = delete;
 
+
+		/*
+		* @function : Init()
+		* @brief: Creates a singleton reference to SceneManager and returns it
+		*/
 		void Init();
+
+		/*
+		* @function : ShutDown()
+		* @brief: Shuts down the engine
+		*/
 		void ShutDown();
+
+		/*
+		* @function : Update()
+		* @brief:Updates the engine and all the modules
+		*/
 		void Update();
-		void Pause();
+
+		/*
+		* @function : ConfigInit()
+		* @brief: inits the engine configurations
+		*/
 		void ConfigInit();
 		
+		/*
+		* @function : InstantiateModules()
+		* @brief: Instantiate all the modules
+		*/
 		void InstantiateModules();
 
 	public: 
 		
-
+		/*
+		* @function : GetInstance()
+		* @return: ref to static class Engine
+		* @brief: Creates a singleton reference to Engine and returns it
+		*/
 		static Engine* GetInstance();
 		void Run();
 

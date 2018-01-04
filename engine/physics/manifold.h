@@ -9,6 +9,9 @@ namespace enginecore {
 	namespace physics {
 
 
+		/*
+		* @brief: structure to store the contact information
+		*/
 		struct Contact {
 
 			//math::Vector2D position;
@@ -19,10 +22,23 @@ namespace enginecore {
 		class Manifold
 		{
 		public:
+			//ctor
 			Manifold();
+			
+			//dtor
 			~Manifold()=default;
 
+			/*
+			* @function : ApplyImpulse()
+			* @brief: applies impulse to the colliding bodies
+			*/
 			void ApplyImpulse();
+			
+			/*
+			* @function : PositionCorrection()
+			* @brief: This method peforms position correction on touch bodies to avoid
+			* merging of bodies
+			*/
 			void PositionCorrection();
 		
 		public:

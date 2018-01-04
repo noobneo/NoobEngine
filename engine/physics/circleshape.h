@@ -10,13 +10,24 @@ namespace enginecore {
 		class CircleShape : public Shape
 		{
 		public:
+			//ctor
 			CircleShape() = default;
 			CircleShape(ShapeType type);
+			//dtor
 			~CircleShape();
 
+			/*
+			* @function : Reset()
+			* @brief: Resets the properties of the shape
+			*/
 			virtual void Reset();
+			/*
+			* @function : set_radius(float radius)
+			* @brief: sets the radius of the circle shape
+			*/
 			 virtual void set_radius(float radius) { radius_ = radius; };
 
+			 //getter for the radius
 			 inline float get_radius() { return radius_; };
 		private:
 			float radius_;

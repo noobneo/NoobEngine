@@ -26,19 +26,34 @@ namespace enginecore {
 		class Window
 		{
 		public:
+			//ctor
 			Window() :width_(800), height_(800), window_name_("") , game_window_(nullptr), window_surface_(nullptr){}
 			Window(int width , int height , std::string window_name, SDL_Window* game_window = nullptr , SDL_Surface* window_surface = nullptr) :width_(width), height_(height), window_name_(window_name), 
 																																					game_window_(nullptr), window_surface_(nullptr){}
+			
+			//dtor
 			~Window();
 			
+			/*
+			* @function : CreateWindow()
+			* @return: bool if the window was successfuly created
+			* @brief: Creates the game window
+			*/
 			bool CreateWindow();
 
+			/*
+			* @function : GetInstance()
+			* @param window_name is the name to be set
+			* @brief: Sets the window name
+			*/
 			void SetWindowName(std::string window_name);
 
+
+			//getters
 			inline SDL_Surface* get_window_surface() { return window_surface_; };
 			inline SDL_Window*	get_game_window() { return game_window_; };
 
-
+			//setters
 			inline int get_width() { return width_; };
 			inline int get_height() { return height_; };
 

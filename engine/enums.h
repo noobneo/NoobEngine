@@ -3,6 +3,10 @@
 
 #include <string>
 
+
+/*
+* @brief: different types of components of the engine
+*/
 namespace enginecore {
 
 	namespace component {
@@ -31,7 +35,9 @@ namespace enginecore {
 		}ComponentType;
 
 
-
+/*
+* @brief: Animation state of AI
+*/
 		typedef enum {
 
 			E_NONE,
@@ -51,6 +57,9 @@ namespace enginecore {
 
 	namespace physics {
 
+		/*
+		* @brief: different body type
+		*/
 		typedef enum {
 
 			E_BODY_TYPE_STATIC = 1,
@@ -59,7 +68,9 @@ namespace enginecore {
 
 		}BodyType;
 
-
+		/*
+		* @brief: different types of shapes
+		*/
 		typedef enum {
 
 			E_SHAPE_CIRCLE,
@@ -68,6 +79,9 @@ namespace enginecore {
 		}ShapeType;
 
 
+		/*
+		* @brief: Getters for shape and body type
+		*/
 		BodyType get_body_type(std::string name);
 		ShapeType get_shape_type(std::string name);
 	}
@@ -77,6 +91,9 @@ namespace enginecore {
 
 	namespace events {
 
+		/*
+		* @brief: different types of events supported in the engine
+		*/
 		typedef enum {
 			E_EVENT_NONE,
 			E_EVENT_COLLISION,
@@ -106,6 +123,9 @@ namespace enginecore {
 
 		}EventType;
 
+		/*
+		* @brief: returns event type from the name
+		*/
 		EventType get_event_type(std::string name);
 		
 	}

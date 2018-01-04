@@ -27,18 +27,34 @@ namespace enginecore {
 
 	public :
 
-
+		/*
+		* @function : ReadFile(std::string filename)
+		* @return: string of the file read
+		* @brief: Reads the file and returns the content as string
+		*/
 		std::string ReadFile(std::string filename);
 
+
+		/*
+		* @function : Destroy()
+		* @brief: destory the reference to the FileHandler
+		*/
 		void Destroy();
 
+		/*
+		* @function : GetInstance()
+		* @return: static reference to the class FileHandler
+		* @brief: creates and returns the singleton reference to the FileHandler
+		*/
 		static FileHandler* GetInstance();
 
 	private:
+		//ctor
 		FileHandler() = default;
+
+		//dtor
 		~FileHandler() = default;
 	
-
 		FileHandler(const FileHandler&) = delete;
 		FileHandler& operator=(const FileHandler&) = delete;
 

@@ -27,21 +27,41 @@ namespace enginecore {
 
 		public:
 
+
+			/*
+			* @function : set_radius(float radius)
+			* @brief: method for setting the dimension of circle shape
+			*/
 			virtual void set_radius(float raidus) {};
+			
+			/*
+			* @function : set_dimensions(float width, float height) 
+			* @brief: method for setting the dimension of aabb
+			*/
 			virtual void set_dimensions(float width, float height) {};
 
 
 		protected:
+			//ctor
 			Shape() = default;
 			Shape(ShapeType type) : type_(type) , next_(nullptr){}
+			
+			//dtor
 			virtual ~Shape();
 
+			/*
+			* @function : Reset()
+			* @brief: virtual method for reseting respective shape
+			*/
 			virtual void Reset()=0;
 
 		private:
 
+			//setters
 			inline void set_next(Shape* next) { next_ = next; };
 			inline void set_id(int id) { id_ = id; };
+			
+			//getters
 			inline int get_id() { return id_ ; };
 			inline ShapeType get_type() { return type_; };
 

@@ -272,11 +272,6 @@ namespace enginecore {
 		ENGINE_LOG("Exiting Engine");
 	}
 
-	void Engine::Pause() {
-
-
-	}
-
 	Engine::~Engine(){
 
 		

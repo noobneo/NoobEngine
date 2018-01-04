@@ -25,11 +25,21 @@ namespace enginecore {
 		class AabbShape : public Shape
 		{
 		public:
+			//ctor
 			AabbShape() :width_(0.0f), height_(0.0f) {}
 			AabbShape(ShapeType type);
+			
+			//dtor
 			~AabbShape();
 
+			
+			/*
+			* @function : set_dimension(float width,float height)
+			* @brief: sets the dimension for the shape
+			*/
 			virtual void set_dimensions(float width, float height);
+			
+			//getters
 			inline float get_width() { return width_; };
 			inline float get_height() { return height_; };
 			
