@@ -1,109 +1,33 @@
-/*-------------------------------------------------------
-Copyright (C) 2017 DigiPen Institute of Technology.
-Reproduction or disclosure of this file or its contents without the prior
-written consent of DigiPen Institute of Technology is prohibited.
-File Name: Readme.md
-Purpose: Description of Noob Engine
-Language: C/C++
-Project: CS529_ajaytanwar
-Author: Ajay Singh Tanwar
-Creation date: 18th October 2017
----------------------------------------------------------*/
+This is the first game engine i developed from Scratch hence the name Noob Engine :P. It's 2D data driven component based engine using C++/Opengl. I developed 2d side platformer using this engine, both engine and game were developed over a course of 2 months. 
+Some of the features of the engine are :
 
-NoobEngine is ongoing project in which i am developing a component based data driven game engine which as 
-a part my course Fundamentals of Game Development at Digipen Institute of Technology . This project also 
-includes developing game using the engine
+Component Factory:
+Creates components for game objects.
+Serializing the game objects from json files.
+Creates objects from the archetypes.
 
-	*************************************************************************
-	| 	                         Noob Engine v1.0v			|
-	*************************************************************************
+InputHandler:
+An input handler for managing input events.
+Keyboard and Mouse Event listener and dispatcher system.
 
+2d Collision System : 
+Impulse based 2d collision.
+Has support for timed based collision also.
 
-	
-	Features 
-	
-	
-	Engine.cpp
-		-Singleton class which is responsible for starting enine instance
-		- Initialising all the engine modules.
-		- Running update loop
-		- Shutting down the engine loop.
-		- Shutting the modules
-		
-		
-	FrameRateController
-	*************************
-	| /framecontroller.cpp  |
-	| /timer.cpp   			|
-	*************************
+Graphics :
+OpenGL based hardware accelerated graphics.
+A basic Particle System.
+Sprite Animation and sprite sheet support.
 
-		- Calculate the fram rate between two frames
-		- Caps the frams to MAX_FPS(for now 60.0f);
-		
-		
-	Common
-	*************************
-	| /macros.h  			|
-	*************************
-	
-		- Includes features which will be common to game and engine
-		
-	EngineLogger
-	*************************
-	| /enginelogger.cpp		|
-	*************************
-	
-		- This provides feature to output logs
-		- Debug level is based on if DEBUG is defined and on the VERBOSITY_LEVEL
-		
-		
-	Inputhandler
-	***********************************
-	| /inputhandler.cpp 			  |
-	| /keyboardeventdispatcher.cpp    |
-	| /listener.cpp        			  |
-	***********************************
-	
-		- Gets keyboard state from SDL_GetKeyboardState
-		- Implemented Keyboard Dispacther and listener
-		- Delegates and telecasts key states to listeners.
-		- Class in which we want get keyboards need to register with keyboarddispatcher
-		
-		
-	ResourceManager
-	*************************
-	| /resourcemanager.cpp  |
-	| /textureloader.cpp    |
-	| /sprite.cpp           |
-	*************************
-	
-		- It is responsible for creating resources and giving it to user
-		- Maintains a cache for the already loaded images
-		- Returns a engine object Sprite* which can be used to manipulate the image.
-		- it has textureloader which uses sdl to load bmps for now
-		
-	Renderer
-		*************************
-		| /renderer.cpp  		|
-		*************************
-		- Renderer is responsible for rendering the drawable objects which are added to its queue.
-		- Uses SDL for now.
-		
-	Utils
-		*****************************
-		| /filehandler.cpp  		|
-		| /textconverter.cpp   		|
-		*****************************
-		- It has FIlehandler and TExtconverter
-		- it is used for reading files
-		- we can use textconverter for converting string to int,float,double,bool and vice versa.
-		
-		
-	Window 
-	*************************
-	| /wndow.cpp        	|
-	*************************
-		- it creates a window and window surface to draw on
-		- it sets the window property.
-		
-		
+Message Handling and Event System:
+Subscription based event handling.
+Supports time based events as well.
+Supports Message delegation.
+
+Memory Management:
+Creating Pools of game objects and components.
+Implemented Linked List based structure for the first available resource for quick access.
+
+Miscellaneous:
+A logging and asserting utility.
+A json parser for data driven development.
