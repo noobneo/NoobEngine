@@ -1,7 +1,8 @@
-This is the first game engine i developed from Scratch hence the name Noob Engine :P. It's 2D data driven component based engine using C++/Opengl. I developed 2d side platformer using this engine, both engine and game were developed over a course of 2 months. 
+This is the first game engine i developed from Scratch hence the name Noob Engine :P. It's 2D data driven component based engine using C++/OpenGl. I developed 2d side platformer using this engine, both engine and game were developed over a course of 2 months. 
+ 
 Some of the features of the engine are :
 
-Component Factory:
+Component Factory : 
 Creates components for game objects.
 Serializing the game objects from json files.
 Creates objects from the archetypes.
